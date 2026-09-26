@@ -278,6 +278,12 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | Partner Advantage Program · Circle of Honor | Partner and sales-recognition programmes | ● | B |
 | → Digital Labs / Foundry (4.4) | | | |
 
+### 5.5 Mastercard Connect (customer portal)
+| Product | What it is | Status | Origin |
+|---|---|---|---|
+| Mastercard Connect (mastercardconnect.com) | Single sign-on portal for licensed customers — issuers, acquirers, processors, RPPS billers. Company ID per licensee; Security Administrators manage users and approve application/data access, Business Administrators set the rules. The Store opens applications: MDES Manager & MDES Customer Service, Mastercard Move, Data Integrity Online, Market Trends, Operational Reports, Analytics Platform, Acquirer Intelligence Center, Secure Message | ● | B |
+| Technical Resource Center | Documentation library inside Connect — customer interface and clearing specifications, manuals, bulletins, release notes (the licensed-customer counterpart of the public developer platform) | ● | B |
+
 ---
 
 ## USERS — The ecosystem the OS serves

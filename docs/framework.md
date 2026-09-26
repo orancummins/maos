@@ -23,7 +23,7 @@ Five things stand out after inventorying ~130 named products:
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ L5 ACCESS      Developers & APIs │ Acceptance (Merchant Cloud, Gateway)      │
 │ "shell / SDK"  Issuing (Processing, Cloud Edge, Product Express, Engage)     │
-│                Programmes (Start Path, Digital Labs)                         │
+│                Programmes (Start Path, Digital Labs) │ Mastercard Connect    │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │ L4 SOLUTIONS   Security │ Acquisition & Engagement │ Insights & Intelligence  │
 │ "applications" Advisors & Transformation │ Commercial & B2B │ AI & Agents    │
@@ -54,6 +54,7 @@ Why this order (bottom-up): it reads as a **transaction**. Money enters on a rai
 - **Open Finance is a rail (L2.6), not a solution.** Its products are how bank-account data and account-to-account initiation (Pay by Bank) reach the network — a way in, like cards or Vocalink — rather than something sold on top of the data. Keeping it in L2 also keeps L4 to the six families Mastercard itself sells as services.
 - **DMP/Brighterion:** home is L3 Risk decisioning (the engine that powers 20+ products), with Brighterion cross-referenced from L1.4 Data & AI foundation.
 - **AI is a lens, not a layer.** Mastercard's site has an "AI" menu, but its contents (Agent Pay, DI Pro, Agent Suite, Merchant Cloud) live in different layers. L4.6 is a small "AI & agent applications" tile for Agent Suite so it is findable; everything else is reached by the AI lens.
+- **Mastercard Connect is Access, not a solution.** The customer portal (mastercardconnect.com) is how licensed issuers, acquirers and processors reach applications such as MDES Manager, Move, Data Integrity Online and Market Trends — a front door, like the developer platform, so it is tile L5.5 with cross-references to the products it opens.
 - **Commercial:** commercial *cards* are a card rail (L2.1); Move Commercial Payments is a Move rail (L2.3); Track / In Control / Smart Data / Receivables Manager are solutions (L4.5).
 
 ## 3. How "double-click" works — four zoom levels

@@ -20,7 +20,7 @@ const LAYERS = [
   tiles: Object.keys(USERS).map(k=>({id:"u-"+k, name:USERS[k], user:k, products:[]}))},
 
  {id:"L5", name:"Access", analogy:"shell · SDKs · app store", color:"--l5",
-  desc:"How customers and developers plug in: the API platform, the acceptance and issuing platforms, and the programmes that onboard partners. Reported inside Value-added services as Processing & gateway.",
+  desc:"How customers and developers plug in: the API platform, the acceptance and issuing platforms, the customer portal and the programmes that onboard partners. Reported inside Value-added services as Processing & gateway.",
   tiles:[
    {id:"5.1", name:"Developers & APIs", blurb:"One front door for the whole OS.", div:"core", rev:"proc", products:[
     P("developers","Mastercard Developers","developer.mastercard.com: the public API platform — 91 API products in the catalogue as at 23 September 2026, each with sandbox, reference apps and OAuth or MTLS access. Every one is mapped to its home tile on this map (open this tile for the full catalogue).",{s:["fin","mer","acq","iss","ai"],lc:"before",src:[["Mastercard Developers — API catalogue",D+"/apis"],["Platform index (llms.txt)",D+"/llms.txt"]]}),
@@ -38,6 +38,11 @@ const LAYERS = [
    {id:"5.4", name:"Programmes & innovation", blurb:"How partners get in early.", div:"core", rev:"na", products:[
     P("startpath","Start Path","Startup engagement programme since 2014: 500+ startups from 60+ countries; an Emerging Fintech track added 11 startups in September 2025.",{s:["fin"],src:[["Start Path",M+"/us/en/innovation/partner-with-us/start-path.html"],["Emerging Fintech cohort, Sep 2025",M+"/us/en/news-and-trends/press/2025/september/mastercard-welcomes-11-startups-to-start-path%E2%80%99s-emerging-fintech-program.html"]]}),
     P("partnerprog","Partner Advantage Program & Circle of Honor","Partner and recognition programmes listed on Mastercard's business site.",{s:["fin","acq"],src:[["Mastercard for business",M+"/us/en/business.html"]]}),
+   ]},
+   {id:"5.5", name:"Mastercard Connect", blurb:"The customer portal for licensed customers.", div:"core", rev:"na", products:[
+    P("mcconnect","Mastercard Connect","mastercardconnect.com: the single sign-on portal through which licensed customers (issuers, acquirers, processors, RPPS billers) reach Mastercard's applications, reports and administration. Each company has a Company ID; its Security Administrators manage users and approve application and data access, its Business Administrators set the access rules. The Store is where applications are ordered and opened — MDES Manager and MDES Customer Service, Mastercard Move, Data Integrity Online, Market Trends, Operational Reports, the Analytics Platform, the Acquirer Intelligence Center and Secure Message among them.",{s:["iss","acq","fin","corp"],lc:"before",rel:["mdes","move","opsintel","spendingpulse","rpps","developers"],src:[["Mastercard Connect",
+"https://www.mastercardconnect.com/"],["Mastercard Connect overview (PDF)","https://static.developer.mastercard.com/content/identity-insights-for-transactions/ConnectOverview.pdf"],["Mastercard Move customer portal — reached from the Connect Store",D+"/mastercard-send/documentation/customer-site/"],["Requesting Market Trends access in Connect","https://mbi.mastercardservices.com/how-request-market-trends-access-mastercard-connect"]]}),
+    P("trc","Technical Resource Center","The documentation library inside Mastercard Connect: customer interface and clearing specifications, manuals, bulletins and release notes for the network's programmes and platforms — the counterpart, for licensed customers, of the public developer platform.",{s:["iss","acq","fin"],lc:"before",rel:["developers","mcconnect"],src:[["Mastercard Connect overview (PDF)","https://static.developer.mastercard.com/content/identity-insights-for-transactions/ConnectOverview.pdf"]]}),
    ]},
   ]},
 

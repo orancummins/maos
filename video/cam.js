@@ -3,12 +3,12 @@
 // recording can pan and zoom to whatever the narration is talking about. Overlays that must stay
 // put (the marker pixel, the product dialog, the journey panel) are moved out to <html> as a HUD.
 (function () {
-  const W = innerWidth, H = innerHeight;
+  const W = innerWidth, H = innerHeight, LAYOUT = window.__LAYOUT_W || 1280, Z = W / LAYOUT;   // page laid out at LAYOUT px, shown at Z× (camera scales are relative to that)
   const html = document.documentElement, body = document.body;
-  html.style.overflow = 'hidden'; body.style.transformOrigin = '0 0'; body.style.willChange = 'transform';
+  html.style.overflow = 'hidden'; body.style.width = LAYOUT + 'px'; body.style.transformOrigin = '0 0'; body.style.willChange = 'transform';
   window.scrollTo = window.scroll = window.scrollBy = () => {};
   Element.prototype.scrollIntoView = function () {                 // only scroll element containers, never the window
-    let p = this.parentElement; const k = body.contains(this) ? cur.s : 1;
+    let p = this.parentElement; const k = this.offsetWidth ? this.getBoundingClientRect().width / this.offsetWidth : 1;
     while (p && p !== body && p !== html) {
       const cs = getComputedStyle(p);
       if (/(auto|scroll)/.test(cs.overflowY) && p.scrollHeight > p.clientHeight + 1) {
@@ -22,7 +22,7 @@
   let cur = { cx: W / 2, cy: H / 2, s: 1 }, inset = 0;
   const apply = (dur, ease) => {
     body.style.transition = dur ? `transform ${dur}ms ${ease || 'cubic-bezier(.45,.05,.2,1)'}` : 'none';
-    const vw = W - inset; body.style.transform = `translate(${vw / 2 - cur.s * cur.cx}px, ${H / 2 - cur.s * cur.cy}px) scale(${cur.s})`;
+    const vw = W - inset, S = cur.s * Z; body.style.transform = `translate(${vw / 2 - S * cur.cx}px, ${H / 2 - S * cur.cy}px) scale(${S})`;
   };
   const rect = (el) => {                                            // element rect in layout (untransformed) px
     if (typeof el === 'string') el = document.querySelector(el);
@@ -33,13 +33,13 @@
   };
   const union = (els) => { const rs = els.map(rect); const x = Math.min(...rs.map(r => r.x)), y = Math.min(...rs.map(r => r.y)); return { x, y, w: Math.max(...rs.map(r => r.x + r.w)) - x, h: Math.max(...rs.map(r => r.y + r.h)) - y }; };
   window.cam = {
-    W, H, rect, union,
+    W, H, Z, rect, union,
     inset(px) { inset = px; apply(0); },
     to(cx, cy, s, dur = 900, ease) { cur = { cx, cy, s }; apply(dur, ease); },
     el(el, s, dur, dx = 0, dy = 0, ease) { const r = rect(el); this.to(r.x + r.w / 2 + dx, r.y + r.h / 2 + dy, s, dur, ease); },
-    fit(els, pad = 24, dur = 900, maxS = 2.2, dy = 0) { const r = union([].concat(els)); const s = Math.min(maxS, (W - inset - 2 * pad) / r.w, (H - 2 * pad) / r.h); this.to(r.x + r.w / 2, r.y + r.h / 2 + dy, s, dur); return s; },
-    fitWidth(el, pad = 20, dur = 900, maxS = 2.2, dy = 0) { const r = rect(el); const s = Math.min(maxS, (W - inset - 2 * pad) / r.w); this.to(r.x + r.w / 2, r.y + r.h / 2 + dy, s, dur); return s; },
-    top(el, s, dur = 900, pad = 16, dx = 0) { const r = rect(el); this.to(r.x + r.w / 2 + dx, r.y - pad + (H / 2) / s, s, dur); },
+    fit(els, pad = 24, dur = 900, maxS = 2.2, dy = 0) { const r = union([].concat(els)); const s = Math.min(maxS * Z, (W - inset - 2 * pad) / r.w, (H - 2 * pad) / r.h) / Z; this.to(r.x + r.w / 2, r.y + r.h / 2 + dy, s, dur); return s; },
+    fitWidth(el, pad = 20, dur = 900, maxS = 2.2, dy = 0) { const r = rect(el); const s = Math.min(maxS * Z, (W - inset - 2 * pad) / r.w) / Z; this.to(r.x + r.w / 2, r.y + r.h / 2 + dy, s, dur); return s; },
+    top(el, s, dur = 900, pad = 16, dx = 0) { const r = rect(el); this.to(r.x + r.w / 2 + dx, r.y - pad + (H / 2) / (s * Z), s, dur); },
     get() { return { ...cur }; },
     hud(el, on) { el = typeof el === 'string' ? document.querySelector(el) : el; if (on) { html.appendChild(el); el.classList.add('hud'); } else { el.classList.remove('hud'); } }
   };

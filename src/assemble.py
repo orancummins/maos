@@ -13,7 +13,7 @@ doc = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Mastercard Operating System — an interactive capability map of Mastercard's assets: five layers, 166 products, 91 developer APIs, 18 journeys, lenses.">
+<meta name="description" content="Mastercard Operating System — an interactive capability map of Mastercard's assets: five layers, 168 products, 91 developer APIs, 18 journeys, lenses.">
 {head.strip()}
 <style>
 :root{{color-scheme:light}}

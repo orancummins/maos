@@ -4,7 +4,7 @@ An interactive capability map of Mastercard's assets — the card network, its r
 
 **Open `index.html` in any browser.** It is a single self-contained file: no server, build step or network needed (the Geist typeface loads from Google Fonts when online and falls back to system fonts offline).
 
-- 5 layers · 29 tiles · 166 products · 91 Mastercard Developers APIs · 18 worked journeys
+- 5 layers · 30 tiles · 168 products · 91 Mastercard Developers APIs · 18 worked journeys
 - Lenses re-slice the same assets by transaction lifecycle, customer, Mastercard division, built-vs-acquired, status and public API
 - Every product card carries what it is, who it serves, origin, status, developer APIs and sources
 - Compiled September 2026 from Mastercard's corporate, investor and developer sites, press releases and trade press
@@ -17,7 +17,7 @@ Read bottom-up it is a transaction: money enters on a **rail** (L2), hits the **
 
 ```
 USERS      Issuers · Acquirers/PSPs · Merchants · Fintechs/wallets · Corporates · Governments · Consumers · AI agents
-L5 ACCESS  Developers & APIs · Acceptance platforms · Issuing platforms · Programmes
+L5 ACCESS  Developers & APIs · Acceptance platforms · Issuing platforms · Programmes · Mastercard Connect
 L4 SOLUTIONS  Security · Acquisition & Engagement · Insights · Advisors · Commercial & B2B · AI & agents
 L3 NETWORK SERVICES  Tokenisation · Authentication & checkout · Risk decisioning · Disputes · Account services · Agentic commerce
 L2 RAILS   Cards · A2A & real-time (Vocalink) · Mastercard Move · Digital assets · Bill pay & local · Open Finance
@@ -52,4 +52,4 @@ Status codes: `new` (2025–26), `flux` (rename, divestiture or restructuring), 
 
 ## Regenerating the video
 
-`video/record.js` drives `index.html` with Playwright at 1280×720 CSS px and a 1.5× device scale factor (1920×1080 output), timed to the narration sentences (`video/timeline.json`); `video/cam.js` is injected at record time and turns the page into a camera-driven canvas that pans and zooms to what the narration describes; `video/tts.py` synthesises the narration sentence by sentence with Kokoro-82M v1.0 via sherpa-onnx and joins the sentences with explicit pauses (download `kokoro-multi-lang-v1_0` from the sherpa-onnx `tts-models` release into `video/`); `video/build.sh` records, recovers exact scene timings from marker pixels, re-times each scene to real time and muxes the audio. The end card is `video/endcard.html`. Requirements: Node with `playwright`, Python with `sherpa-onnx` and `soundfile`, and `ffmpeg`.
+`video/record.js` drives `index.html` with Playwright at 1920×1080 (the page laid out 1280 px wide and shown at 1.5× by the camera), timed to the narration sentences (`video/timeline.json`); `video/cam.js` is injected at record time and turns the page into a camera-driven canvas that pans and zooms to what the narration describes; `video/tts.py` synthesises the narration sentence by sentence with Kokoro-82M v1.0 via sherpa-onnx and joins the sentences with explicit pauses (download `kokoro-multi-lang-v1_0` from the sherpa-onnx `tts-models` release into `video/`); `video/build.sh` records, recovers exact scene timings from marker pixels, re-times each scene to real time and muxes the audio. The end card is `video/endcard.html`. Requirements: Node with `playwright`, Python with `sherpa-onnx` and `soundfile`, and `ffmpeg`.

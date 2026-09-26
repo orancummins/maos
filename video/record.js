@@ -10,11 +10,11 @@ const END = 'file://' + path.join(DIR, 'endcard.html');
 const durs = JSON.parse(fs.readFileSync(path.join(DIR, 'durations.json'), 'utf8'));
 const lines = JSON.parse(fs.readFileSync(path.join(DIR, 'timeline.json'), 'utf8'));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const VW = 1280, VH = 720, DPR = 1.5;
+const VW = 1920, VH = 1080, LAYOUT = 1280, Z = VW / LAYOUT;   // page laid out at 1280 px wide, filmed at 1.5× (see cam.js)
 
 (async () => {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width: VW, height: VH }, deviceScaleFactor: DPR, recordVideo: { dir: path.join(DIR, 'rec'), size: { width: VW * DPR, height: VH * DPR } }, colorScheme: 'light' });
+  const ctx = await browser.newContext({ viewport: { width: VW, height: VH }, deviceScaleFactor: 1, recordVideo: { dir: path.join(DIR, 'rec'), size: { width: VW, height: VH } }, colorScheme: 'light' });
   const page = await ctx.newPage();
   const t0 = Date.now();
   const marks = [];
@@ -43,15 +43,17 @@ const VW = 1280, VH = 720, DPR = 1.5;
   await page.goto(PAGE);
   await page.addStyleTag({ content: `
     html{scroll-behavior:auto}
+    body{width:${LAYOUT}px} .hero{min-height:720px}
+    html>#drawer{max-height:660px;transform:translate(-50%,-50%) scale(${Z * 0.985})} html>#drawer.open{transform:translate(-50%,-50%) scale(${Z})}
     .layer,.under{grid-template-columns:170px minmax(0,1fr)}
     .tiles{grid-template-columns:repeat(auto-fill,minmax(156px,1fr))}
     .board.journey{grid-template-columns:minmax(0,1fr)}
     html>#drawer,html>#jpanel{font-family:var(--font);font-size:14px;line-height:1.5;color:var(--ink);-webkit-font-smoothing:antialiased}
-    html>#jpanel.hud{display:flex;position:fixed;top:20px;right:20px;bottom:auto;width:372px;max-height:calc(100vh - 40px);z-index:60;box-shadow:var(--sh3);border-color:var(--line-2)}
+    html>#jpanel.hud{display:flex;position:fixed;top:20px;right:20px;bottom:auto;width:372px;max-height:${Math.round((VH - 40) / Z)}px;z-index:60;box-shadow:var(--sh3);border-color:var(--line-2);transform:scale(${Z});transform-origin:top right}
     .steps button.cur{background:var(--panel);box-shadow:inset 0 0 0 1px var(--line-2)}
     .tile,.lab .nm,.lab .id,.lab .an{transition:none}
   ` });
-  await page.addScriptTag({ path: path.join(DIR, 'cam.js') });
+  await ev((w) => { window.__LAYOUT_W = w; }, LAYOUT); await page.addScriptTag({ path: path.join(DIR, 'cam.js') });
   await sleep(1200);
 
   // 01 — intro on the home screen: slow push-in, hovering the planes as the narration names the layers
@@ -63,9 +65,9 @@ const VW = 1280, VH = 720, DPR = 1.5;
   await line('01_intro', 4); await plane('L2');            // "Six ways to move money…"
   await line('01_intro', 5); await plane('L3');            // "The services that make every payment safe"
   await line('01_intro', 6); await plane('L4');            // "data and intelligence businesses"
-  await line('01_intro', 7); await page.mouse.move(300, 650, { steps: 8 });
+  await line('01_intro', 7); await page.mouse.move(450, 980, { steps: 8 });
   await line('01_intro', 8, 0.2); for (const L of ['L1', 'L2', 'L3', 'L4', 'L5']) { await plane(L); await sleep(1150); }   // "A kernel. Rails. …"
-  await page.mouse.move(300, 650, { steps: 8 });
+  await page.mouse.move(450, 980, { steps: 8 });
   await until('01_intro', 1.0);
 
   // 02 — examples: on the animated stack; open the map on "Let's open the map"
@@ -85,7 +87,7 @@ const VW = 1280, VH = 720, DPR = 1.5;
   await line('03_layers', 4); await cam.fitWidth(layerSel('L4'), 20, 1000, 1.25); await sleep(1000); await hovLabel('L4');
   await line('03_layers', 5); await cam.fitWidth(layerSel('L5'), 20, 1000, 1.25); await sleep(1000); await hovLabel('L5');
   await line('03_layers', 6); await cam.fitWidth(layerSel('U'), 20, 1000, 1.25); await sleep(1000); await hovLabel('U');
-  await page.mouse.move(640, 700, { steps: 6 });
+  await page.mouse.move(960, 1050, { steps: 6 });
   await until('03_layers', 1.0);
 
   // 04 — open a tile and a product (the dialog is a HUD, so it is always framed)
@@ -116,7 +118,7 @@ const VW = 1280, VH = 720, DPR = 1.5;
     await hovEl(`#jmenu button.j:has-text("${name}")`).catch(() => {}); await sleep(250);
     await ev((name) => { const it = [...document.querySelectorAll('#jmenu button.j')].find(b => b.textContent.includes(name)); if (it) it.click(); }, name);
     await sleep(700);                                       // paintJourney runs at scale 1
-    await cam.hud('#jpanel', true); await cam.inset(410);
+    await cam.hud('#jpanel', true); await cam.inset(Math.round(372 * Z + 40));
   };
   const step = async (k) => ev((k) => { document.querySelectorAll('.steps button').forEach((b, i) => b.classList.toggle('cur', i === k)); const b = document.querySelectorAll('.steps button')[k]; if (b) b.scrollIntoView({ block: 'nearest' }); }, k);
   const goStep = async (id, k, s = 1.5) => { const at = await ev(({ id, k }) => JOURNEYS.find(j => j.id === id).steps[k].at, { id, k }); await step(k); if (at.startsWith('pillar')) await cam.el('.under', 1.2, 900); else await cam.el(tileSel(at), s, 900); };

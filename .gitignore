@@ -11,3 +11,6 @@ video/*.log
 video/remap.txt
 node_modules/
 .DS_Store
+
+# local scratch outputs
+Claude outputs/

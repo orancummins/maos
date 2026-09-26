@@ -1,6 +1,6 @@
 # Mastercard Operating System — video narration script
 
-Recorded 26 September 2026 · 3 min 36 s · 1920×1080 · voice: Kokoro-82M v1.0 (af_heart), one sentence at a time with explicit pauses
+Recorded 26 September 2026 (v11 design) · 3 min 36 s · 1920×1080 · voice: Kokoro-82M v1.0 (af_heart), one sentence at a time with explicit pauses
 
 The camera pans and zooms to whatever is being described; the product dialog and the journey panel stay docked at full size.
 

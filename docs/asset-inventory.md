@@ -93,6 +93,15 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | Arcus | Latin-America (Mexico) real-time bill-pay and disbursement infrastructure; no 2025–26 news found | ○ | A (2021) |
 | Mastercard Pay Local | Cardholders pay through local wallets (Alipay, GrabPay, M-Pesa, Mercado Pago…) where cards aren't accepted | ✦ | B (Nov 2024) |
 
+### 2.6 Open Finance (bank-account data & account-to-account initiation)
+| Product | What it is | Status | Origin |
+|---|---|---|---|
+| Mastercard Open Finance US (Finicity) | Account/owner verification, Payment Success Indicator, Deposit Switch, Bill Pay Switch, data enrichment, Consumer Foresight, lending & mortgage verification, small-business cash-flow; ~95% of US deposit accounts | ● | A (2020, ~$825m) |
+| Mastercard Open Finance Europe (Aiia) | SCA-based account connection, data retrieval, payment initiation across Europe; Aiia brand converging into "Open Finance" | ◐ (rebrand) | A (2021) |
+| Mastercard Data Connect | Consumer-permissioned data-sharing/consent layer unifying the US and European stacks | ● | B (2024) |
+| Pay by Bank (US) | A2A payment initiation delivered through the Open Finance stack; the reason the tile sits with the rails | ● | B |
+| Regulatory context | CFPB Section 1033 enjoined/under reconsideration in 2026; no sign of wind-down | — | — |
+
 ---
 
 ## L3 · NETWORK SERVICES — Invoked around every transaction
@@ -187,16 +196,7 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | Crypto Secure | Issuer dashboard for VASP risk and crypto-linked approvals | ● | B (2022, on CipherTrace data) |
 | CipherTrace | Crypto intelligence (compliance monitoring, risk, investigations); Armada, Inspector and Sentry shut down March 2024 | ◐ | A (2021) |
 
-### 4.2 Open Finance
-| Product | What it is | Status | Origin |
-|---|---|---|---|
-| Mastercard Open Finance US (Finicity) | Account/owner verification, Payment Success Indicator, Deposit Switch, Bill Pay Switch, data enrichment, Consumer Foresight, lending & mortgage verification, small-business cash-flow; ~95% of US deposit accounts | ● | A (2020, ~$825m) |
-| Mastercard Open Finance Europe (Aiia) | SCA-based account connection, data retrieval, payment initiation across Europe; Aiia brand converging into "Open Finance" | ◐ (rebrand) | A (2021) |
-| Mastercard Data Connect | Consumer-permissioned data-sharing/consent layer unifying the US and European stacks | ● | B (2024) |
-| Pay by Bank (US) | A2A payment initiation delivered through Open Finance rather than a standalone rail | ● | B |
-| Regulatory context | CFPB Section 1033 enjoined/under reconsideration in 2026; no sign of wind-down | — | — |
-
-### 4.3 Consumer Acquisition & Engagement
+### 4.2 Consumer Acquisition & Engagement
 | Product | What it is | Status | Origin |
 |---|---|---|---|
 | Dynamic Yield / Experience OS (incl. Shopping Muse, Experience OS Agents, Experience APIs, Experience Search) | AI personalisation platform; 8× Gartner MQ leader; 80m+ personalised sessions/day | ● | A (2022, from McDonald's) |
@@ -208,7 +208,7 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | SessionM | Loyalty platform acquired 2019 — **sold to Capillary Technologies, Feb 2026** | ✕ | A→divested |
 | IfOnly | Experiences marketplace — shut down 2020 | ✕ | A→closed |
 
-### 4.4 Insights & Intelligence
+### 4.3 Insights & Intelligence
 | Product | What it is | Status | Origin |
 |---|---|---|---|
 | Test & Learn (+ for Financial Institutions) | Controlled-experimentation platform | ● | A (2015, APT, $600m) |
@@ -221,7 +221,7 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | Media Measurement · Data Clean Room · Independent Anonymization | Privacy-preserving data collaboration ("Data Cloud" not found as a name) | ● | B |
 | Operations Intelligence — Operational Reports · Transaction Investigator Plus · Learning Lab · Digital Safari | Operational reporting and training (MEDI → 3.3) | ● | B |
 
-### 4.5 Advisors & Transformation
+### 4.4 Advisors & Transformation
 | Product | What it is | Status | Origin |
 |---|---|---|---|
 | Advisors & Transformation (Advisory · Innovation · Deploy) | Consulting arm, ~4,000 consultants, 120+ countries; lineage: Mastercard Advisors (2001) → Data & Services (2019) → Services (2024) | ● | B |
@@ -229,7 +229,7 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | Digital Labs (Mastercard Foundry) · Strategy Insight · Sandbox as a Service | Innovation-as-a-service and prototyping | ● | B |
 | Managed services | Delivery model (e.g. managed fraud rules) rather than a branded product | ○ | B |
 
-### 4.6 Commercial & B2B solutions
+### 4.5 Commercial & B2B solutions
 | Product | What it is | Status | Origin |
 |---|---|---|---|
 | Mastercard Track Business Payment Service | Buyer–supplier network for invoices, terms and working capital | ● | B (2020) |
@@ -240,7 +240,7 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 | Easy Savings | Small-business rebate programme | ● | B |
 | Healthcare solutions · Embedded finance | Named CNPF focus areas on Mastercard's commercial pages | ● | B |
 
-### 4.7 AI & agent applications (Mastercard's "AI" category)
+### 4.6 AI & agent applications (Mastercard's "AI" category)
 | Product | What it is | Status | Origin |
 |---|---|---|---|
 | Mastercard Agent Suite (+ Developers Agent Toolkit) | Customisable AI agents for banks and merchants, integrated with Agent Pay | ✦ | B (Jan 2026) |
@@ -276,7 +276,7 @@ Compiled 23 September 2026 from Mastercard corporate, developer and investor sit
 |---|---|---|---|
 | Start Path (+ Emerging Fintech track) | Startup engagement — 500+ startups, 60+ countries since 2014 | ● | B |
 | Partner Advantage Program · Circle of Honor | Partner and sales-recognition programmes | ● | B |
-| → Digital Labs / Foundry (4.5) | | | |
+| → Digital Labs / Foundry (4.4) | | | |
 
 ---
 
@@ -296,13 +296,13 @@ Issuers & banks · Acquirers & PSPs · Merchants · Fintechs & wallets · Corpor
 
 **Organisation (May 2024 structure; leaders as of 3 Aug 2026)**
 - Core / Consumer Payments — Jorn Lambert, Chief Product Officer → L1, L2.1, L2.2, L2.4, L3, L5
-- Commercial & New Payment Flows — Dimi Dosis, Chief Commercial Payments Officer → L2.3, L2.5, L4.6
-- Services — Linda Kirkpatrick, Chief Services Officer (incl. Data & AI, Greg Ulrich) → L4.1–4.5, L4.7
+- Commercial & New Payment Flows — Dimi Dosis, Chief Commercial Payments Officer → L2.3, L2.5, L2.6, L4.5
+- Services — Linda Kirkpatrick, Chief Services Officer (incl. Data & AI, Greg Ulrich) → L4.1–4.4, L4.6
 - Go-to-market unified under Sachin Mehra, Chief Business Officer (new role, 2026)
 
 **Revenue (FY2025: $32.8bn)**
 - Payment network (~$22.6bn, +12%) → L1, L2.1
-- Value-Added Services & Solutions (~$10.2bn, +23%): Security solutions · Consumer acquisition & engagement · Business & market insights · Digital & authentication · Processing & gateway · Other (ACH/RTP, bill pay, cross-border, open finance) → L2.2–2.5, L3, L4, L5
+- Value-Added Services & Solutions (~$10.2bn, +23%): Security solutions · Consumer acquisition & engagement · Business & market insights · Digital & authentication · Processing & gateway · Other (ACH/RTP, bill pay, cross-border, open finance) → L2.2–2.6, L3, L4, L5
 
 **Website navigation (mastercard.com/business, Sept 2026)**
 Consumer payments · Commercial payments · Money movement · Open finance · Advisors & transformation · Cybersecurity & fraud prevention · Consumer acquisition & engagement · Insights & intelligence · AI · Digital Asset Solutions
@@ -326,28 +326,28 @@ Consumer payments · Commercial payments · Money movement · Open finance · Ad
 |---|---|---|
 | Account Services Catalogue | 3.5 Account services | Account Services Catalogue |
 | Account to Account Commerce | 2.2 A2A & real-time | Account to Account Commerce |
-| Agent Suite for Merchants | 4.7 AI & agent applications | Mastercard Agent Suite |
+| Agent Suite for Merchants | 4.6 AI & agent applications | Mastercard Agent Suite |
 | AML Account Risk | 4.1 Security Solutions | AML Account Risk |
 | Authentication Solutions | 3.2 Authentication & checkout | Smart Authentication · Identity Check Express · Stand-In RBA |
 | Automatic Billing Updater (ABU) | 3.5 Account services | Automatic Billing Updater (ABU) |
-| Benefit Allocation Service | 4.3 Consumer Acquisition & Engagement | Card benefits services |
-| Benefits Eligibility Service | 4.3 Consumer Acquisition & Engagement | Card benefits services |
+| Benefit Allocation Service | 4.2 Consumer Acquisition & Engagement | Card benefits services |
+| Benefits Eligibility Service | 4.2 Consumer Acquisition & Engagement | Card benefits services |
 | Bill Pay | 2.5 Bill pay & local | Mastercard Bill Pay |
 | Bill Payment Validator | 2.5 Bill pay & local | RPPS (Remote Payment and Presentment Service) |
 | BIN Lookup | 1.3 Franchise & rules | BIN Lookup |
 | BS Creditor API | 2.2 A2A & real-time | Betalingsservice (Denmark) |
-| Business Payment Controls | 4.6 Commercial & B2B | Business Payment Controls |
-| Carbon Calculator | 4.3 Consumer Acquisition & Engagement | Carbon Calculator (Doconomy Åland Index) |
-| Carbon Calculator Experience | 4.3 Consumer Acquisition & Engagement | Carbon Calculator (Doconomy Åland Index) |
+| Business Payment Controls | 4.5 Commercial & B2B | Business Payment Controls |
+| Carbon Calculator | 4.2 Consumer Acquisition & Engagement | Carbon Calculator (Doconomy Åland Index) |
+| Carbon Calculator Experience | 4.2 Consumer Acquisition & Engagement | Carbon Calculator (Doconomy Åland Index) |
 | Card on File Tokenization | 3.1 Tokenisation & credentials | MDES for Merchants / Secure Card on File |
 | Click to Pay | 3.2 Authentication & checkout | Click to Pay (EMV Secure Remote Commerce) |
-| Commercial Direct Payments | 4.6 Commercial & B2B | Commercial Direct Payments |
-| Commercial Event Notifications | 4.6 Commercial & B2B | Commercial Event Notifications |
+| Commercial Direct Payments | 4.5 Commercial & B2B | Commercial Direct Payments |
+| Commercial Event Notifications | 4.5 Commercial & B2B | Commercial Event Notifications |
 | Community Pass | pillar-inclusion Inclusive growth | Community Pass & Farm Pass |
-| Consumer Credit Analytics | 4.4 Insights & Intelligence | Credit Intelligence Solutions |
+| Consumer Credit Analytics | 4.3 Insights & Intelligence | Credit Intelligence Solutions |
 | Currency Conversion Calculator | 1.1 The switch | Currency Conversion Calculator |
-| Doconomy Aland Index | 4.3 Consumer Acquisition & Engagement | Carbon Calculator (Doconomy Åland Index) |
-| Dynamic Yield | 4.3 Consumer Acquisition & Engagement | Dynamic Yield / Experience OS |
+| Doconomy Aland Index | 4.2 Consumer Acquisition & Engagement | Carbon Calculator (Doconomy Åland Index) |
+| Dynamic Yield | 4.2 Consumer Acquisition & Engagement | Dynamic Yield / Experience OS |
 | Ethoca Alerts | 3.4 Disputes & resolution | Ethoca Alerts |
 | Ethoca Consumer Clarity for Merchants | 3.4 Disputes & resolution | Ethoca Consumer Clarity |
 | Ethoca Consumer Clarity | 3.4 Disputes & resolution | Ethoca Consumer Clarity |
@@ -355,37 +355,37 @@ Consumer payments · Commercial payments · Money movement · Open finance · Ad
 | Fraud and Loss Database (FLD) | 3.3 Risk decisioning | Fraud and Loss Database (SAFE) |
 | Identity Insights for Accounts | 4.1 Security Solutions | Mastercard Identity (Ekata) |
 | Identity Insights for Transactions | 3.2 Authentication & checkout | Identity Insights for Transactions |
-| In Control for Commercial Payments | 4.6 Commercial & B2B | In Control & Commercial Connect API |
+| In Control for Commercial Payments | 4.5 Commercial & B2B | In Control & Commercial Connect API |
 | India Online Dispute Resolution | 3.4 Disputes & resolution | Mastercom & Dispute Resolution |
 | Installments | 2.1 Card rails | Mastercard Installments |
-| Location Intelligence | 4.4 Insights & Intelligence | Places & location analytics |
+| Location Intelligence | 4.3 Insights & Intelligence | Places & location analytics |
 | Mastercard Account Validation | 3.5 Account services | Mastercard Account Validation |
-| Mastercard Benefits & Experiences Portal | 4.3 Consumer Acquisition & Engagement | Card benefits services |
+| Mastercard Benefits & Experiences Portal | 4.2 Consumer Acquisition & Engagement | Card benefits services |
 | Mastercard Cloud Commerce | 3.2 Authentication & checkout | Tap on Phone & Cloud Commerce |
-| Mastercard Commercial Connect API | 4.6 Commercial & B2B | In Control & Commercial Connect API |
+| Mastercard Commercial Connect API | 4.5 Commercial & B2B | In Control & Commercial Connect API |
 | Mastercard Contactless Reader SDK | 3.2 Authentication & checkout | Tap on Phone & Cloud Commerce |
 | Mastercard Cross-Border Services | 2.3 Mastercard Move | Cross-Border Services |
 | Mastercard Cyber and Payment Threat Solutions | 4.1 Security Solutions | Mastercard Threat Intelligence |
-| Mastercard Developer Hub for FDX APIs | 4.2 Open Finance | Developer Hub for FDX APIs |
+| Mastercard Developer Hub for FDX APIs | 2.6 Open Finance | Developer Hub for FDX APIs |
 | Mastercard Direct Services | 1.1 The switch | Mastercard Direct Services |
 | Mastercard Donate | pillar-inclusion Inclusive growth | Mastercard Donate |
-| Mastercard Easy Savings Program | 4.6 Commercial & B2B | Easy Savings |
+| Mastercard Easy Savings Program | 4.5 Commercial & B2B | Easy Savings |
 | Mastercard Gateway | 5.2 Acceptance platforms | Mastercard Gateway (MPGS) |
 | Mastercard Installments at Checkout | 2.1 Card rails | Mastercard Installments |
-| Mastercard Insurance Programs | 4.3 Consumer Acquisition & Engagement | Mastercard Insurance Programs |
-| Mastercard Loyalty Management | 4.3 Consumer Acquisition & Engagement | Loyalty Solutions |
-| Mastercard Loyalty Promotions | 4.3 Consumer Acquisition & Engagement | Loyalty Solutions |
+| Mastercard Insurance Programs | 4.2 Consumer Acquisition & Engagement | Mastercard Insurance Programs |
+| Mastercard Loyalty Management | 4.2 Consumer Acquisition & Engagement | Loyalty Solutions |
+| Mastercard Loyalty Promotions | 4.2 Consumer Acquisition & Engagement | Loyalty Solutions |
 | Mastercard Merchant Presented QR: SRC | 3.2 Authentication & checkout | Mastercard QR & Merchant Presented QR |
 | Mastercard Move | 2.3 Mastercard Move | Mastercard Move |
-| Mastercard Open Finance Theming API | 4.2 Open Finance | Mastercard Open Finance US (Finicity) |
-| Mastercard Pay with Rewards | 4.3 Consumer Acquisition & Engagement | Loyalty Solutions |
+| Mastercard Open Finance Theming API | 2.6 Open Finance | Mastercard Open Finance US (Finicity) |
+| Mastercard Pay with Rewards | 4.2 Consumer Acquisition & Engagement | Loyalty Solutions |
 | Mastercard Processing | 5.3 Issuing platforms | Mastercard Processing |
 | Mastercard QR | 3.2 Authentication & checkout | Mastercard QR & Merchant Presented QR |
-| Mastercard Redemption Services | 4.3 Consumer Acquisition & Engagement | Loyalty Solutions |
+| Mastercard Redemption Services | 4.2 Consumer Acquisition & Engagement | Loyalty Solutions |
 | Mastercard Send | 2.3 Mastercard Move | Mastercard Send |
 | Mastercard Sonic Branding | pillar-brand Brand & Priceless | Sonic Branding |
 | Mastercard Threat Intelligence | 4.1 Security Solutions | Mastercard Threat Intelligence |
-| Mastercard Track Business Payment Service | 4.6 Commercial & B2B | Mastercard Track Business Payment Service |
+| Mastercard Track Business Payment Service | 4.5 Commercial & B2B | Mastercard Track Business Payment Service |
 | Mastercard Virtual Card Tokens | 3.1 Tokenisation & credentials | Mastercard Virtual Card Tokens |
 | Mastercard Wallet Services | 3.1 Tokenisation & credentials | Mastercard Wallet Services |
 | Mastercard Identity Check | 3.2 Authentication & checkout | Mastercard Identity Check (EMV 3-D Secure) |
@@ -395,23 +395,23 @@ Consumer payments · Commercial payments · Money movement · Open finance · Ad
 | MDES | 3.1 Tokenisation & credentials | Mastercard Digital Enablement Service (MDES) |
 | Merchant Cloud | 5.2 Acceptance platforms | Mastercard Merchant Cloud |
 | Merchant Identifier | 3.4 Disputes & resolution | Merchant Identifier |
-| Mexico Insights | 4.4 Insights & Intelligence | SpendingPulse & market insights |
-| Offers for Publishers | 4.3 Consumer Acquisition & Engagement | Offers platform |
-| Offers Merchant Content | 4.3 Consumer Acquisition & Engagement | Offers platform |
+| Mexico Insights | 4.3 Insights & Intelligence | SpendingPulse & market insights |
+| Offers for Publishers | 4.2 Consumer Acquisition & Engagement | Offers platform |
+| Offers Merchant Content | 4.2 Consumer Acquisition & Engagement | Offers platform |
 | Onboard Risk Check | 3.3 Risk decisioning | Onboard Risk Check |
-| Open Finance (Europe) | 4.2 Open Finance | Mastercard Open Finance Europe (Aiia) |
-| Open Finance (US & AU) | 4.2 Open Finance | Mastercard Open Finance US (Finicity) |
+| Open Finance (Europe) | 2.6 Open Finance | Mastercard Open Finance Europe (Aiia) |
+| Open Finance (US & AU) | 2.6 Open Finance | Mastercard Open Finance US (Finicity) |
 | Pay by Account | 2.2 A2A & real-time | Instant Payment Service · Bulk Payment Service · Proxy Directory Service · Pay by Account |
 | Payment Account Management | 3.5 Account services | Account Status Inquiry & Payment Account Management |
 | Payment Account Reference Inquiry | 3.1 Tokenisation & credentials | Payment Account Reference Inquiry |
-| Places | 4.4 Insights & Intelligence | Places & location analytics |
-| Priceless Cities | 4.3 Consumer Acquisition & Engagement | Priceless & cardholder benefits |
-| Priceless Platform | 4.3 Consumer Acquisition & Engagement | Priceless & cardholder benefits |
-| Priceless Specials | 4.3 Consumer Acquisition & Engagement | Priceless & cardholder benefits |
+| Places | 4.3 Insights & Intelligence | Places & location analytics |
+| Priceless Cities | 4.2 Consumer Acquisition & Engagement | Priceless & cardholder benefits |
+| Priceless Platform | 4.2 Consumer Acquisition & Engagement | Priceless & cardholder benefits |
+| Priceless Specials | 4.2 Consumer Acquisition & Engagement | Priceless & cardholder benefits |
 | RiskRecon API | 4.1 Security Solutions | RiskRecon |
-| Small Business Credit Analytics | 4.4 Insights & Intelligence | Credit Intelligence Solutions |
+| Small Business Credit Analytics | 4.3 Insights & Intelligence | Credit Intelligence Solutions |
 | Subscription Controls | 3.5 Account services | Minna Technologies |
-| Test & Learn | 4.4 Insights & Intelligence | Test & Learn |
+| Test & Learn | 4.3 Insights & Intelligence | Test & Learn |
 | Token Authentication Service (TAS) | 3.1 Tokenisation & credentials | Token Authentication Service (TAS) |
-| Track Search | 4.6 Commercial & B2B | Mastercard Track Business Payment Service |
+| Track Search | 4.5 Commercial & B2B | Mastercard Track Business Payment Service |
 | Transaction Notifications | 3.5 Account services | Transaction Notifications |

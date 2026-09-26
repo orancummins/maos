@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
-cd "$(dirname "$0")"
+cd /home/claude/mastercard-os/video
 rm -rf rec seg
 NODE_PATH=$(npm root -g) node record.js
 python3 - <<'PY'
 import json, subprocess, numpy as np, soundfile as sf, os
 m=json.load(open('marks.json')); video=m['video']; fps=25.0
-raw=subprocess.run(['ffmpeg','-v','error','-i',video,'-vf','crop=8:8:3:3,scale=1:1:flags=area','-f','rawvideo','-pix_fmt','rgb24','-'],capture_output=True).stdout
+raw=subprocess.run(['ffmpeg','-v','error','-i',video,'-vf','crop=8:8:10:10,scale=1:1:flags=area','-f','rawvideo','-pix_fmt','rgb24','-'],capture_output=True).stdout
 px=np.frombuffer(raw,dtype=np.uint8).reshape(-1,3).astype(int); vd=len(px)/fps
 def first_at(col,start):
     c=np.array([int(v) for v in col.split(',')]); d=np.abs(px-c).sum(axis=1); idx=np.where(d[start:]<90)[0]; return (start+idx[0]) if len(idx) else None
@@ -25,7 +25,7 @@ segs.append((pv,vd,wall['end']-pw))
 os.makedirs('seg',exist_ok=True); lst=[]
 for i,(a,b,wd) in enumerate(segs):
     f=wd/(b-a) if b>a else 1.0; out=f'seg/s{i:02d}.mp4'
-    subprocess.run(['ffmpeg','-y','-v','error','-ss',f'{a:.3f}','-to',f'{b:.3f}','-i',video,'-vf',f'setpts=(PTS-STARTPTS)*{f:.5f},fps=30,drawbox=x=0:y=0:w=18:h=18:color=white:t=fill','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p',out],check=True); lst.append(out)
+    subprocess.run(['ffmpeg','-y','-v','error','-ss',f'{a:.3f}','-to',f'{b:.3f}','-i',video,'-vf',f'setpts=(PTS-STARTPTS)*{f:.5f},fps=30,delogo=x=2:y=2:w=30:h=30','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p',out],check=True); lst.append(out)
 open('seg/list.txt','w').write("".join(f"file '{os.path.abspath(p)}'\n" for p in lst))
 sr=24000; total=int((wall['end']+0.5)*sr); track=np.zeros(total,dtype=np.float32)
 for sid in ids:

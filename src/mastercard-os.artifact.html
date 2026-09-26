@@ -3,13 +3,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --ground:#FFFFFF; --panel:#F7F8FA; --panel-2:#F0F2F5; --ink:#0F1419; --ink-2:#344054; --muted:#667085; --faint:#98A2B3; --line:#E7EAEE; --line-2:#D5DAE1;
-  --accent:#FF5F00; --accent-ink:#C74A00; --link:#B3111F; --focus:#2563EB;
-  --l1:#111827; --l2:#D7263D; --l3:#F26A1B; --l4:#D99A0B; --l5:#6B7280; --lu:#98A2B3;
+  --ground:#FFFFFF; --panel:#F3F4F6; --panel-2:#E9EBEF; --ink:#0B0F14; --ink-2:#1F2937; --muted:#4B5563; --faint:#6B7280; --line:#CBD1DA; --line-2:#AEB6C2;
+  --accent:#FF5F00; --accent-ink:#B84400; --link:#A50F1C; --focus:#2563EB;
+  --l1:#0B0F14; --l2:#C4142B; --l3:#D9531E; --l4:#A66A00; --l5:#4B5563; --lu:#6B7280;
   --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#4a3aa7; --c8:#e34948;
   --rev1:#EB001B; --rev2:#E8930C;
-  --s-new:#12805C; --s-flux:#B26B00; --s-unconf:#98A2B3; --s-retired:#B42318;
-  --sh1:0 1px 2px rgba(16,24,40,.05); --sh2:0 8px 24px -8px rgba(16,24,40,.18); --sh3:0 32px 64px -16px rgba(16,24,40,.35);
+  --s-new:#0F7A55; --s-flux:#A35F00; --s-unconf:#6B7280; --s-retired:#B42318;
+  --sh1:0 1px 2px rgba(16,24,40,.08); --sh2:0 8px 24px -8px rgba(16,24,40,.28); --sh3:0 32px 64px -16px rgba(16,24,40,.4);
   --r:10px; --r-l:16px;
   --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -17,23 +17,23 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --ground:#0B0C0E; --panel:#121316; --panel-2:#191B1F; --ink:#F2F4F7; --ink-2:#D0D5DD; --muted:#98A2B3; --faint:#667085; --line:#22252A; --line-2:#30343B;
+    --ground:#0B0C0E; --panel:#15171B; --panel-2:#1E2126; --ink:#F7F8FA; --ink-2:#DCE0E6; --muted:#B0B7C3; --faint:#8B93A1; --line:#33383F; --line-2:#4A505A;
     --accent:#FF7A2E; --accent-ink:#FF9A5C; --link:#FF8A94; --focus:#7FAAF0;
-    --l1:#E5E7EB; --l2:#FF6B7A; --l3:#FF9448; --l4:#F5B942; --l5:#9CA3AF; --lu:#667085;
+    --l1:#F3F4F6; --l2:#FF7A88; --l3:#FFA05C; --l4:#F7C455; --l5:#B0B7C3; --lu:#8B93A1;
     --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9; --c8:#e66767;
     --rev1:#E8455A; --rev2:#C98500;
-    --s-new:#4ADE80; --s-flux:#F2B84B; --s-unconf:#667085; --s-retired:#F87171;
+    --s-new:#4ADE80; --s-flux:#F2B84B; --s-unconf:#8B93A1; --s-retired:#F87171;
     --sh1:0 1px 2px rgba(0,0,0,.5); --sh2:0 8px 24px -8px rgba(0,0,0,.6); --sh3:0 32px 64px -16px rgba(0,0,0,.7);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --ground:#0B0C0E; --panel:#121316; --panel-2:#191B1F; --ink:#F2F4F7; --ink-2:#D0D5DD; --muted:#98A2B3; --faint:#667085; --line:#22252A; --line-2:#30343B;
+  --ground:#0B0C0E; --panel:#15171B; --panel-2:#1E2126; --ink:#F7F8FA; --ink-2:#DCE0E6; --muted:#B0B7C3; --faint:#8B93A1; --line:#33383F; --line-2:#4A505A;
   --accent:#FF7A2E; --accent-ink:#FF9A5C; --link:#FF8A94; --focus:#7FAAF0;
-  --l1:#E5E7EB; --l2:#FF6B7A; --l3:#FF9448; --l4:#F5B942; --l5:#9CA3AF; --lu:#667085;
+  --l1:#F3F4F6; --l2:#FF7A88; --l3:#FFA05C; --l4:#F7C455; --l5:#B0B7C3; --lu:#8B93A1;
   --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9; --c8:#e66767;
   --rev1:#E8455A; --rev2:#C98500;
-  --s-new:#4ADE80; --s-flux:#F2B84B; --s-unconf:#667085; --s-retired:#F87171;
+  --s-new:#4ADE80; --s-flux:#F2B84B; --s-unconf:#8B93A1; --s-retired:#F87171;
   --sh1:0 1px 2px rgba(0,0,0,.5); --sh2:0 8px 24px -8px rgba(0,0,0,.6); --sh3:0 32px 64px -16px rgba(0,0,0,.7);
 }
 *{box-sizing:border-box}
@@ -52,7 +52,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .hero{min-height:calc(100svh - 0px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px 48px;align-items:center;padding-block:48px 40px}
 .hero .kicker{font-size:13px;font-weight:500;color:var(--accent-ink)}
 .hero h1{font-weight:600;font-size:clamp(38px,5.2vw,64px);letter-spacing:-.04em;line-height:.98;margin:12px 0 18px}
-.hero .sub{margin:0;color:var(--muted);font-size:18px;line-height:1.5;max-width:56ch;text-wrap:pretty}
+.hero .sub{margin:0;color:var(--ink-2);font-size:18px;line-height:1.5;max-width:56ch;text-wrap:pretty}
 .hero .sub b{color:var(--ink);font-weight:500}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;align-items:center}
 .btn{border:1px solid var(--ink);background:var(--ink);color:var(--ground);border-radius:999px;padding:11px 18px;font-size:14.5px;font-weight:500;cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:transform .12s,box-shadow .12s}
@@ -70,12 +70,12 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .viz .plane:hover{transform:translateY(-6px)}
 .viz .plane polygon{transition:fill .2s}
 .viz .plane text{font-family:var(--font);font-size:13px;font-weight:500;fill:var(--ink);pointer-events:none}
-.viz .plane .an{font-size:11px;fill:var(--muted);font-weight:400}
-.viz .users circle{fill:var(--ground);stroke:var(--line-2);stroke-width:1.5}
-.viz .users text{font-family:var(--font);font-size:11.5px;fill:var(--muted)}
+.viz .plane .an{font-size:11.5px;fill:var(--muted);font-weight:400}
+.viz .users circle{fill:var(--ground);stroke:var(--ink-2);stroke-width:1.5}
+.viz .users text{font-family:var(--font);font-size:12px;font-weight:500;fill:var(--ink-2)}
 .viz .pk{fill:var(--accent)}
 .viz .pk.up{fill:var(--l3)}
-.viz .orbit{fill:none;stroke:var(--line-2);stroke-width:1;stroke-dasharray:3 6}
+.viz .orbit{fill:none;stroke:var(--line-2);stroke-width:1.25;stroke-dasharray:3 6}
 .viz .shadow{fill:var(--ink);opacity:.06;filter:blur(14px)}
 @media (prefers-reduced-motion: no-preference){
   .viz .tower{animation:float 7s ease-in-out infinite}
@@ -85,7 +85,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 }
 .mapintro{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;padding-block:44px 14px;border-top:1px solid var(--line)}
 .mapintro h2{margin:0;font-weight:600;font-size:22px;letter-spacing:-.025em}
-.mapintro p{margin:0;color:var(--muted);font-size:14px;max-width:70ch}
+.mapintro p{margin:0;color:var(--ink-2);font-size:14px;max-width:70ch}
 .mapintro p b{color:var(--ink);font-weight:500}
 .home{border:0;background:none;padding:6px 0;cursor:pointer;color:var(--muted);font-size:13px;display:inline-flex;gap:6px;align-items:center;font-weight:500}
 .home:hover{color:var(--ink)}
@@ -109,8 +109,8 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .results .rt{color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}
 .results .empty{padding:10px;color:var(--muted)}
 .tabs{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
-.tabs .lbl{font-size:12px;color:var(--faint);margin-right:6px}
-.tabs button{border:0;background:none;padding:7px 10px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:13.5px;font-weight:500;position:relative}
+.tabs .lbl{font-size:12px;color:var(--muted);margin-right:6px}
+.tabs button{border:0;background:none;padding:7px 10px;border-radius:8px;cursor:pointer;color:var(--ink-2);font-size:13.5px;font-weight:500;position:relative}
 .tabs button:hover{color:var(--ink);background:var(--panel)}
 .tabs button[aria-pressed="true"]{color:var(--ink);background:var(--panel-2)}
 .jwrap{position:relative;margin-left:auto}
@@ -123,22 +123,22 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .jmenu .g{padding:6px 6px 8px}
 .jmenu .gh{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px 6px 6px}
 .jmenu .gh .gn{font-size:12px;font-weight:600;color:var(--ink)}
-.jmenu .gh .gd{font-size:12px;color:var(--faint)}
+.jmenu .gh .gd{font-size:12px;color:var(--muted)}
 .jmenu button.j{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;width:100%;text-align:left;border:0;background:none;padding:8px 8px;border-radius:8px;cursor:pointer}
 .jmenu button.j:hover,.jmenu button.j:focus-visible{background:var(--panel)}
 .jmenu button.j[aria-pressed="true"]{background:color-mix(in oklab,var(--accent) 10%,var(--ground))}
 .jmenu .jn{font-weight:500;font-size:13.5px}
 .jmenu .jw{grid-column:1/-1;color:var(--muted);font-size:12.5px}
-.jmenu .js{font-size:11.5px;color:var(--faint);white-space:nowrap;font-variant-numeric:tabular-nums}
+.jmenu .js{font-size:11.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .legend{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px}
 .legend:empty{display:none}
-.chip{border:1px solid var(--line);background:var(--ground);border-radius:999px;padding:4px 10px 4px 8px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
-.chip:hover{border-color:var(--line-2)}
+.chip{border:1px solid var(--line-2);background:var(--ground);border-radius:999px;padding:4px 10px 4px 8px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.chip:hover{border-color:var(--ink)}
 .chip .sw{width:9px;height:9px;border-radius:50%;background:var(--c8)}
-.chip .cnt{color:var(--faint);font-size:11.5px;font-variant-numeric:tabular-nums}
+.chip .cnt{color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
 .chip[aria-pressed="true"] .cnt{color:inherit;opacity:.7}
-.legend .hint{align-self:center;color:var(--faint);font-size:12px;margin-left:4px}
+.legend .hint{align-self:center;color:var(--muted);font-size:12px;margin-left:4px}
 .jstatus{display:none;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:0 0 10px;color:var(--muted);font-size:13px}
 .jstatus.on{display:flex}
 .jstatus .g{font-size:12px;color:var(--accent-ink);font-weight:500}
@@ -150,50 +150,50 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .board{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-block:28px 24px;align-items:start;position:relative}
 .board.journey{grid-template-columns:minmax(0,1fr) 340px}
 .stack{display:grid;gap:14px;position:relative}
-.layer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:start;padding-block:10px;border-top:1px solid var(--line)}
+.layer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:start;padding-block:12px;border-top:1px solid var(--line)}
 .layer.users{border-top:0;padding-top:0}
 .lab{border:0;text-align:left;background:none;padding:6px 8px 6px 0;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;gap:2px;position:relative;margin-top:2px}
 .lab:hover .nm{color:var(--accent-ink)}
 .lab > span{display:block}
-.lab .id{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+.lab .id{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--ink-2);letter-spacing:.04em}
 .lab .id::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lc)}
-.lab .nm{font-weight:600;font-size:17px;letter-spacing:-.02em;line-height:1.15;transition:color .12s}
-.lab .an{color:var(--muted);font-size:12.5px}
-.lab .cnt{color:var(--faint);font-size:12px;margin-top:2px;font-variant-numeric:tabular-nums}
+.lab .nm{font-weight:650;font-size:17.5px;letter-spacing:-.02em;line-height:1.15;transition:color .12s}
+.lab .an{color:var(--muted);font-size:13px}
+.lab .cnt{color:var(--muted);font-size:12px;margin-top:2px;font-variant-numeric:tabular-nums}
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
-.tile{border:1px solid var(--line);text-align:left;cursor:pointer;border-radius:var(--r);padding:12px 12px 10px;background:var(--ground);min-height:84px;display:flex;flex-direction:column;gap:4px;position:relative;transition:transform .12s ease,box-shadow .12s ease,opacity .2s ease,border-color .12s ease}
-.tile:hover{border-color:var(--line-2);transform:translateY(-1px);box-shadow:var(--sh2)}
+.tile{border:1px solid var(--line-2);text-align:left;cursor:pointer;border-radius:var(--r);padding:12px 12px 10px;background:var(--ground);min-height:84px;display:flex;flex-direction:column;gap:4px;position:relative;transition:transform .12s ease,box-shadow .12s ease,opacity .2s ease,border-color .12s ease}
+.tile:hover{border-color:var(--ink);transform:translateY(-1px);box-shadow:var(--sh2)}
 .tile > .tid,.tile > .tn{display:block}
-.tile .tid{font-family:var(--mono);font-size:10.5px;color:var(--lc);letter-spacing:.04em}
-.tile .tn{font-weight:500;font-size:14px;line-height:1.25;letter-spacing:-.005em;text-wrap:balance;color:var(--ink)}
+.tile .tid{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--lc);letter-spacing:.04em}
+.tile .tn{font-weight:600;font-size:14.5px;line-height:1.25;letter-spacing:-.005em;text-wrap:balance;color:var(--ink)}
 .tile .tf{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px}
-.tile .lbar{display:flex;gap:2px;height:3px;flex:1;border-radius:2px;overflow:hidden}
+.tile .lbar{display:flex;gap:2px;height:4px;flex:1;border-radius:2px;overflow:hidden}
 .tile .lbar[hidden]{display:none}
 .tile .lbar .ls{height:100%;transition:opacity .2s}
-.tile .lbar .ls.faded{opacity:.18}
-.tile .tc{font-size:11.5px;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
-.tile.dim,.lab.dim{opacity:.3}
+.tile .lbar .ls.faded{opacity:.22}
+.tile .tc{font-size:11.5px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.tile.dim,.lab.dim{opacity:.35}
 .tile.hit{border-color:var(--ink)}
 .tile.on-path{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 18%,transparent)}
 .users .tiles{display:flex;flex-wrap:wrap;gap:8px;align-content:center;min-height:36px}
-.users .tile{min-height:0;flex-direction:row;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--panel)}
+.users .tile{min-height:0;flex-direction:row;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--panel);border-color:var(--line)}
 .users .tile:hover{background:var(--panel-2);box-shadow:none;transform:none;border-color:var(--line)}
-.users .tile .tn{font-size:13px;font-weight:500}
+.users .tile .tn{font-size:13px;font-weight:600}
 .users .tile .tf{margin:0;padding:0;gap:6px}
 .users .tile .usw{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
 .users .tile .tc{margin:0}
 .under{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;padding-block:14px 6px;border-top:1px solid var(--line);align-items:start}
-.under .h{font-size:12px;color:var(--muted);padding-top:6px}
+.under .h{font-size:12.5px;color:var(--muted);padding-top:6px}
 .under .h b{display:block;color:var(--ink);font-weight:600;font-size:14px;letter-spacing:-.01em}
 .pillars{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.pillars button{border:1px solid var(--line);background:var(--ground);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:500;display:inline-flex;gap:8px;align-items:center}
+.pillars button{border:1px solid var(--line-2);background:var(--ground);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:500;display:inline-flex;gap:8px;align-items:center}
 .pillars button:hover{border-color:var(--line-2);background:var(--panel)}
-.pillars button .c{color:var(--faint);font-size:11.5px}
+.pillars button .c{color:var(--muted);font-size:11.5px}
 .pillars button.on-path{border-color:var(--accent)}
 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;color:var(--muted);font-size:13px;margin-top:12px}
 .flow .n{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:500}
 .flow .n i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
-.flow .a{color:var(--faint)}
+.flow .a{color:var(--muted)}
 .jpath,.jnodes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .jpath{z-index:1} .jnodes{z-index:6}
 .tile,.lab{z-index:2}
@@ -212,7 +212,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .jpanel .jh .x:hover{background:var(--panel-2);color:var(--ink)}
 .jpanel .jb{overflow:auto;padding:14px 18px 18px}
 .jpanel .why{margin:0 0 10px;color:var(--ink-2);font-size:13.5px}
-.jpanel .scale{margin:0 0 14px;font-size:12.5px;color:var(--muted);padding:10px 12px;border-radius:10px;background:var(--panel)}
+.jpanel .scale{margin:0 0 14px;font-size:12.5px;color:var(--ink-2);padding:10px 12px;border-radius:10px;background:var(--panel)}
 .jpanel .scale b{color:var(--ink);font-weight:600}
 .jpanel .scale a{display:block;font-size:12px;margin-top:3px}
 .steps{display:grid;position:relative}
@@ -222,9 +222,9 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .steps button:hover{background:var(--panel)}
 .steps button > span > span{display:block}
 .steps .no{font-family:var(--mono);font-size:10.5px;color:#fff;background:var(--accent);border-radius:999px;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;margin-top:1px;position:relative;z-index:1;justify-self:center}
-.steps .sw2{font-size:11px;color:var(--faint);font-family:var(--mono)}
+.steps .sw2{font-size:11px;color:var(--muted);font-family:var(--mono)}
 .steps .st{font-weight:500;font-size:13.5px;color:var(--ink)}
-.steps .sd{color:var(--muted);font-size:12.5px;margin-top:1px}
+.steps .sd{color:var(--ink-2);font-size:12.5px;margin-top:1px}
 
 /* ================= dialog ================= */
 .scrim{position:fixed;inset:0;background:rgba(15,20,25,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:40;opacity:0;pointer-events:none;transition:opacity .18s}
@@ -250,9 +250,9 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .prod > button{width:100%;text-align:left;border:0;background:none;padding:12px 4px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:start;border-radius:8px}
 .prod > button:hover{background:var(--panel)}
 .prod .pn{font-weight:500;font-size:14.5px;line-height:1.3}
-.prod .pd{color:var(--muted);font-size:13px;grid-column:1/-1}
+.prod .pd{color:var(--ink-2);font-size:13px;grid-column:1/-1}
 .prod .badges{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;padding-top:2px}
-.badge{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--panel-2);color:var(--muted);white-space:nowrap;font-weight:500}
+.badge{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--panel-2);color:var(--ink-2);white-space:nowrap;font-weight:500}
 .badge.new{color:var(--s-new);background:color-mix(in oklab,var(--s-new) 12%,var(--ground))}
 .badge.flux{color:var(--s-flux);background:color-mix(in oklab,var(--s-flux) 12%,var(--ground))}
 .badge.unconf{color:var(--muted);outline:1px dashed var(--line-2);outline-offset:-1px;background:none}
@@ -263,7 +263,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .prod .detail{padding:6px 4px 18px}
 .prod.open > button .pd{display:none}
 .kv{display:grid;grid-template-columns:132px minmax(0,1fr);gap:8px 16px;font-size:13.5px;margin:0}
-.kv dt{color:var(--muted);font-size:12.5px;padding-top:1px}
+.kv dt{color:var(--muted);font-size:12.5px;font-weight:500;padding-top:1px}
 .kv dd{margin:0;color:var(--ink-2)}
 .kv .srcs a{display:block;font-size:13px;overflow-wrap:anywhere}
 .kv .rel button{border:0;background:none;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:13.5px;margin-right:10px}
@@ -324,7 +324,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
     <div>
       <div class="kicker">Capability map · as at 23 September 2026</div>
       <h1>Mastercard Operating System</h1>
-      <p class="sub">Everything Mastercard runs, on one map: a <b>kernel</b>, five <b>rails</b>, the <b>network services</b> every rail can call, the <b>solutions</b> built on the data, and the <b>access</b> layer people plug into.</p>
+      <p class="sub">Everything Mastercard runs, on one map: a <b>kernel</b>, six <b>rails</b>, the <b>network services</b> every rail can call, the <b>solutions</b> built on the data, and the <b>access</b> layer people plug into.</p>
       <div class="cta">
         <button class="btn" id="explore">Explore the map <span class="ar">→</span></button>
         <button class="btn ghost" id="cta-journey">Follow a journey</button>
@@ -466,14 +466,7 @@ const LAYERS = [
     P("amlrisk","AML Account Risk","Augments issuers' anti-money-laundering processes by flagging potential laundering at the individual account (PAN) level.",{s:["iss"],lc:"after",src:[["AML Account Risk — Developers",D+"/product/aml-account-risk-api"]]}),
     P("ciphertrace","CipherTrace","Crypto intelligence: compliance monitoring, risk assessment and investigations. The Armada, Inspector and Sentry products were shut down in March 2024.",{s:["fin","gov","iss"],st:"flux",o:"A",ay:"2021",at:"CipherTrace",src:[["Fortune on the 2024 shutdown","https://fortune.com/crypto/2024/03/13/mastercard-ciphertrace-blockchain-analytics-chainalysis-bitcoin-fog/"]]}),
    ]},
-   {id:"4.2", name:"Open Finance", blurb:"Consumer-permissioned bank data and A2A initiation.", div:"svc", rev:"oth", products:[
-    P("ofus","Mastercard Open Finance US (Finicity)","Account and owner verification, Payment Success Indicator, Deposit Switch, Bill Pay Switch, data enrichment, Consumer Foresight, lending and mortgage verification, small-business cash-flow analytics; ~95% of US deposit accounts.",{s:["iss","fin","mer","corp"],lc:"before",o:"A",ay:"2020",at:"Finicity (~$825m)",src:[["Open Finance (US)",M+"/us/en/business/open-finance.html"],["Open Finance US — developer docs",D+"/open-finance-us/documentation/"]]}),
-    P("ofeu","Mastercard Open Finance Europe (Aiia)","SCA-based account connection, data retrieval and payment initiation across Europe; the Aiia brand is converging into Open Finance.",{s:["fin","mer","iss"],lc:"before",st:"flux",o:"A",ay:"2021",at:"Aiia",src:[["Aiia Enterprise docs",D+"/open-finance-europe/documentation/licensed/aiia-enterprise/"]]}),
-    P("dataconnect","Mastercard Data Connect","Consumer-permissioned data-sharing and consent layer across the US and European stacks.",{s:["iss","fin","con"],lc:"before",ay:"2024",src:[["Mastercard Data Connect",M+"/us/en/business/open-finance/solutions/data/mastercard-data-connect.html"]]}),
-    P("fdxhub","Developer Hub for FDX APIs","Tooling for banks and data providers to publish FDX-compliant open-banking APIs (the US Financial Data Exchange standard).",{s:["iss","fin"],lc:"before",src:[["FDX Developer Hub — Developers",D+"/product/fdx-developer-hub"]]}),
-    P("paybybankus","Pay by Bank (US)","Account-to-account payment initiation delivered through the Open Finance stack rather than as a standalone rail.",{s:["mer","con","iss"],lc:"checkout",note:"US regulatory context: CFPB Section 1033 was enjoined and under reconsideration in 2026; no sign of Mastercard winding down Finicity or Aiia.",src:[["Open Finance (US)",M+"/us/en/business/open-finance.html"]]}),
-   ]},
-   {id:"4.3", name:"Consumer Acquisition & Engagement", blurb:"Personalisation, marketing, loyalty, benefits.", div:"svc", rev:"eng", products:[
+   {id:"4.2", name:"Consumer Acquisition & Engagement", blurb:"Personalisation, marketing, loyalty, benefits.", div:"svc", rev:"eng", products:[
     P("dy","Dynamic Yield / Experience OS","AI personalisation platform — Shopping Muse, Experience OS Agents, Experience APIs, Experience Search; 8× Gartner MQ leader; 80m+ personalised sessions a day.",{s:["mer","corp"],o:"A",ay:"2022",at:"Dynamic Yield (from McDonald's)",src:[["Dynamic Yield product page",M+"/us/en/business/consumer-acquisition-and-engagement/personalization/dynamic-yield.html"],["Close of acquisition, 2022",I+"/investor-news/investor-news-details/2022/Mastercard-Strengthens-Consumer-Engagement-Services-With-Close-of-Dynamic-Yield-Acquisition/default.aspx"]]}),
     P("mktsvc","Mastercard Marketing Services","Full-funnel lifecycle marketing: Acquisition, Engagement and a Performance Engine for optimisation.",{s:["iss","mer"],src:[["Marketing Services",M+"/us/en/business/consumer-acquisition-and-engagement/marketing-services.html"]]}),
     P("audhub","Marketing Audience Hub","Audience identification, media optimisation and campaign personalisation; the successor to the 'Mastercard Audiences' name.",{s:["iss","mer"],st:"flux",src:[["Marketing Audience Hub",M+"/us/en/business/consumer-acquisition-and-engagement/personalization/solutions/marketing-audience-hub.html"]]}),
@@ -487,7 +480,7 @@ const LAYERS = [
     P("sessionm","SessionM","Loyalty and engagement platform acquired in 2019 — sold to Capillary Technologies in February 2026.",{s:["mer"],st:"retired",o:"A",ay:"2019 → divested Feb 2026",at:"SessionM",src:[["Capillary announcement, Feb 2026","https://www.capillarytech.com/blog/capillary-technologies-acquires-sessionm-from-mastercard/"]]}),
     P("ifonly","IfOnly","Experiences marketplace folded into Priceless; shut down in August 2020.",{s:["con"],st:"retired",o:"A",ay:"~2019 → closed 2020",at:"IfOnly",src:[["TechCrunch, Aug 2020","https://techcrunch.com/2020/08/24/mastercard-acquired-and-shut-down-ifonly-an-experiences-marketplace-hit-by-covid-19/"]]}),
    ]},
-   {id:"4.4", name:"Insights & Intelligence", blurb:"Analytics and research on network data.", div:"svc", rev:"ins", products:[
+   {id:"4.3", name:"Insights & Intelligence", blurb:"Analytics and research on network data.", div:"svc", rev:"ins", products:[
     P("testlearn","Test & Learn","Controlled-experimentation platform for retailers and financial institutions.",{s:["mer","iss","corp"],o:"A",ay:"2015",at:"Applied Predictive Technologies ($600m)",src:[["APT acquisition, 2015",I+"/investor-news/investor-news-details/2015/MasterCard-Announces-Acquisition-of-Applied-Predictive-Technologies/default.aspx"]]}),
     P("spendingpulse","SpendingPulse & market insights","SpendingPulse, Market Share, Market Trends, Macro360 and Forecasting & Scenario Planning: macro and sector spending insight.",{s:["mer","gov","iss"],src:[["SpendingPulse",M+"/us/en/business/insights-intelligence/economic-market-insights/solutions/spendingpulse.html"]]}),
     P("places","Places & location analytics","Places, Geo Insights, Shopper Intelligence, Merchant Insights, Tourism Insights, Ad Insights and ATM Locations.",{s:["mer","gov","corp"],src:[["Economic & Market Insights",M+"/us/en/business/insights-intelligence/economic-market-insights.html"]]}),
@@ -498,13 +491,13 @@ const LAYERS = [
     P("cleanroom","Data Clean Room & Media Measurement","Privacy-preserving data collaboration and independent anonymisation. No product literally named 'Data Cloud' was found.",{s:["mer","iss"],src:[["Insights & Intelligence",M+"/global/en/business/insights-intelligence.html"]]}),
     P("opsintel","Operations Intelligence","Operational Reports, Transaction Investigator Plus, Learning Lab and Digital Safari.",{s:["iss","acq"],lc:"after",src:[["Insights & Intelligence",M+"/us/en/business/insights-intelligence.html"]]}),
    ]},
-   {id:"4.5", name:"Advisors & Transformation", blurb:"Consulting, innovation and delivery.", div:"svc", rev:"ins", products:[
+   {id:"4.4", name:"Advisors & Transformation", blurb:"Consulting, innovation and delivery.", div:"svc", rev:"ins", products:[
     P("advisors","Advisors & Transformation","Consulting arm (Advisory · Innovation · Deploy): ~4,000 consultants in 120+ countries. Lineage: Mastercard Advisors (2001) → Data & Services (2019) → Services (2024).",{s:["iss","acq","mer","corp","gov"],ay:"2001",src:[["Advisors & Transformation",M+"/us/en/business/insights-intelligence/advisors-transformation.html"]]}),
     P("practices","Consulting practices","Payments, Cyber & Enterprise Risk, Data Strategy & Management, AI & Advanced Analytics, Sustainability & Financial Inclusion, Future Tech.",{s:["iss","acq","mer","corp","gov"],src:[["AI & Advanced Analytics Consulting",M+"/global/en/business/insights-intelligence/mastercard-advisors/ai-and-advanced-analytics-consulting.html"]]}),
     P("digitallabs","Digital Labs, Strategy Insight, Sandbox as a Service","Innovation-as-a-service under the Mastercard Foundry umbrella: strategy and insight, design and prototype, execute and accelerate.",{s:["iss","fin","corp"],src:[["Digital Labs",M+"/us/en/innovation/build-with-us/digital-labs.html"]]}),
     P("managed","Managed services","A delivery model (managed fraud rules, managed cyber) rather than a branded product.",{s:["iss","mer"],st:"unconf",note:"Referenced as a delivery model and job family, not a distinct product."}),
    ]},
-   {id:"4.6", name:"Commercial & B2B", blurb:"Buyer–supplier payments and controls.", div:"cnpf", rev:"oth", products:[
+   {id:"4.5", name:"Commercial & B2B", blurb:"Buyer–supplier payments and controls.", div:"cnpf", rev:"oth", products:[
     P("trackbps","Mastercard Track Business Payment Service","Buyer–supplier network for invoice presentment, payment terms and working capital.",{s:["corp","iss"],lc:"checkout",ay:"2020",src:[["US launch, May 2020","https://www.businesswire.com/news/home/20200512005463/en/Mastercard-Track-Business-Payment-Service-Launches-in-the-U.S.-Brings-Efficiency-Gains-and-Faster-Access-to-Working-Capital-to-Suppliers-and-Buyers"]]}),
     P("trackip","Track Instant Pay","Virtual-card instant B2B payment inside accounts-payable workflows (Marqeta integration).",{s:["corp","iss","fin"],lc:"checkout",ay:"2022",src:[["Launch, Jan 2022","https://www.businesswire.com/news/home/20220120005082/en/Mastercard-Unveils-Next-Generation-Virtual-Card-Solution-for-Instant-B2B-Payments"]]}),
     P("incontrol","In Control & Commercial Connect API","Virtual card numbers and spend controls; single-API relaunch with Citi as first global issuer, July 2026.",{s:["iss","corp"],lc:"before",st:"new",o:"A",ay:"2009",at:"Orbiscom",src:[["Commercial Connect, Jul 2026",M+"/us/en/news-and-trends/press/2026/july/Mastercard-expands-virtual-card-platform.html"]]}),
@@ -516,7 +509,7 @@ const LAYERS = [
     P("cen","Commercial Event Notifications","Rapid payment and token notifications for B2B payments so finance teams can reconcile accurately.",{s:["corp","iss"],lc:"after",src:[["Commercial Event Notifications — Developers",D+"/product/commercial-event-notifications"]]}),
     P("healthcare","Healthcare & embedded finance","Named focus areas of Commercial & New Payment Flows on Mastercard's commercial pages.",{s:["corp","fin"],src:[["Commercial payments",M+"/us/en/business/payments/commercial-payments.html"]]}),
    ]},
-   {id:"4.7", name:"AI & agent applications", blurb:"Mastercard's 'AI' category — mostly cross-references.", div:"svc", rev:"ins", products:[
+   {id:"4.6", name:"AI & agent applications", blurb:"Mastercard's 'AI' category — mostly cross-references.", div:"svc", rev:"ins", products:[
     P("agentsuite","Mastercard Agent Suite","Customisable AI agents for banks and merchants (product recommendation, conversational shopping), integrated with Agent Pay; includes the Developers Agent Toolkit.",{s:["iss","mer","corp"],st:"new",ay:"Jan 2026",rel:["agentpay","dipro","dy","practices","merchantcloud"],src:[["Launch press release, Jan 2026",M+"/global/en/news-and-trends/press/2026/january/mastercard-launches-agent-suite-to-ready-enterprises-for-a-new-e.html"]]}),
    ]},
   ]},
@@ -593,7 +586,7 @@ const LAYERS = [
   ]},
 
  {id:"L2", name:"Rails", analogy:"drivers · I/O", color:"--l2",
-  desc:"Mastercard is multi-rail: five ways money moves, all plugging into the same kernel and able to call the same network services. Cards earn Payment network revenue; the other rails report inside Value-added services.",
+  desc:"Mastercard is multi-rail: six ways money and account data move, all plugging into the same kernel and able to call the same network services. Cards earn Payment network revenue; the other rails report inside Value-added services.",
   tiles:[
    {id:"2.1", name:"Card rails", blurb:"Credit, debit, prepaid, commercial.", div:"core", rev:"net", products:[
     P("cardsconsumer","Credit, debit & prepaid card products","Consumer card programmes on the core network — the source of the Payment network revenue line.",{s:["iss","con"],lc:"auth",src:[["Consumer payments",M+"/us/en/business/payments/consumer-payments.html"]]}),
@@ -633,6 +626,13 @@ const LAYERS = [
     P("arcus","Arcus","Latin-American (Mexico) real-time bill-pay and disbursement infrastructure; no 2025–26 news found.",{s:["corp","iss","con"],lc:"checkout",st:"unconf",o:"A",ay:"2021",at:"Arcus",src:[["Acquisition, 2021",M+"/news/latin-america/en/newsroom/press-releases/pr-en/2021/november/mastercard-expands-support-of-latin-america-real-time-payments-with-acquisition-of-arcus/"]]}),
     P("rpps","RPPS (Remote Payment and Presentment Service)","Mastercard's US electronic bill-payment network connecting banks and billers; the Bill Payment Validator API checks whether an account can be paid through it.",{s:["iss","corp","fin"],lc:"settle",src:[["Bill Payment Validator — Developers",D+"/product/bill-payment-validator"]]}),
     P("paylocal","Mastercard Pay Local","Lets cardholders pay through local wallets (Alipay, GrabPay, M-Pesa, Mercado Pago, DANA, Touch 'n Go) where cards aren't accepted.",{s:["fin","mer","con"],lc:"checkout",st:"new",ay:"Nov 2024",div:"core",src:[["Launch, Nov 2024",M+"/global/en/news-and-trends/press/2024/november/mastercard-launches-pay-local-to-empower-digital-wallet-providers-with-new-ways-to-pay.html"]]}),
+   ]},
+   {id:"2.6", name:"Open Finance", blurb:"Bank-account data and account-to-account initiation, with consent.", div:"svc", rev:"oth", products:[
+    P("ofus","Mastercard Open Finance US (Finicity)","Account and owner verification, Payment Success Indicator, Deposit Switch, Bill Pay Switch, data enrichment, Consumer Foresight, lending and mortgage verification, small-business cash-flow analytics; ~95% of US deposit accounts.",{s:["iss","fin","mer","corp"],lc:"before",o:"A",ay:"2020",at:"Finicity (~$825m)",src:[["Open Finance (US)",M+"/us/en/business/open-finance.html"],["Open Finance US — developer docs",D+"/open-finance-us/documentation/"]]}),
+    P("ofeu","Mastercard Open Finance Europe (Aiia)","SCA-based account connection, data retrieval and payment initiation across Europe; the Aiia brand is converging into Open Finance.",{s:["fin","mer","iss"],lc:"before",st:"flux",o:"A",ay:"2021",at:"Aiia",src:[["Aiia Enterprise docs",D+"/open-finance-europe/documentation/licensed/aiia-enterprise/"]]}),
+    P("dataconnect","Mastercard Data Connect","Consumer-permissioned data-sharing and consent layer across the US and European stacks.",{s:["iss","fin","con"],lc:"before",ay:"2024",src:[["Mastercard Data Connect",M+"/us/en/business/open-finance/solutions/data/mastercard-data-connect.html"]]}),
+    P("fdxhub","Developer Hub for FDX APIs","Tooling for banks and data providers to publish FDX-compliant open-banking APIs (the US Financial Data Exchange standard).",{s:["iss","fin"],lc:"before",src:[["FDX Developer Hub — Developers",D+"/product/fdx-developer-hub"]]}),
+    P("paybybankus","Pay by Bank (US)","Account-to-account payment initiation delivered through the Open Finance stack rather than as a standalone rail.",{s:["mer","con","iss"],lc:"checkout",note:"US regulatory context: CFPB Section 1033 was enjoined and under reconsideration in 2026; no sign of Mastercard winding down Finicity or Aiia.",src:[["Open Finance (US)",M+"/us/en/business/open-finance.html"]]}),
    ]},
   ]},
 
@@ -714,7 +714,7 @@ const JOURNEYS = [
    {at:"3.3", p:"di", t:"Decision Intelligence scores it in flight", d:"The issuer gets a real-time AI risk score with the request."},
    {at:"u-iss", t:"The issuer approves", d:""},
    {at:"3.5", p:"txnnotif", t:"A real-time alert reaches the cardholder's app", d:"Transaction Notifications, with consent."},
-   {at:"4.4", p:"spendingpulse", t:"…and the aggregate becomes SpendingPulse", d:"The flywheel turns."},
+   {at:"4.3", p:"spendingpulse", t:"…and the aggregate becomes SpendingPulse", d:"The flywheel turns."},
   ]},
  {id:"ecom", g:"scale", name:"Online checkout", why:"Where tokenisation, authentication and fraud scoring all meet — and where Mastercard has committed to removing manual card entry in Europe by 2030.",
   scale:"~50% of European e-commerce transactions tokenised by mid-2025; Click to Pay enrolments doubled year-on-year; Merchant Cloud connects 240+ acquirers.", src:[["Tokenisation one-year update, Jun 2025","https://www.businesswire.com/news/home/20250603515548/en"],["Merchant Cloud launch, Oct 2025","https://www.mastercard.com/us/en/news-and-trends/press/2025/october/Mastercard-Merchant-Cloud-simplify-and-support-commerce-growth-in-global-acceptance-ecosystem.html"]],
@@ -754,7 +754,7 @@ const JOURNEYS = [
    {at:"1.1", p:"fx", t:"Converted at Mastercard's FX rate", d:"Currency Conversion Calculator exposes the same rates by API."},
    {at:"3.3", p:"di", t:"Decision Intelligence scores an unusual location", d:"Travel patterns, not just a single merchant, inform the score."},
    {at:"u-iss", t:"The home issuer approves and applies cross-border fees", d:"Cross Border Fee Manager logic."},
-   {at:"4.3", p:"priceless", t:"Priceless, airport lounges and travel benefits ride along", d:"Card-tier benefits and Travel & Lifestyle Services."},
+   {at:"4.2", p:"priceless", t:"Priceless, airport lounges and travel benefits ride along", d:"Card-tier benefits and Travel & Lifestyle Services."},
   ]},
  {id:"billpay", g:"scale", name:"Paying the bills", why:"Not every payment is a card payment. In the UK, the bulk rails Mastercard operates move most salaries, bills and benefits.",
   scale:"Bacs processes 4.4bn+ automated payments a year — ~90% of UK salaries, ~70% of household bills and ~98% of state benefits.", src:[["Bacs case study","https://www.mastercard.com/us/en/news-and-trends/Insights/2025/over-4-4-billion-automated-payments-annually.html"]],
@@ -792,14 +792,14 @@ const JOURNEYS = [
   scale:"Commercial is 38% of GDV; virtual cards run in 43 countries and 174 currencies with fraud under one-fifth of physical cards.", src:[["Commercial Connect / In Control expansion, Jul 2026","https://www.mastercard.com/us/en/news-and-trends/press/2026/july/Mastercard-expands-virtual-card-platform.html"],["Investor Day 2024 (PDF)","https://s25.q4cdn.com/479285134/files/doc_events/2024-Mastercard-Investment-Community-Presentation.pdf"]],
   steps:[
    {at:"u-corp", t:"A buyer's AP system approves an invoice", d:"Inside SAP, Emburse or a bank portal."},
-   {at:"4.6", p:"incontrol", t:"Commercial Connect creates a virtual card with controls", d:"Amount, validity window and merchant category set at creation."},
-   {at:"4.6", p:"bpc", t:"Business Payment Controls enforce the limits", d:"At authorisation and at clearing."},
-   {at:"4.6", p:"trackbps", t:"Track BPS presents the payment to the supplier", d:"With terms and remittance data."},
+   {at:"4.5", p:"incontrol", t:"Commercial Connect creates a virtual card with controls", d:"Amount, validity window and merchant category set at creation."},
+   {at:"4.5", p:"bpc", t:"Business Payment Controls enforce the limits", d:"At authorisation and at clearing."},
+   {at:"4.5", p:"trackbps", t:"Track BPS presents the payment to the supplier", d:"With terms and remittance data."},
    {at:"2.1", p:"cardscommercial", t:"Rides the commercial card rail", d:""},
    {at:"1.1", p:"swcore", t:"The switch routes to the issuing bank", d:""},
    {at:"u-iss", t:"The issuer approves", d:""},
-   {at:"4.6", p:"receivables", t:"Receivables Manager reconciles it at the supplier", d:"Straight into the ERP."},
-   {at:"4.6", p:"cen", t:"Commercial Event Notifications confirm both sides", d:""},
+   {at:"4.5", p:"receivables", t:"Receivables Manager reconciles it at the supplier", d:"Straight into the ERP."},
+   {at:"4.5", p:"cen", t:"Commercial Event Notifications confirm both sides", d:""},
   ]},
  {id:"stable", g:"money", name:"Settling in stablecoins", why:"The newest rail: regulated stablecoins as a settlement currency for acquirers and issuers, with BVNK bridging on-chain and fiat.",
   scale:"Six regulated stablecoins across eight chains as of June 2026; stablecoin-funded cards already spend at 150m+ merchant locations; BVNK acquired for up to $1.8bn.", src:[["Stablecoin settlement expansion, Jun 2026","https://www.mastercard.com/global/en/news-and-trends/press/2026/june/mastercard-expands-settlement-capabilities-to-include-stablecoin.html"],["Stablecoin utility and scale, 2025","https://www.mastercard.com/us/en/news-and-trends/stories/2025/mastercard-stablecoin-utility-and-scale.html"]],
@@ -895,12 +895,12 @@ const JOURNEYS = [
   scale:"Open Finance US reaches ~95% of US deposit accounts; Open Finance Europe connects to ~3,000 banks.", src:[["Open Finance (US)","https://www.mastercard.com/us/en/business/open-finance.html"],["Open Finance (Europe) — Developers","https://developer.mastercard.com/product/open-finance-europe"]],
   steps:[
    {at:"u-con", t:"An applicant applies for a loan", d:"On their phone, in minutes."},
-   {at:"4.2", p:"dataconnect", t:"Data Connect captures consent to share bank data", d:""},
-   {at:"4.2", p:"ofus", t:"Open Finance verifies accounts, owner, income and assets", d:"Finicity in the US, Aiia in Europe."},
+   {at:"2.6", p:"dataconnect", t:"Data Connect captures consent to share bank data", d:""},
+   {at:"2.6", p:"ofus", t:"Open Finance verifies accounts, owner, income and assets", d:"Finicity in the US, Aiia in Europe."},
    {at:"4.1", p:"mcidentity", t:"Identity Insights checks the applicant is who they say", d:""},
-   {at:"4.4", p:"creditintel", t:"Credit Intelligence scores the cash flow", d:"Alternative data for thin-file applicants."},
+   {at:"4.3", p:"creditintel", t:"Credit Intelligence scores the cash flow", d:"Alternative data for thin-file applicants."},
    {at:"u-iss", t:"The lender decides", d:""},
-   {at:"4.2", p:"ofus", t:"Deposit Switch moves payroll to the new account", d:"Bill Pay Switch updates the billers."},
+   {at:"2.6", p:"ofus", t:"Deposit Switch moves payroll to the new account", d:"Bill Pay Switch updates the billers."},
   ]},
  {id:"inclusion", g:"frontier", name:"A smallholder farmer gets paid", why:"Community Pass takes the same stack to places with no connectivity and no bank: a digital identity, an offline-capable credential and a disbursement rail.",
   scale:"MADE Alliance: Africa targets 100m people and businesses by 2034; Mastercard's Africa acceptance network grew 45% in 2025.", src:[["Community Pass","https://www.mastercard.com/europe/en/for-the-world/prosperity/community-pass.html"],["Africa acceptance +45%, Dec 2025","https://www.mastercard.com/news/eemea/en/newsroom/press-releases/en/2025-1/december/mastercard-boosts-africa-acceptance-network-by-45-in-2025-accelerating-the-continent-s-digital-economy/"]],
@@ -1279,7 +1279,7 @@ function openTile(T, keep){
       h.appendChild(ul); body.appendChild(h); });
     body.querySelectorAll(".apihome").forEach(b=>b.addEventListener("click",()=>openProduct(PRODUCTS[b.dataset.p])));
   }
-  if(T.id==="4.7"){ body.appendChild(el("h4","","Also AI, elsewhere on the map")); const sa=el("p","seealso"); ["agentpay","dipro","dy","practices","merchantcloud"].forEach(id=>{ const b=el("button","",esc(PRODUCTS[id].n)); b.addEventListener("click",()=>openProduct(PRODUCTS[id])); sa.appendChild(b); sa.appendChild(document.createTextNode("  ")); }); body.appendChild(sa); }
+  if(T.id==="4.6"){ body.appendChild(el("h4","","Also AI, elsewhere on the map")); const sa=el("p","seealso"); ["agentpay","dipro","dy","practices","merchantcloud"].forEach(id=>{ const b=el("button","",esc(PRODUCTS[id].n)); b.addEventListener("click",()=>openProduct(PRODUCTS[id])); sa.appendChild(b); sa.appendChild(document.createTextNode("  ")); }); body.appendChild(sa); }
   if(!keep) openDrawer(); body.scrollTop=0;
 }
 function openUser(u, keep){
@@ -1314,7 +1314,7 @@ function renderViz(){
   const bottomUp=[...layers].reverse();
   bottomUp.forEach((L,i)=>{
     const y=base-i*step; const g=mk("g",{class:"plane"}); g.dataset.layer=L.id;
-    const poly=mk("polygon",{points:`${cx},${y-hh} ${cx+hw},${y} ${cx},${y+hh} ${cx-hw},${y}`, fill:`color-mix(in oklab, var(${L.color}) ${i===0?22:10}%, var(--ground))`, stroke:`var(${L.color})`, "stroke-width":"1.25", "stroke-opacity":".7"});
+    const poly=mk("polygon",{points:`${cx},${y-hh} ${cx+hw},${y} ${cx},${y+hh} ${cx-hw},${y}`, fill:`color-mix(in oklab, var(${L.color}) ${i===0?30:16}%, var(--ground))`, stroke:`var(${L.color})`, "stroke-width":"1.5", "stroke-opacity":".9"});
     g.appendChild(poly);
     const lx=cx+hw+18, ly=y+4;
     g.appendChild(mk("line",{x1:cx+hw+2,y1:y,x2:lx-6,y2:y,stroke:"var(--line-2)","stroke-width":"1"}));

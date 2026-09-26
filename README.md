@@ -18,9 +18,9 @@ Read bottom-up it is a transaction: money enters on a **rail** (L2), hits the **
 ```
 USERS      Issuers · Acquirers/PSPs · Merchants · Fintechs/wallets · Corporates · Governments · Consumers · AI agents
 L5 ACCESS  Developers & APIs · Acceptance platforms · Issuing platforms · Programmes
-L4 SOLUTIONS  Security · Open Finance · Acquisition & Engagement · Insights · Advisors · Commercial & B2B · AI & agents
+L4 SOLUTIONS  Security · Acquisition & Engagement · Insights · Advisors · Commercial & B2B · AI & agents
 L3 NETWORK SERVICES  Tokenisation · Authentication & checkout · Risk decisioning · Disputes · Account services · Agentic commerce
-L2 RAILS   Cards · A2A & real-time (Vocalink) · Mastercard Move · Digital assets · Bill pay & local
+L2 RAILS   Cards · A2A & real-time (Vocalink) · Mastercard Move · Digital assets · Bill pay & local · Open Finance
 L1 KERNEL  The switch · Brands & credentials · Franchise & rules · Data & AI foundation
 ```
 
@@ -41,7 +41,7 @@ One rule keeps it simple: **every asset has exactly one home tile**; lenses and 
 | `docs/asset-inventory.md` | The inventory in readable form, with status and origin, plus the API-to-tile appendix |
 | `docs/business-structure-research.md` | Mastercard's segments, divisions, website taxonomy, acquisitions 2015–2026 and 2025–26 themes, with sources |
 | `docs/video-script.md` | The narration script for the walkthrough video, with scene timings |
-| `video/Mastercard-Operating-System.mp4` | Narrated walkthrough (5 min 31 s, 1600×900) |
+| `video/Mastercard-Operating-System.mp4` | Narrated walkthrough (3 min 36 s, 1600×900) |
 | `video/` scripts | How the video is produced — see below |
 
 ## Editing the map
@@ -52,4 +52,4 @@ Status codes: `new` (2025–26), `flux` (rename, divestiture or restructuring), 
 
 ## Regenerating the video
 
-`video/record.js` drives `index.html` with Playwright at 1920×1080, timed to the narration segments; `video/tts.py` synthesises the narration with Kokoro-82M via sherpa-onnx (download `kokoro-int8-multi-lang-v1_1` from the sherpa-onnx `tts-models` release into `video/`); `video/build.sh` records, recovers exact scene timings from marker pixels, re-times each scene to real time and muxes the audio. The end card is `video/endcard.html`. Requirements: Node with `playwright`, Python with `sherpa-onnx` and `soundfile`, and `ffmpeg`.
+`video/record.js` drives `index.html` with Playwright at 1280×720 CSS px and a 1.5× device scale factor (1920×1080 output), timed to the narration sentences (`video/timeline.json`); `video/cam.js` is injected at record time and turns the page into a camera-driven canvas that pans and zooms to what the narration describes; `video/tts.py` synthesises the narration sentence by sentence with Kokoro-82M v1.0 via sherpa-onnx and joins the sentences with explicit pauses (download `kokoro-multi-lang-v1_0` from the sherpa-onnx `tts-models` release into `video/`); `video/build.sh` records, recovers exact scene timings from marker pixels, re-times each scene to real time and muxes the audio. The end card is `video/endcard.html`. Requirements: Node with `playwright`, Python with `sherpa-onnx` and `soundfile`, and `ffmpeg`.

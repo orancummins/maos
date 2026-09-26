@@ -1,0 +1,13 @@
+# video pipeline scratch
+video/rec/
+video/seg/
+video/*.wav
+video/*.png
+video/marks.json
+video/video_times.json
+video/kokoro-*/
+video/*.tar.bz2
+video/*.log
+video/remap.txt
+node_modules/
+.DS_Store

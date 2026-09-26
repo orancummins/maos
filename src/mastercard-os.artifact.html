@@ -1,0 +1,1370 @@
+<title>Mastercard Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#FFFFFF; --panel:#F7F8FA; --panel-2:#F0F2F5; --ink:#0F1419; --ink-2:#344054; --muted:#667085; --faint:#98A2B3; --line:#E7EAEE; --line-2:#D5DAE1;
+  --accent:#FF5F00; --accent-ink:#C74A00; --link:#B3111F; --focus:#2563EB;
+  --l1:#111827; --l2:#D7263D; --l3:#F26A1B; --l4:#D99A0B; --l5:#6B7280; --lu:#98A2B3;
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#4a3aa7; --c8:#e34948;
+  --rev1:#EB001B; --rev2:#E8930C;
+  --s-new:#12805C; --s-flux:#B26B00; --s-unconf:#98A2B3; --s-retired:#B42318;
+  --sh1:0 1px 2px rgba(16,24,40,.05); --sh2:0 8px 24px -8px rgba(16,24,40,.18); --sh3:0 32px 64px -16px rgba(16,24,40,.35);
+  --r:10px; --r-l:16px;
+  --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0B0C0E; --panel:#121316; --panel-2:#191B1F; --ink:#F2F4F7; --ink-2:#D0D5DD; --muted:#98A2B3; --faint:#667085; --line:#22252A; --line-2:#30343B;
+    --accent:#FF7A2E; --accent-ink:#FF9A5C; --link:#FF8A94; --focus:#7FAAF0;
+    --l1:#E5E7EB; --l2:#FF6B7A; --l3:#FF9448; --l4:#F5B942; --l5:#9CA3AF; --lu:#667085;
+    --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9; --c8:#e66767;
+    --rev1:#E8455A; --rev2:#C98500;
+    --s-new:#4ADE80; --s-flux:#F2B84B; --s-unconf:#667085; --s-retired:#F87171;
+    --sh1:0 1px 2px rgba(0,0,0,.5); --sh2:0 8px 24px -8px rgba(0,0,0,.6); --sh3:0 32px 64px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0B0C0E; --panel:#121316; --panel-2:#191B1F; --ink:#F2F4F7; --ink-2:#D0D5DD; --muted:#98A2B3; --faint:#667085; --line:#22252A; --line-2:#30343B;
+  --accent:#FF7A2E; --accent-ink:#FF9A5C; --link:#FF8A94; --focus:#7FAAF0;
+  --l1:#E5E7EB; --l2:#FF6B7A; --l3:#FF9448; --l4:#F5B942; --l5:#9CA3AF; --lu:#667085;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9; --c8:#e66767;
+  --rev1:#E8455A; --rev2:#C98500;
+  --s-new:#4ADE80; --s-flux:#F2B84B; --s-unconf:#667085; --s-retired:#F87171;
+  --sh1:0 1px 2px rgba(0,0,0,.5); --sh2:0 8px 24px -8px rgba(0,0,0,.6); --sh3:0 32px 64px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;padding-inline:16px;padding-block:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;position:relative;overflow-x:hidden}
+button{font:inherit;color:inherit}
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1280px;margin:0 auto;position:relative}
+.wash{position:absolute;inset:0 0 auto 0;height:520px;pointer-events:none;z-index:0;overflow:hidden}
+.wash::before{content:"";position:absolute;right:-12%;top:-260px;width:70vw;max-width:980px;height:640px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,95,0,.16), rgba(247,158,27,.10) 45%, rgba(235,0,27,.05) 70%, transparent 75%);filter:blur(24px)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .wash::before{opacity:.55} }
+:root[data-theme="dark"] .wash::before{opacity:.55}
+.wrap > *{position:relative;z-index:1}
+
+/* ================= home / hero ================= */
+.hero{min-height:calc(100svh - 0px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px 48px;align-items:center;padding-block:48px 40px}
+.hero .kicker{font-size:13px;font-weight:500;color:var(--accent-ink)}
+.hero h1{font-weight:600;font-size:clamp(38px,5.2vw,64px);letter-spacing:-.04em;line-height:.98;margin:12px 0 18px}
+.hero .sub{margin:0;color:var(--muted);font-size:18px;line-height:1.5;max-width:56ch;text-wrap:pretty}
+.hero .sub b{color:var(--ink);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;align-items:center}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--ground);border-radius:999px;padding:11px 18px;font-size:14.5px;font-weight:500;cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--sh2)}
+.btn .ar{transition:transform .15s}
+.btn:hover .ar{transform:translateX(3px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.ghost:hover{border-color:var(--ink);box-shadow:none}
+.stats{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:30px;color:var(--muted);font-size:13.5px}
+.stats span b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.stats .sep{color:var(--line-2)}
+.viz{position:relative;aspect-ratio:1/1;max-width:560px;width:100%;justify-self:end}
+.viz svg{width:100%;height:100%;display:block;overflow:visible}
+.viz .plane{cursor:pointer;transition:transform .25s ease,filter .25s ease}
+.viz .plane:hover{transform:translateY(-6px)}
+.viz .plane polygon{transition:fill .2s}
+.viz .plane text{font-family:var(--font);font-size:13px;font-weight:500;fill:var(--ink);pointer-events:none}
+.viz .plane .an{font-size:11px;fill:var(--muted);font-weight:400}
+.viz .users circle{fill:var(--ground);stroke:var(--line-2);stroke-width:1.5}
+.viz .users text{font-family:var(--font);font-size:11.5px;fill:var(--muted)}
+.viz .pk{fill:var(--accent)}
+.viz .pk.up{fill:var(--l3)}
+.viz .orbit{fill:none;stroke:var(--line-2);stroke-width:1;stroke-dasharray:3 6}
+.viz .shadow{fill:var(--ink);opacity:.06;filter:blur(14px)}
+@media (prefers-reduced-motion: no-preference){
+  .viz .tower{animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .viz .orbit{animation:orbit 30s linear infinite}
+  @keyframes orbit{to{stroke-dashoffset:-180}}
+}
+.mapintro{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;padding-block:44px 14px;border-top:1px solid var(--line)}
+.mapintro h2{margin:0;font-weight:600;font-size:22px;letter-spacing:-.025em}
+.mapintro p{margin:0;color:var(--muted);font-size:14px;max-width:70ch}
+.mapintro p b{color:var(--ink);font-weight:500}
+.home{border:0;background:none;padding:6px 0;cursor:pointer;color:var(--muted);font-size:13px;display:inline-flex;gap:6px;align-items:center;font-weight:500}
+.home:hover{color:var(--ink)}
+.home i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+.stack.enter .layer{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.stack.enter .layer:nth-child(1){animation-delay:.05s}.stack.enter .layer:nth-child(2){animation-delay:.12s}.stack.enter .layer:nth-child(3){animation-delay:.19s}.stack.enter .layer:nth-child(4){animation-delay:.26s}.stack.enter .layer:nth-child(5){animation-delay:.33s}.stack.enter .layer:nth-child(6){animation-delay:.40s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ================= controls ================= */
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;scroll-margin-top:0;background:color-mix(in oklab,var(--ground) 86%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding-block:10px 0;border-bottom:1px solid var(--line)}
+.controls .row{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;padding-bottom:10px}
+.search{position:relative;flex:0 1 300px;min-width:200px}
+.search input{width:100%;height:36px;border:1px solid var(--line-2);border-radius:999px;background:var(--ground);color:var(--ink);padding:0 36px 0 14px;font:inherit;font-size:13.5px}
+.search input:focus{border-color:var(--ink);outline:0}
+.search input::placeholder{color:var(--faint)}
+.search .k{position:absolute;right:10px;top:8px;font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--panel)}
+.results{position:absolute;left:0;right:0;top:42px;background:var(--ground);border:1px solid var(--line);border-radius:12px;box-shadow:var(--sh2);padding:6px;max-height:360px;overflow:auto;z-index:30;min-width:360px}
+.results button{display:flex;width:100%;text-align:left;gap:10px;align-items:baseline;border:0;background:none;padding:8px 10px;border-radius:8px;cursor:pointer}
+.results button:hover,.results button:focus-visible{background:var(--panel)}
+.results .rn{font-weight:500}
+.results .rt{color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}
+.results .empty{padding:10px;color:var(--muted)}
+.tabs{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+.tabs .lbl{font-size:12px;color:var(--faint);margin-right:6px}
+.tabs button{border:0;background:none;padding:7px 10px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:13.5px;font-weight:500;position:relative}
+.tabs button:hover{color:var(--ink);background:var(--panel)}
+.tabs button[aria-pressed="true"]{color:var(--ink);background:var(--panel-2)}
+.jwrap{position:relative;margin-left:auto}
+.jbtn{border:1px solid var(--line-2);background:var(--ground);border-radius:999px;padding:7px 14px 7px 12px;cursor:pointer;font-size:13.5px;font-weight:500;display:inline-flex;gap:8px;align-items:center;transition:background .12s,border-color .12s}
+.jbtn:hover{border-color:var(--ink)}
+.jbtn .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.jbtn.active{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.jbtn .car{font-size:10px;opacity:.6;margin-left:2px}
+.jmenu{position:absolute;right:0;top:44px;width:min(600px,calc(100vw - 32px));background:var(--ground);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh2);padding:10px;z-index:40;max-height:min(72vh,680px);overflow:auto}
+.jmenu .g{padding:6px 6px 8px}
+.jmenu .gh{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:8px 6px 6px}
+.jmenu .gh .gn{font-size:12px;font-weight:600;color:var(--ink)}
+.jmenu .gh .gd{font-size:12px;color:var(--faint)}
+.jmenu button.j{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;width:100%;text-align:left;border:0;background:none;padding:8px 8px;border-radius:8px;cursor:pointer}
+.jmenu button.j:hover,.jmenu button.j:focus-visible{background:var(--panel)}
+.jmenu button.j[aria-pressed="true"]{background:color-mix(in oklab,var(--accent) 10%,var(--ground))}
+.jmenu .jn{font-weight:500;font-size:13.5px}
+.jmenu .jw{grid-column:1/-1;color:var(--muted);font-size:12.5px}
+.jmenu .js{font-size:11.5px;color:var(--faint);white-space:nowrap;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px}
+.legend:empty{display:none}
+.chip{border:1px solid var(--line);background:var(--ground);border-radius:999px;padding:4px 10px 4px 8px;display:inline-flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.chip:hover{border-color:var(--line-2)}
+.chip .sw{width:9px;height:9px;border-radius:50%;background:var(--c8)}
+.chip .cnt{color:var(--faint);font-size:11.5px;font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.chip[aria-pressed="true"] .cnt{color:inherit;opacity:.7}
+.legend .hint{align-self:center;color:var(--faint);font-size:12px;margin-left:4px}
+.jstatus{display:none;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:0 0 10px;color:var(--muted);font-size:13px}
+.jstatus.on{display:flex}
+.jstatus .g{font-size:12px;color:var(--accent-ink);font-weight:500}
+.jstatus .n{font-weight:600;color:var(--ink)}
+.jstatus .x{margin-left:auto;border:0;background:none;color:var(--muted);cursor:pointer;font-size:12.5px;text-decoration:underline;text-underline-offset:2px;padding:0}
+.jstatus .x:hover{color:var(--ink)}
+
+/* ================= board ================= */
+.board{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-block:28px 24px;align-items:start;position:relative}
+.board.journey{grid-template-columns:minmax(0,1fr) 340px}
+.stack{display:grid;gap:14px;position:relative}
+.layer{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:start;padding-block:10px;border-top:1px solid var(--line)}
+.layer.users{border-top:0;padding-top:0}
+.lab{border:0;text-align:left;background:none;padding:6px 8px 6px 0;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;gap:2px;position:relative;margin-top:2px}
+.lab:hover .nm{color:var(--accent-ink)}
+.lab > span{display:block}
+.lab .id{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+.lab .id::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lc)}
+.lab .nm{font-weight:600;font-size:17px;letter-spacing:-.02em;line-height:1.15;transition:color .12s}
+.lab .an{color:var(--muted);font-size:12.5px}
+.lab .cnt{color:var(--faint);font-size:12px;margin-top:2px;font-variant-numeric:tabular-nums}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
+.tile{border:1px solid var(--line);text-align:left;cursor:pointer;border-radius:var(--r);padding:12px 12px 10px;background:var(--ground);min-height:84px;display:flex;flex-direction:column;gap:4px;position:relative;transition:transform .12s ease,box-shadow .12s ease,opacity .2s ease,border-color .12s ease}
+.tile:hover{border-color:var(--line-2);transform:translateY(-1px);box-shadow:var(--sh2)}
+.tile > .tid,.tile > .tn{display:block}
+.tile .tid{font-family:var(--mono);font-size:10.5px;color:var(--lc);letter-spacing:.04em}
+.tile .tn{font-weight:500;font-size:14px;line-height:1.25;letter-spacing:-.005em;text-wrap:balance;color:var(--ink)}
+.tile .tf{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px}
+.tile .lbar{display:flex;gap:2px;height:3px;flex:1;border-radius:2px;overflow:hidden}
+.tile .lbar[hidden]{display:none}
+.tile .lbar .ls{height:100%;transition:opacity .2s}
+.tile .lbar .ls.faded{opacity:.18}
+.tile .tc{font-size:11.5px;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+.tile.dim,.lab.dim{opacity:.3}
+.tile.hit{border-color:var(--ink)}
+.tile.on-path{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 18%,transparent)}
+.users .tiles{display:flex;flex-wrap:wrap;gap:8px;align-content:center;min-height:36px}
+.users .tile{min-height:0;flex-direction:row;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--panel)}
+.users .tile:hover{background:var(--panel-2);box-shadow:none;transform:none;border-color:var(--line)}
+.users .tile .tn{font-size:13px;font-weight:500}
+.users .tile .tf{margin:0;padding:0;gap:6px}
+.users .tile .usw{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.users .tile .tc{margin:0}
+.under{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;padding-block:14px 6px;border-top:1px solid var(--line);align-items:start}
+.under .h{font-size:12px;color:var(--muted);padding-top:6px}
+.under .h b{display:block;color:var(--ink);font-weight:600;font-size:14px;letter-spacing:-.01em}
+.pillars{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pillars button{border:1px solid var(--line);background:var(--ground);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:500;display:inline-flex;gap:8px;align-items:center}
+.pillars button:hover{border-color:var(--line-2);background:var(--panel)}
+.pillars button .c{color:var(--faint);font-size:11.5px}
+.pillars button.on-path{border-color:var(--accent)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;color:var(--muted);font-size:13px;margin-top:12px}
+.flow .n{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:500}
+.flow .n i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+.flow .a{color:var(--faint)}
+.jpath,.jnodes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.jpath{z-index:1} .jnodes{z-index:6}
+.tile,.lab{z-index:2}
+.jpath path{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:4 6;opacity:.7}
+.jnodes .node rect{fill:var(--accent);stroke:var(--ground);stroke-width:2}
+.jnodes .node text{fill:#fff;font-family:var(--mono);font-size:10.5px;font-weight:500;text-anchor:middle;dominant-baseline:central}
+@media (prefers-reduced-motion: no-preference){ .jpath path{animation:dash 1.8s linear infinite} @keyframes dash{to{stroke-dashoffset:-20}} }
+
+/* ================= journey panel ================= */
+.jpanel{display:none;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--ctrl-h,60px) + 16px);background:var(--ground);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh1);flex-direction:column;overflow:hidden;max-height:calc(100vh - var(--ctrl-h,60px) - 40px)}
+.board.journey .jpanel{display:flex}
+.jpanel .jh{display:flex;align-items:flex-start;gap:10px;padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.jpanel .jh .k{font-size:12px;color:var(--accent-ink);font-weight:500}
+.jpanel .jh h3{font-weight:600;font-size:17px;margin:2px 0 0;letter-spacing:-.02em;line-height:1.2}
+.jpanel .jh .x{margin-left:auto;border:0;background:var(--panel);border-radius:999px;width:28px;height:28px;cursor:pointer;flex:0 0 auto;font-size:15px;line-height:1;color:var(--muted)}
+.jpanel .jh .x:hover{background:var(--panel-2);color:var(--ink)}
+.jpanel .jb{overflow:auto;padding:14px 18px 18px}
+.jpanel .why{margin:0 0 10px;color:var(--ink-2);font-size:13.5px}
+.jpanel .scale{margin:0 0 14px;font-size:12.5px;color:var(--muted);padding:10px 12px;border-radius:10px;background:var(--panel)}
+.jpanel .scale b{color:var(--ink);font-weight:600}
+.jpanel .scale a{display:block;font-size:12px;margin-top:3px}
+.steps{display:grid;position:relative}
+.steps button{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start;border:0;background:none;border-radius:8px;padding:8px 6px;text-align:left;cursor:pointer;position:relative}
+.steps button::before{content:"";position:absolute;left:16px;top:30px;bottom:-4px;width:1px;background:var(--line)}
+.steps button:last-child::before{display:none}
+.steps button:hover{background:var(--panel)}
+.steps button > span > span{display:block}
+.steps .no{font-family:var(--mono);font-size:10.5px;color:#fff;background:var(--accent);border-radius:999px;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;margin-top:1px;position:relative;z-index:1;justify-self:center}
+.steps .sw2{font-size:11px;color:var(--faint);font-family:var(--mono)}
+.steps .st{font-weight:500;font-size:13.5px;color:var(--ink)}
+.steps .sd{color:var(--muted);font-size:12.5px;margin-top:1px}
+
+/* ================= dialog ================= */
+.scrim{position:fixed;inset:0;background:rgba(15,20,25,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:40;opacity:0;pointer-events:none;transition:opacity .18s}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:50;left:50%;top:50%;width:min(760px,calc(100% - 32px));max-height:min(86vh,900px);background:var(--ground);border-radius:var(--r-l);box-shadow:var(--sh3);display:flex;flex-direction:column;overflow:hidden;opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.985);transition:opacity .16s ease,transform .16s ease;border:1px solid var(--line)}
+.drawer.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.dh{padding:18px 22px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.dh .crumbs{display:flex;flex-wrap:wrap;gap:4px 6px;font-size:12.5px;color:var(--muted);align-items:center}
+.dh .crumbs button{border:0;background:none;padding:0;cursor:pointer;color:var(--muted);font-size:12.5px}
+.dh .crumbs button:hover{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.dh .crumbs .sep{opacity:.5}
+.dh h2{font-weight:600;font-size:22px;letter-spacing:-.025em;margin:6px 0 0;line-height:1.15;text-wrap:balance;display:flex;gap:10px;align-items:center}
+.dh h2::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--lc,var(--accent));flex:0 0 auto}
+.dh .lid{font-size:12.5px;color:var(--muted);margin-top:6px}
+.dh .x{margin-left:auto;border:0;background:var(--panel);border-radius:999px;width:30px;height:30px;cursor:pointer;flex:0 0 auto;font-size:16px;line-height:1;color:var(--muted)}
+.dh .x:hover{background:var(--panel-2);color:var(--ink)}
+.db{overflow:auto;padding:8px 22px 28px;flex:1}
+.db p.lead{margin:10px 0 12px;color:var(--ink-2);font-size:14px}
+.plist{display:grid}
+.prod{border-bottom:1px solid var(--line)}
+.prod:last-child{border-bottom:0}
+.prod.dim{opacity:.4}
+.prod > button{width:100%;text-align:left;border:0;background:none;padding:12px 4px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:start;border-radius:8px}
+.prod > button:hover{background:var(--panel)}
+.prod .pn{font-weight:500;font-size:14.5px;line-height:1.3}
+.prod .pd{color:var(--muted);font-size:13px;grid-column:1/-1}
+.prod .badges{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;padding-top:2px}
+.badge{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--panel-2);color:var(--muted);white-space:nowrap;font-weight:500}
+.badge.new{color:var(--s-new);background:color-mix(in oklab,var(--s-new) 12%,var(--ground))}
+.badge.flux{color:var(--s-flux);background:color-mix(in oklab,var(--s-flux) 12%,var(--ground))}
+.badge.unconf{color:var(--muted);outline:1px dashed var(--line-2);outline-offset:-1px;background:none}
+.badge.retired{color:var(--s-retired);background:color-mix(in oklab,var(--s-retired) 10%,var(--ground));text-decoration:line-through}
+.badge.acq{color:var(--c7);background:color-mix(in oklab,var(--c7) 10%,var(--ground))}
+.badge.api{color:var(--c1);background:color-mix(in oklab,var(--c1) 10%,var(--ground))}
+.badge.lens{color:var(--ink)}
+.prod .detail{padding:6px 4px 18px}
+.prod.open > button .pd{display:none}
+.kv{display:grid;grid-template-columns:132px minmax(0,1fr);gap:8px 16px;font-size:13.5px;margin:0}
+.kv dt{color:var(--muted);font-size:12.5px;padding-top:1px}
+.kv dd{margin:0;color:var(--ink-2)}
+.kv .srcs a{display:block;font-size:13px;overflow-wrap:anywhere}
+.kv .rel button{border:0;background:none;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:13.5px;margin-right:10px}
+.tileline{display:grid}
+.tileline button{border:0;border-bottom:1px solid var(--line);background:none;padding:12px 4px;text-align:left;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;align-items:start;border-radius:8px}
+.tileline button:last-child{border-bottom:0}
+.tileline button:hover{background:var(--panel)}
+.tileline .tid{font-family:var(--mono);font-size:11px;color:var(--lc);padding-top:3px;min-width:28px}
+.tileline .tn{font-weight:500;font-size:14.5px}
+.tileline .tb{color:var(--muted);font-size:13px;grid-column:2}
+.tileline .tp{font-size:12.5px;color:var(--faint);grid-column:2;margin-top:2px}
+.db h4{font-size:12px;color:var(--muted);margin:22px 0 4px;font-weight:500}
+.apigrp{margin-bottom:14px}
+.apih{font-size:12.5px;color:var(--lc);font-weight:600;padding:8px 0 6px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.apilist{display:grid}
+.apirow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:8px;align-items:baseline;font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--line)}
+.apirow:last-child{border-bottom:0}
+.apirow a{font-weight:500;color:var(--ink);text-decoration:none}
+.apirow a:hover{text-decoration:underline}
+.apihome{border:0;background:none;padding:0;color:var(--muted);cursor:pointer;font-size:12px;text-align:right}
+.apihome:hover{color:var(--ink);text-decoration:underline}
+.seealso{font-size:13px;color:var(--muted)}
+.seealso button{border:0;background:none;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:13px}
+
+/* ================= footer ================= */
+.foot{border-top:1px solid var(--line);padding-block:24px 56px;margin-top:8px}
+#foot{margin:14px 0 0;color:var(--faint);font-size:12.5px;line-height:1.55;max-width:90ch}
+.legendkeys{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted)}
+.legendkeys .sym{font-family:var(--mono);color:var(--ink);margin-right:5px}
+
+@media (max-width:1040px){
+  .board.journey{grid-template-columns:minmax(0,1fr)}
+  .jpanel{position:fixed;top:auto;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:35;width:min(400px,calc(100% - 32px));max-height:min(58vh,640px);box-shadow:var(--sh3)}
+}
+@media (max-width:720px){
+  .hero{grid-template-columns:minmax(0,1fr);padding-block:32px 24px;min-height:0}
+  .hero .sub{font-size:16px}
+  .viz{justify-self:center;max-width:420px}
+  .layer,.users,.under{grid-template-columns:minmax(0,1fr);gap:10px}
+  .lab{flex-direction:row;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .lab .cnt{margin-left:auto;margin-top:0}
+  .tiles{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .jwrap{margin-left:0}
+  .search{flex-basis:100%;max-width:none}
+  .results{min-width:0}
+  .kv{grid-template-columns:1fr}
+  .drawer{left:0;top:0;width:100%;max-height:100%;height:100%;border-radius:0;transform:none;border:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .drawer.open{transform:none}
+  .apirow{grid-template-columns:1fr}.apihome{text-align:left}
+  .wash::before{right:-40%;width:120vw}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} }
+</style>
+
+<div class="wash" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="hero" id="home">
+    <div>
+      <div class="kicker">Capability map · as at 23 September 2026</div>
+      <h1>Mastercard Operating System</h1>
+      <p class="sub">Everything Mastercard runs, on one map: a <b>kernel</b>, five <b>rails</b>, the <b>network services</b> every rail can call, the <b>solutions</b> built on the data, and the <b>access</b> layer people plug into.</p>
+      <div class="cta">
+        <button class="btn" id="explore">Explore the map <span class="ar">→</span></button>
+        <button class="btn ghost" id="cta-journey">Follow a journey</button>
+      </div>
+      <div class="stats" id="facts"></div>
+    </div>
+    <div class="viz" id="viz" aria-label="Mastercard as an operating system: five stacked layers with transactions flowing through them"></div>
+  </header>
+
+  <div class="mapintro" id="map">
+    <h2>The map</h2>
+    <p>Read it <b>bottom-up</b> and it is a transaction; <b>top-down</b> and it is a customer. Click anything to drill down, switch a lens to re-slice the same assets, or pick a journey to watch the layers work.</p>
+  </div>
+
+  <div class="controls">
+    <div class="row">
+      <button class="home" id="homebtn" aria-label="Back to the home screen"><i></i>Home</button>
+      <div class="search">
+        <input id="q" type="search" placeholder="Search products and APIs" autocomplete="off" aria-label="Search products">
+        <span class="k">/</span>
+        <div class="results" id="results" hidden></div>
+      </div>
+      <div class="tabs" id="lens" role="group" aria-label="Lens"><span class="lbl">Lens</span></div>
+      <div class="jwrap">
+        <button class="jbtn" id="jbtn" aria-haspopup="menu" aria-expanded="false"><span class="dot"></span><span id="jbtnl">Journeys</span><span class="car">▼</span></button>
+        <div class="jmenu" id="jmenu" hidden role="menu"></div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="jstatus" id="jstatus"></div>
+  </div>
+
+  <div class="board" id="board">
+    <div>
+      <div class="stack" id="stack"></div>
+      <div class="under">
+        <div class="h"><b>Cross-cutting</b>Pillars that touch every layer</div>
+        <div>
+          <div class="pillars" id="pillars"></div>
+          <div class="flow" aria-label="Data flywheel"><span class="n"><i></i>Transactions</span><span class="a">→</span><span class="n">Data</span><span class="a">→</span><span class="n">Intelligence</span><span class="a">→</span><span class="n">Trust</span><span class="a">↻</span><span>each turn makes the next transaction more likely to choose the network — the reason payments and services sit on one map</span></div>
+        </div>
+      </div>
+    </div>
+    <aside class="jpanel" id="jpanel" aria-label="Journey steps">
+      <div class="jh"><div><div class="k" id="jgroup">Journey</div><h3 id="jtitle"></h3></div><button class="x" id="jclose" aria-label="Close journey">×</button></div>
+      <div class="jb" id="jbody"></div>
+    </aside>
+    <svg class="jpath" id="jpath" aria-hidden="true"></svg>
+    <svg class="jnodes" id="jnodes" aria-hidden="true"></svg>
+  </div>
+
+  <footer class="foot">
+    <div class="legendkeys">
+      <span><span class="sym">✦</span>new or expanded in 2025–26</span>
+      <span><span class="sym">◐</span>in flux</span>
+      <span><span class="sym">○</span>unconfirmed</span>
+      <span><span class="sym">✕</span>retired (Status lens)</span>
+      <span><span class="sym">A</span>acquired · <span class="sym">B</span>built</span>
+      <span><span class="sym">/</span>search · <span class="sym">Esc</span>close</span>
+    </div>
+    <p id="foot"></p>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dtitle">
+  <div class="dh">
+    <div style="min-width:0">
+      <div class="crumbs" id="crumbs"></div>
+      <h2 id="dtitle"></h2>
+      <div class="lid" id="dlid"></div>
+    </div>
+    <button class="x" id="close" aria-label="Close">×</button>
+  </div>
+  <div class="db" id="dbody"></div>
+</aside>
+
+<script>
+const USERS = {
+  iss:"Issuers & banks", acq:"Acquirers & PSPs", mer:"Merchants", fin:"Fintechs & wallets",
+  corp:"Corporates & SMEs", gov:"Governments & public sector", con:"Consumers", ai:"AI agents & machines"
+};
+const LC = {before:"Before the transaction", checkout:"At checkout", auth:"Authorisation", settle:"Clearing & settlement", after:"After the transaction", beyond:"Beyond the transaction"};
+const ST = {active:"Active", new:"New in 2025–26", flux:"In flux", unconf:"Unconfirmed", retired:"Retired / divested"};
+const OR = {B:"Built in-house", A:"Acquired"};
+const REV = {net:"Payment network", sec:"VAS · Security solutions", eng:"VAS · Consumer acquisition & engagement", ins:"VAS · Business & market insights", dig:"VAS · Digital & authentication", proc:"VAS · Processing & gateway", oth:"VAS · Other (ACH/RTP, bill pay, cross-border, open finance)", na:"Not a revenue line"};
+const DIV = {core:"Core / Consumer Payments", cnpf:"Commercial & New Payment Flows", svc:"Services", corp:"Corporate / cross-cutting"};
+
+
+
+function P(id,n,d,x){ return Object.assign({id,n,d,s:[],lc:"beyond",st:"active",o:"B",src:[]},x||{}); }
+const M="https://www.mastercard.com", D="https://developer.mastercard.com", I="https://investor.mastercard.com";
+
+const LAYERS = [
+ {id:"U", name:"Users", analogy:"the ecosystem the OS serves", color:"--lu", users:true,
+  desc:"Eight kinds of user, including a new one. Most assets serve several; the Customer lens shows which.",
+  tiles: Object.keys(USERS).map(k=>({id:"u-"+k, name:USERS[k], user:k, products:[]}))},
+
+ {id:"L5", name:"Access", analogy:"shell · SDKs · app store", color:"--l5",
+  desc:"How customers and developers plug in: the API platform, the acceptance and issuing platforms, and the programmes that onboard partners. Reported inside Value-added services as Processing & gateway.",
+  tiles:[
+   {id:"5.1", name:"Developers & APIs", blurb:"One front door for the whole OS.", div:"core", rev:"proc", products:[
+    P("developers","Mastercard Developers","developer.mastercard.com: the public API platform — 91 API products in the catalogue as at 23 September 2026, each with sandbox, reference apps and OAuth or MTLS access. Every one is mapped to its home tile on this map (open this tile for the full catalogue).",{s:["fin","mer","acq","iss","ai"],lc:"before",src:[["Mastercard Developers — API catalogue",D+"/apis"],["Platform index (llms.txt)",D+"/llms.txt"]]}),
+   ]},
+   {id:"5.2", name:"Acceptance platforms", blurb:"Merchant and acquirer side.", div:"core", rev:"proc", products:[
+    P("merchantcloud","Mastercard Merchant Cloud","Unified acceptance stack: tokenisation, gateway, Click to Pay, fraud and identity, the Payment Optimization Platform and Agent Pay; 240+ acquirers, 35+ payment types.",{s:["acq","mer","fin"],lc:"checkout",st:"new",ay:"Oct 2025",src:[["Launch press release, Oct 2025",M+"/us/en/news-and-trends/press/2025/october/Mastercard-Merchant-Cloud-simplify-and-support-commerce-growth-in-global-acceptance-ecosystem.html"]]}),
+    P("gateway","Mastercard Gateway (MPGS)","Omnichannel payment gateway (MiGS → MPGS → Gateway); increasingly positioned as a component inside Merchant Cloud.",{s:["acq","mer"],lc:"checkout",o:"A",ay:"2010",at:"DataCash",src:[["Mastercard Gateway",M+"/gateway.html"]]}),
+   ]},
+   {id:"5.3", name:"Issuing platforms", blurb:"Issuer and fintech side.", div:"core", rev:"proc", products:[
+    P("processing","Mastercard Processing","Issuer processing-as-a-service (Core and Debit APIs); Thought Machine partnership 2024; includes the former Nets issuer-processing business.",{s:["iss","fin"],lc:"before",o:"B",note:"Expanded by acquisition of Nets' processing business (2021).",src:[["Mastercard Processing — Developers",D+"/product/mastercard-processing/"],["Thought Machine partnership, Jun 2024",M+"/us/en/news-and-trends/press/2024/june/mastercard-and-european-cloud-native-issuer-processor-leverages-mastercard-cloud-edge-proving-seamless-payment-experience.html"]]}),
+    P("cloudedge","Mastercard Cloud Edge","Cloud connectivity to the network with up to 4× faster onboarding; live in APAC, US, Canada and select EEMEA/LatAm markets; certified partners include Paymentology, Deserve and Clowd9.",{s:["iss","acq","fin"],lc:"before",st:"new",ay:"Jun 2025",src:[["Cloud Edge press release, Jun 2025",M+"/news/ap/en/newsroom/press-releases/en/2025/mastercard-onboards-customers-up-to-four-times-faster-with-cloud-edge/"]]}),
+    P("productexpress","Product Express — Card Issuance","Fast-track card-programme launch for fintechs; formerly branded Fintech Express.",{s:["fin"],lc:"before",st:"flux",note:"Renamed from Fintech Express; current page is titled Product Express.",src:[["Product Express page",M+"/global/en/business/industry-segment/fintech/program/product-express-card-issuance.html"]]}),
+    P("engage","Mastercard Engage","Marketplace of 170+ vetted enablement partners; 500m+ cards run on an Engage partner.",{s:["fin","iss"],lc:"before",src:[["Mastercard Engage",M+"/us/en/business/industry-segment/fintech/program/engage.html"]]}),
+   ]},
+   {id:"5.4", name:"Programmes & innovation", blurb:"How partners get in early.", div:"core", rev:"na", products:[
+    P("startpath","Start Path","Startup engagement programme since 2014: 500+ startups from 60+ countries; an Emerging Fintech track added 11 startups in September 2025.",{s:["fin"],src:[["Start Path",M+"/us/en/innovation/partner-with-us/start-path.html"],["Emerging Fintech cohort, Sep 2025",M+"/us/en/news-and-trends/press/2025/september/mastercard-welcomes-11-startups-to-start-path%E2%80%99s-emerging-fintech-program.html"]]}),
+    P("partnerprog","Partner Advantage Program & Circle of Honor","Partner and recognition programmes listed on Mastercard's business site.",{s:["fin","acq"],src:[["Mastercard for business",M+"/us/en/business.html"]]}),
+   ]},
+  ]},
+
+ {id:"L4", name:"Solutions", analogy:"applications", color:"--l4",
+  desc:"Value-added services sold to customers and usable whether or not the payment ran on Mastercard. About 31% of FY2025 net revenue, growing +23% against +12% for the network — and mostly acquired.",
+  tiles:[
+   {id:"4.1", name:"Security Solutions", blurb:"Identity, cyber and financial crime for enterprises.", div:"svc", rev:"sec", products:[
+    P("mcidentity","Mastercard Identity (Ekata)","Identity Insights for Accounts, Identity Review 360 and Identity Authentication: global identity signals for account opening and KYC. The Ekata brand now redirects to Mastercard Identity.",{s:["mer","fin","iss"],lc:"before",st:"flux",o:"A",ay:"2021",at:"Ekata (~$850m)",src:[["Mastercard Identity hub",M+"/us/en/business/cybersecurity-fraud-prevention/identity.html"]]}),
+    P("nudata","NuData Security / NuDetect","Passive behavioural biometrics that separate humans from bots and account takeover without adding friction.",{s:["mer","iss","fin"],lc:"before",o:"A",ay:"2017",at:"NuData Security",src:[["nudatasecurity.com","https://nudatasecurity.com/"]]}),
+    P("mcid","Mastercard ID","Digital-identity service: UK-certified digital ID provider; healthcare patient identification.",{s:["gov","con","mer"],lc:"before",src:[["UK digital ID certification, 2023",M+"/news/europe/en-uk/newsroom/press-releases/en-gb/2023/mastercard-certified-in-the-uk-as-a-trusted-provider-of-digital-id-services/"]]}),
+    P("trustcenter","Trust Center","Free cybersecurity education and tools for small businesses, with an annual SMB cybersecurity study.",{s:["corp"],src:[["Trust Center",M+"/us/en/business/industry-segment/small-medium-business/trust-center.html"]]}),
+    P("riskrecon","RiskRecon","Continuous third-party and vendor cyber-risk ratings from external scanning — no vendor cooperation needed.",{s:["corp","iss","acq"],o:"A",ay:"2019",at:"RiskRecon (closed 2020)",src:[["TechCrunch on the acquisition","https://techcrunch.com/2019/12/23/mastercard-acquires-security-assessment-startup-riskrecon"]]}),
+    P("cybersuite","Cyber Secure · Cyber Quant · Cyber Front · Cyber Crisis Exercise · Cyber Insights","Portfolio cyber risk, dollarised risk quantification (Gartner Hype Cycle 2025), attack simulation, tabletop exercises and strategic threat intelligence — delivered on the RiskRecon platform.",{s:["iss","acq","corp"],src:[["Cyber Quant",M+"/us/en/business/cybersecurity-fraud-prevention/risk-decisioning/solutions/cyber-quant.html"],["Cyber Front launch, 2022","https://newsroom.mastercard.com/news/press/2022/may/another-arrow-in-the-quiver-mastercard-strengthens-cybersecurity-consulting-practice-with-new-cyber-front-threat-simulation-platform/"]]}),
+    P("sysrisk","Systemic Risk Assessment & Third Party Risk Management","Concentration and third-party risk across an issuer's or acquirer's portfolio.",{s:["iss","acq"],src:[["Systemic Risk Assessment",M+"/us/en/business/cybersecurity-fraud-prevention/cybersecurity/systemic-risk-assessment.html"]]}),
+    P("baffin","Threat Protection (Baffin Bay Networks)","Cloud-native DDoS, bot and malicious-traffic protection.",{s:["corp","iss","mer"],o:"A",ay:"2023",at:"Baffin Bay Networks",src:[["Investor release, Mar 2023",I+"/investor-news/investor-news-details/2023/Mastercard-Strengthens-Customer-Security-With-New-AI-Cyber-Shield/default.aspx"]]}),
+    P("recfut","Recorded Future","Intelligence Cloud / Intelligence Graph indexing 1m+ sources, with Payment Fraud Intelligence and Identity Intelligence modules. Mastercard's largest acquisition.",{s:["corp","gov","iss"],o:"A",ay:"Dec 2024",at:"Recorded Future ($2.65bn)",src:[["Acquisition close, Dec 2024","https://www.businesswire.com/news/home/20241220165251/en/Mastercard-Finalizes-Acquisition-of-Recorded-Future"],["Payment Fraud Intelligence","https://www.recordedfuture.com/products/payment-fraud-intelligence"]]}),
+    P("mcti","Mastercard Threat Intelligence","First fraud-plus-cyber product built on Recorded Future: real-time card-testing detection, digital-skimming intelligence and merchant threat assessments.",{s:["iss","acq"],lc:"before",st:"new",ay:"Oct 2025",src:[["Launch press release, Oct 2025",M+"/us/en/news-and-trends/press/2025/october/Mastercard-introduces-first-ever-threat-intelligence-solution.html"]]}),
+    P("a2aprotect","Consumer Fraud Risk → A2A Protect","AI scam scoring on real-time payment rails (UK APP fraud −20% in 2024), now a Prevent / Protect / Recover suite used by 15 UK banks.",{s:["iss"],lc:"auth",st:"new",ay:"2023 → 2025",src:[["A2A Protect, 2025",M+"/news/europe/en-uk/newsroom/press-releases/en-gb/2025/prevent-protect-and-recover-mastercard-strengthens-trust-in-account-to-account-payments/"]]}),
+    P("scamprotect","Scam Protect","Umbrella brand (2024) across Mastercard's scam-fighting tools — a portfolio name, not a single product.",{s:["iss","con"],src:[["Scam Protect","https://b2b.mastercard.com/scam-protect"]]}),
+    P("trace","TRACE","AML service that surfaces newly created money-mule accounts (100+ a month); launched for Asia Pacific in February 2025.",{s:["iss"],lc:"after",st:"new",ay:"Feb 2025",src:[["TRACE launch, Feb 2025",M+"/us/en/news-and-trends/press/2025/february/mastercard-launches-anti-money-laundering-service-trace-to-combat-financial-crime-in-asia-pacific.html"]]}),
+    P("cryptosecure","Crypto Secure","Issuer dashboard of VASP risk and crypto spending so low-risk crypto-linked transactions can be approved.",{s:["iss"],lc:"auth",ay:"2022",note:"Built on CipherTrace data.",src:[["Crypto Secure",M+"/us/en/business/cybersecurity-fraud-prevention/crypto-secure.html"]]}),
+    P("amlrisk","AML Account Risk","Augments issuers' anti-money-laundering processes by flagging potential laundering at the individual account (PAN) level.",{s:["iss"],lc:"after",src:[["AML Account Risk — Developers",D+"/product/aml-account-risk-api"]]}),
+    P("ciphertrace","CipherTrace","Crypto intelligence: compliance monitoring, risk assessment and investigations. The Armada, Inspector and Sentry products were shut down in March 2024.",{s:["fin","gov","iss"],st:"flux",o:"A",ay:"2021",at:"CipherTrace",src:[["Fortune on the 2024 shutdown","https://fortune.com/crypto/2024/03/13/mastercard-ciphertrace-blockchain-analytics-chainalysis-bitcoin-fog/"]]}),
+   ]},
+   {id:"4.2", name:"Open Finance", blurb:"Consumer-permissioned bank data and A2A initiation.", div:"svc", rev:"oth", products:[
+    P("ofus","Mastercard Open Finance US (Finicity)","Account and owner verification, Payment Success Indicator, Deposit Switch, Bill Pay Switch, data enrichment, Consumer Foresight, lending and mortgage verification, small-business cash-flow analytics; ~95% of US deposit accounts.",{s:["iss","fin","mer","corp"],lc:"before",o:"A",ay:"2020",at:"Finicity (~$825m)",src:[["Open Finance (US)",M+"/us/en/business/open-finance.html"],["Open Finance US — developer docs",D+"/open-finance-us/documentation/"]]}),
+    P("ofeu","Mastercard Open Finance Europe (Aiia)","SCA-based account connection, data retrieval and payment initiation across Europe; the Aiia brand is converging into Open Finance.",{s:["fin","mer","iss"],lc:"before",st:"flux",o:"A",ay:"2021",at:"Aiia",src:[["Aiia Enterprise docs",D+"/open-finance-europe/documentation/licensed/aiia-enterprise/"]]}),
+    P("dataconnect","Mastercard Data Connect","Consumer-permissioned data-sharing and consent layer across the US and European stacks.",{s:["iss","fin","con"],lc:"before",ay:"2024",src:[["Mastercard Data Connect",M+"/us/en/business/open-finance/solutions/data/mastercard-data-connect.html"]]}),
+    P("fdxhub","Developer Hub for FDX APIs","Tooling for banks and data providers to publish FDX-compliant open-banking APIs (the US Financial Data Exchange standard).",{s:["iss","fin"],lc:"before",src:[["FDX Developer Hub — Developers",D+"/product/fdx-developer-hub"]]}),
+    P("paybybankus","Pay by Bank (US)","Account-to-account payment initiation delivered through the Open Finance stack rather than as a standalone rail.",{s:["mer","con","iss"],lc:"checkout",note:"US regulatory context: CFPB Section 1033 was enjoined and under reconsideration in 2026; no sign of Mastercard winding down Finicity or Aiia.",src:[["Open Finance (US)",M+"/us/en/business/open-finance.html"]]}),
+   ]},
+   {id:"4.3", name:"Consumer Acquisition & Engagement", blurb:"Personalisation, marketing, loyalty, benefits.", div:"svc", rev:"eng", products:[
+    P("dy","Dynamic Yield / Experience OS","AI personalisation platform — Shopping Muse, Experience OS Agents, Experience APIs, Experience Search; 8× Gartner MQ leader; 80m+ personalised sessions a day.",{s:["mer","corp"],o:"A",ay:"2022",at:"Dynamic Yield (from McDonald's)",src:[["Dynamic Yield product page",M+"/us/en/business/consumer-acquisition-and-engagement/personalization/dynamic-yield.html"],["Close of acquisition, 2022",I+"/investor-news/investor-news-details/2022/Mastercard-Strengthens-Consumer-Engagement-Services-With-Close-of-Dynamic-Yield-Acquisition/default.aspx"]]}),
+    P("mktsvc","Mastercard Marketing Services","Full-funnel lifecycle marketing: Acquisition, Engagement and a Performance Engine for optimisation.",{s:["iss","mer"],src:[["Marketing Services",M+"/us/en/business/consumer-acquisition-and-engagement/marketing-services.html"]]}),
+    P("audhub","Marketing Audience Hub","Audience identification, media optimisation and campaign personalisation; the successor to the 'Mastercard Audiences' name.",{s:["iss","mer"],st:"flux",src:[["Marketing Audience Hub",M+"/us/en/business/consumer-acquisition-and-engagement/personalization/solutions/marketing-audience-hub.html"]]}),
+    P("commedia","Mastercard Commerce Media","Retail-media network connecting advertisers and publishers: 500m+ permissioned consumers, 25,000+ merchant advertisers.",{s:["mer","iss"],st:"new",ay:"Oct 2025",src:[["Launch press release, Oct 2025",M+"/global/en/news-and-trends/press/2025/october/powering-smarter-and-more-personal-advertising-with-mastercard-commerce-media.html"]]}),
+    P("loyalty","Loyalty Solutions","Rewards, Pay Rewards, Global Redemption Suite, Promotions and Digital Disbursements; 1.3tn loyalty points under management.",{s:["iss","mer","con"],lc:"after",src:[["Consumer Acquisition & Engagement",M+"/us/en/business/consumer-acquisition-and-engagement.html"]]}),
+    P("priceless","Priceless & cardholder benefits","Priceless Experiences, Discounts and Surprises (Priceless Africa, June 2026), Travel & Lifestyle Services, Airport Experiences via LoungeKey, and tiered card benefits.",{s:["con","iss"],lc:"after",src:[["Priceless","https://www.priceless.com/about"],["Priceless Africa launch, Jun 2026",M+"/news/eemea/en/newsroom/press-releases/en/2026/june-2026/mastercard-launches-priceless-africa-on-priceless-com-unlocking-a-curated-travel-experience-across-nine-iconic-destinations/"]]}),
+    P("offers","Offers platform","Merchant-funded offers distributed to cardholders through issuer and publisher apps; merchants and aggregators push profiles, offers and images into the platform.",{s:["iss","mer","fin"],lc:"after",src:[["Offers for Publishers — Developers",D+"/product/personalized-offers"],["Offers Merchant Content — Developers",D+"/product/eop-admin"]]}),
+    P("benefits","Card benefits services","Issuer tooling to allocate, check eligibility for and let cardholders personalise their card benefits — Benefit Allocation, Benefits Eligibility and the Benefits & Experiences Portal.",{s:["iss","con"],lc:"after",src:[["Benefits & Experiences Portal — Developers",D+"/product/mastercard-benefits-and-experiences-portal"]]}),
+    P("insurance","Mastercard Insurance Programs","Card-linked insurance programmes exposed to issuers through the Developers catalogue (listed in the platform index; no separate product page was readable).",{s:["iss","con"],lc:"after",st:"unconf",src:[["Mastercard Developers — llms.txt index",D+"/llms.txt"]]}),
+    P("carbon","Carbon Calculator (Doconomy Åland Index)","Transaction-level carbon-footprint scoring, consumer-facing footprint and offset experiences, and Doconomy's Åland Index sustainability services; a China file-based variant exists.",{s:["iss","fin","con"],lc:"after",src:[["Carbon Calculator — Developers",D+"/product/carbon-calculator"],["Doconomy Åland Index — Developers",D+"/product/doconomy-aland-index"]]}),
+    P("sessionm","SessionM","Loyalty and engagement platform acquired in 2019 — sold to Capillary Technologies in February 2026.",{s:["mer"],st:"retired",o:"A",ay:"2019 → divested Feb 2026",at:"SessionM",src:[["Capillary announcement, Feb 2026","https://www.capillarytech.com/blog/capillary-technologies-acquires-sessionm-from-mastercard/"]]}),
+    P("ifonly","IfOnly","Experiences marketplace folded into Priceless; shut down in August 2020.",{s:["con"],st:"retired",o:"A",ay:"~2019 → closed 2020",at:"IfOnly",src:[["TechCrunch, Aug 2020","https://techcrunch.com/2020/08/24/mastercard-acquired-and-shut-down-ifonly-an-experiences-marketplace-hit-by-covid-19/"]]}),
+   ]},
+   {id:"4.4", name:"Insights & Intelligence", blurb:"Analytics and research on network data.", div:"svc", rev:"ins", products:[
+    P("testlearn","Test & Learn","Controlled-experimentation platform for retailers and financial institutions.",{s:["mer","iss","corp"],o:"A",ay:"2015",at:"Applied Predictive Technologies ($600m)",src:[["APT acquisition, 2015",I+"/investor-news/investor-news-details/2015/MasterCard-Announces-Acquisition-of-Applied-Predictive-Technologies/default.aspx"]]}),
+    P("spendingpulse","SpendingPulse & market insights","SpendingPulse, Market Share, Market Trends, Macro360 and Forecasting & Scenario Planning: macro and sector spending insight.",{s:["mer","gov","iss"],src:[["SpendingPulse",M+"/us/en/business/insights-intelligence/economic-market-insights/solutions/spendingpulse.html"]]}),
+    P("places","Places & location analytics","Places, Geo Insights, Shopper Intelligence, Merchant Insights, Tourism Insights, Ad Insights and ATM Locations.",{s:["mer","gov","corp"],src:[["Economic & Market Insights",M+"/us/en/business/insights-intelligence/economic-market-insights.html"]]}),
+    P("mei","Mastercard Economics Institute","In-house economists publishing macro and consumer-spending research; also the Mastercard Research Center.",{s:["gov","corp","iss"],src:[["Economics Institute","https://www.mastercardservices.com/en/resources/economics-institute"]]}),
+    P("portfolio","Portfolio Optimizer & issuer tools","Portfolio Optimizer, Portfolio Advisor, Cards Lab, Smart Leads, Pioneer and AI Ready.",{s:["iss"],src:[["Insights & Intelligence",M+"/global/en/business/insights-intelligence.html"]]}),
+    P("intelcenter","Intelligence Centers","Mastercard Intelligence Center, Acquirer Intelligence Center and Acquiring Optimizer dashboards.",{s:["iss","acq"],src:[["Insights & Intelligence",M+"/global/en/business/insights-intelligence.html"]]}),
+    P("creditintel","Credit Intelligence Solutions","Consumer and small-business credit analytics combining network and open-finance data.",{s:["iss","fin"],lc:"before",src:[["Q4 2025 earnings review",M+"/global/en/news-and-trends/stories/2026/earnings-review-q4-2025.html"]]}),
+    P("cleanroom","Data Clean Room & Media Measurement","Privacy-preserving data collaboration and independent anonymisation. No product literally named 'Data Cloud' was found.",{s:["mer","iss"],src:[["Insights & Intelligence",M+"/global/en/business/insights-intelligence.html"]]}),
+    P("opsintel","Operations Intelligence","Operational Reports, Transaction Investigator Plus, Learning Lab and Digital Safari.",{s:["iss","acq"],lc:"after",src:[["Insights & Intelligence",M+"/us/en/business/insights-intelligence.html"]]}),
+   ]},
+   {id:"4.5", name:"Advisors & Transformation", blurb:"Consulting, innovation and delivery.", div:"svc", rev:"ins", products:[
+    P("advisors","Advisors & Transformation","Consulting arm (Advisory · Innovation · Deploy): ~4,000 consultants in 120+ countries. Lineage: Mastercard Advisors (2001) → Data & Services (2019) → Services (2024).",{s:["iss","acq","mer","corp","gov"],ay:"2001",src:[["Advisors & Transformation",M+"/us/en/business/insights-intelligence/advisors-transformation.html"]]}),
+    P("practices","Consulting practices","Payments, Cyber & Enterprise Risk, Data Strategy & Management, AI & Advanced Analytics, Sustainability & Financial Inclusion, Future Tech.",{s:["iss","acq","mer","corp","gov"],src:[["AI & Advanced Analytics Consulting",M+"/global/en/business/insights-intelligence/mastercard-advisors/ai-and-advanced-analytics-consulting.html"]]}),
+    P("digitallabs","Digital Labs, Strategy Insight, Sandbox as a Service","Innovation-as-a-service under the Mastercard Foundry umbrella: strategy and insight, design and prototype, execute and accelerate.",{s:["iss","fin","corp"],src:[["Digital Labs",M+"/us/en/innovation/build-with-us/digital-labs.html"]]}),
+    P("managed","Managed services","A delivery model (managed fraud rules, managed cyber) rather than a branded product.",{s:["iss","mer"],st:"unconf",note:"Referenced as a delivery model and job family, not a distinct product."}),
+   ]},
+   {id:"4.6", name:"Commercial & B2B", blurb:"Buyer–supplier payments and controls.", div:"cnpf", rev:"oth", products:[
+    P("trackbps","Mastercard Track Business Payment Service","Buyer–supplier network for invoice presentment, payment terms and working capital.",{s:["corp","iss"],lc:"checkout",ay:"2020",src:[["US launch, May 2020","https://www.businesswire.com/news/home/20200512005463/en/Mastercard-Track-Business-Payment-Service-Launches-in-the-U.S.-Brings-Efficiency-Gains-and-Faster-Access-to-Working-Capital-to-Suppliers-and-Buyers"]]}),
+    P("trackip","Track Instant Pay","Virtual-card instant B2B payment inside accounts-payable workflows (Marqeta integration).",{s:["corp","iss","fin"],lc:"checkout",ay:"2022",src:[["Launch, Jan 2022","https://www.businesswire.com/news/home/20220120005082/en/Mastercard-Unveils-Next-Generation-Virtual-Card-Solution-for-Instant-B2B-Payments"]]}),
+    P("incontrol","In Control & Commercial Connect API","Virtual card numbers and spend controls; single-API relaunch with Citi as first global issuer, July 2026.",{s:["iss","corp"],lc:"before",st:"new",o:"A",ay:"2009",at:"Orbiscom",src:[["Commercial Connect, Jul 2026",M+"/us/en/news-and-trends/press/2026/july/Mastercard-expands-virtual-card-platform.html"]]}),
+    P("smartdata","Smart Data","Commercial-card expense reporting and reconciliation, embeddable in platforms such as Galileo.",{s:["corp","iss"],lc:"after",src:[["Smart Data",M+"/au/en/business/payments/commercial-payments/corporate-solutions/smart-data.html"]]}),
+    P("receivables","Receivables Manager","Supplier-side virtual-card acceptance and reconciliation; globally available from July 2025.",{s:["corp","acq"],lc:"after",st:"new",ay:"2023 → global Jul 2025",src:[["Global expansion, Jul 2025",M+"/us/en/news-and-trends/press/2025/july/mastercard-accelerates-b2b-payment-automation-globally-with-acce.html"]]}),
+    P("easysavings","Easy Savings","Small-business rebate programme tied to business cards.",{s:["corp","iss"],lc:"after",src:[["Easy Savings","https://www.mastercard.us/en-us/business/industry-segment/small-medium-business/easy-savings.html"]]}),
+    P("bpc","Business Payment Controls","Configurable spending controls on real and virtual commercial cards with transaction-level reporting for reconciliation.",{s:["corp","iss"],lc:"auth",src:[["Business Payment Controls — Developers",D+"/product/business-payment-controls"]]}),
+    P("cdp","Commercial Direct Payments","Automates B2B card payments end to end — buyer to supplier — to cut cost, complexity and risk.",{s:["corp","iss","acq"],lc:"checkout",src:[["Commercial Direct Payments — Developers",D+"/product/commercial-direct-payments"]]}),
+    P("cen","Commercial Event Notifications","Rapid payment and token notifications for B2B payments so finance teams can reconcile accurately.",{s:["corp","iss"],lc:"after",src:[["Commercial Event Notifications — Developers",D+"/product/commercial-event-notifications"]]}),
+    P("healthcare","Healthcare & embedded finance","Named focus areas of Commercial & New Payment Flows on Mastercard's commercial pages.",{s:["corp","fin"],src:[["Commercial payments",M+"/us/en/business/payments/commercial-payments.html"]]}),
+   ]},
+   {id:"4.7", name:"AI & agent applications", blurb:"Mastercard's 'AI' category — mostly cross-references.", div:"svc", rev:"ins", products:[
+    P("agentsuite","Mastercard Agent Suite","Customisable AI agents for banks and merchants (product recommendation, conversational shopping), integrated with Agent Pay; includes the Developers Agent Toolkit.",{s:["iss","mer","corp"],st:"new",ay:"Jan 2026",rel:["agentpay","dipro","dy","practices","merchantcloud"],src:[["Launch press release, Jan 2026",M+"/global/en/news-and-trends/press/2026/january/mastercard-launches-agent-suite-to-ready-enterprises-for-a-new-e.html"]]}),
+   ]},
+  ]},
+
+ {id:"L3", name:"Network services", analogy:"system services", color:"--l3",
+  desc:"Services invoked around a payment on any rail: make the credential digital, prove who is paying, decide the risk, resolve what goes wrong, keep the account current — and, since 2025, let an AI agent do it.",
+  tiles:[
+   {id:"3.1", name:"Tokenisation & credentials", blurb:"Replace the card number.", div:"core", rev:"dig", products:[
+    P("mdes","Mastercard Digital Enablement Service (MDES)","Core network tokenisation: replaces the PAN with device- or merchant-bound tokens for wallets, in-app, contactless and card-on-file.",{s:["iss","fin","mer"],lc:"before",src:[["MDES — Developers",D+"/product/mdes"]]}),
+    P("scof","MDES for Merchants / Secure Card on File","Merchant and PSP tokenisation of stored credentials; live in 45 European countries by mid-2025.",{s:["mer","acq"],lc:"before",src:[["Secure Card on File",M+"/global/en/business/payments/commercial-payments/accept-payments/secure-card-on-file.html"]]}),
+    P("tokenconnect","Token Connect & Pre-Digitization","Push-provisioning of tokens to merchants and wallets, and issuer- or token-requestor-initiated tokenisation flows.",{s:["iss","mer"],lc:"before",src:[["MDES Token Connect",D+"/mdes-token-connect/documentation/use-cases/push-to-merchant/"]]}),
+    P("tas","Token Authentication Service (TAS)","Pairs a network token with OTP or passkey step-up inside Mastercard Gateway and Click to Pay. ('Token Authentication Framework' was not found as a product name.)",{s:["mer","acq"],lc:"checkout",src:[["TAS flow — Gateway docs",D+"/mastercard-gateway/documentation/security-and-fraud/authentication/token-auth-service/token-auth-service-flow/"]]}),
+    P("onecred","Mastercard One Credential","One credential connected to debit, credit, prepaid and instalment funding with consumer-set preferences; partners Wio Bank, Marqeta, Lithic and Botim (Aug 2026).",{s:["iss","fin","con"],lc:"before",st:"new",ay:"2025",src:[["One Credential",M+"/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-one-credential.html"]]}),
+    P("digitalfirst","Digital First","End-to-end framework for instant digital issuance and a digital-native card experience; issuers saw +10% contactless and +8% tokenised transactions.",{s:["iss","fin"],lc:"before",ay:"2022",src:[["Digital First",M+"/global/en/business/payments/consumer-payments/next-gen-payments/digital-first.html"]]}),
+    P("token2030","Tokenised e-commerce by 2030","Commitment (June 2024) to phase out manual card entry in European e-commerce by 2030; ~50% of European e-commerce transactions were tokenised by mid-2025. A goal, not a product.",{s:["iss","mer"],lc:"checkout",src:[["One-year update, Jun 2025","https://www.businesswire.com/news/home/20250603515548/en"]]}),
+    P("vctokens","Mastercard Virtual Card Tokens","Tokenises browser-autofill card entries so saved cards in the browser are network tokens rather than PANs.",{s:["mer","fin","con"],lc:"checkout",src:[["Virtual Card Tokens — Developers",D+"/product/mastercard-virtual-card-tokens"]]}),
+    P("walletservices","Mastercard Wallet Services","Fast contactless enablement and new use cases for wallet providers and banking apps that want to expand in digital payments.",{s:["fin","iss"],lc:"before",src:[["Wallet Services — Developers",D+"/product/mastercard-wallet-services"]]}),
+    P("mcbp","MCBP MP SDK (Cloud-Based Payments)","SDK that simplifies building Mastercard Cloud-Based Payments wallet applications for Android and iOS.",{s:["fin","iss"],lc:"before",src:[["MCBP MP SDK — Developers",D+"/product/mobile-payments-sdk"]]}),
+    P("par","Payment Account Reference Inquiry","Looks up the Payment Account Reference (PAR) for a PAN or MDES token where Mastercard is the BIN controller — linking tokens back to one account without exposing it.",{s:["mer","acq","iss"],lc:"after",src:[["PAR Inquiry — Developers",D+"/product/payment-account-reference-inquiry"]]}),
+   ]},
+   {id:"3.2", name:"Authentication & checkout", blurb:"Prove who is paying, without friction.", div:"core", rev:"dig", products:[
+    P("idcheck","Mastercard Identity Check (EMV 3-D Secure)","Risk-based 3DS authentication, successor to SecureCode; 150+ data elements exchanged per authentication.",{s:["iss","mer","con"],lc:"checkout",src:[["Identity Check — Developers",D+"/product/identity-check/"]]}),
+    P("smartauth","Smart Authentication · Identity Check Express · Stand-In RBA","Risk-based authentication targeting 90–95% frictionless decisions; a lighter flow launched in India (2019); Mastercard-performed RBA when the issuer's ACS is down.",{s:["iss"],lc:"checkout",src:[["Authentication",M+"/global/en/business/cybersecurity-fraud-prevention/identity/authentication.html"]]}),
+    P("iift","Identity Insights for Transactions","Issuer–merchant data sharing at authorisation, including the Microsoft Dynamics 365 Fraud Protection partnership (+14% approvals). Formerly 'Digital Transaction Insights'.",{s:["iss","mer"],lc:"auth",st:"flux",src:[["Identity Insights for Transactions",M+"/us/en/business/cybersecurity-fraud-prevention/identity/insights/identity-insights-for-transactions.html"]]}),
+    P("passkeys","Payment Passkeys","Device biometrics replace one-time passcodes at checkout; expanded to Asia Pacific in late 2024.",{s:["con","iss","mer"],lc:"checkout",st:"new",ay:"2024",src:[["Payment Passkeys",M+"/us/en/personal/ways-to-pay/payment-passkeys.html"]]}),
+    P("c2p","Click to Pay (EMV Secure Remote Commerce)","Network-recognised guest checkout without typing card details; 26 European markets, enrolments doubled year-on-year in 2025.",{s:["mer","con","iss"],lc:"checkout",note:"Co-developed with the other networks at EMVCo.",src:[["Click to Pay",M+"/us/en/business/payments/commercial-payments/accept-payments/click-to-pay.html"]]}),
+    P("biocheckout","Biometric Checkout Program","In-store pay-by-face or palm with identity partners such as NEC.",{s:["mer","con"],lc:"checkout",src:[["NEC press release, 2023","https://www.nec.com/en/press/202311/global_20231114_01.html"]]}),
+    P("taponphone","Tap on Phone & Cloud Commerce","A smartphone becomes a contactless terminal; Cloud Commerce hosts ~90% of the tap-to-pay logic in the cloud.",{s:["mer","acq"],lc:"checkout",src:[["Tap on Phone",M+"/us/en/business/payments/commercial-payments/accept-payments/mobile-point-of-sale/tap-on-phone.html"],["Cloud Commerce",M+"/us/en/business/payments/commercial-payments/accept-payments/mobile-point-of-sale/cloud-commerce.html"]]}),
+    P("qr","Mastercard QR & Merchant Presented QR","Consumer-initiated QR or alias payments, and merchant-presented QR acceptance at the point of sale.",{s:["mer","acq","con","fin"],lc:"checkout",src:[["Mastercard QR — Developers",D+"/product/mastercard-qr"],["Merchant Presented QR: SRC — Developers",D+"/product/mastercard-merchant-presented-qr-src"]]}),
+    P("masterpass","Masterpass","Mastercard's first digital wallet; discontinued in 2019 in favour of Click to Pay and MDES.",{s:["con","mer"],lc:"checkout",st:"retired",src:[["Masterpass — Wikipedia","https://en.wikipedia.org/wiki/Masterpass"]]}),
+   ]},
+   {id:"3.3", name:"Risk decisioning", blurb:"Decide in milliseconds.", div:"svc", rev:"sec", products:[
+    P("dmp","Decision Management Platform (DMP)","The decisioning platform — rules, case management and BI — that powers 20+ Mastercard products, evaluating thousands of rules in tens of milliseconds. Built on Brighterion AI.",{s:["iss","acq","mer"],lc:"auth",o:"A",ay:"2017",at:"Brighterion (engine)",rel:["brighterion","di","dipro","odd"],src:[["Brighterion technology","https://b2b.mastercard.com/ai-and-security-solutions/brighterion-ai/technology/"],["AI-powered decision management (blog)","https://b2b.mastercard.com/news-and-insights/blog/ai-powered-decision-management-key-for-global-credit-card-security/"]]}),
+    P("di","Decision Intelligence (DI)","Real-time AI risk score on every transaction for issuers at authorisation.",{s:["iss"],lc:"auth",rel:["dmp"],src:[["Decision Intelligence",M+"/us/en/business/cybersecurity-fraud-prevention/risk-decisioning/decision-intelligence.html"]]}),
+    P("dipro","Decision Intelligence Pro","Generative and graph-AI evolution (the MUCI algorithm) that scores transactions from any network; up to 300% uplift in detecting compromised cards.",{s:["iss"],lc:"auth",st:"new",ay:"Feb 2024",src:[["Press release, Feb 2024",M+"/us/en/news-and-trends/press/2024/february/mastercard-supercharges-consumer-protection-with-gen-ai.html"]]}),
+    P("odd","On-Demand Decisioning","Issuers set their own authorisation rules directly on the network and choose auto-response or referral.",{s:["iss"],lc:"auth",st:"new",ay:"Oct 2025",src:[["Press release, Sep 2025",M+"/us/en/news-and-trends/press/2025/september/mastercard-customizable-decisioning-solution-for-financial-institutions.html"]]}),
+    P("tfm","Transaction Fraud Monitoring (TFM) & A2A TFM","Pre-authorisation risk scores for acquirers, PSPs and payment facilitators, with a variant for account-to-account rails.",{s:["acq"],lc:"auth",src:[["Transaction Fraud Monitoring",M+"/global/en/business/cybersecurity-fraud-prevention/risk-decisioning/transaction-fraud-monitoring.html"]]}),
+    P("ems","Expert Monitoring Solutions (EMS)","Behaviour-based card-not-present fraud score at authorisation for US-issued cards.",{s:["mer","acq"],lc:"auth",src:[["EMS via Cybersource docs","https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro/payments-features-intro/payments-mc-ems.html"]]}),
+    P("fma","Fraud Management Applications","Rule Discovery, Fraud Rule Manager and Case Manager: issuer self-service rule building and case handling on top of DI.",{s:["iss"],lc:"auth",src:[["Fraud Management Applications",M+"/global/en/business/cybersecurity-fraud-prevention/risk-decisioning/fraud-management-application.html"]]}),
+    P("obrs","On-Behalf Rules Services","Mastercard-managed rule cartridges, tuned quarterly, for issuers without their own fraud-ops teams.",{s:["iss"],lc:"auth",src:[["On-Behalf Rules Services",M+"/us/en/business/cybersecurity-fraud-prevention/risk-decisioning/on-behalf-rules-services.html"]]}),
+    P("merchrisk","Merchant Monitoring with AI · Merchant Risk Decisioning","Acquirer-side merchant risk products listed under Risk Decisioning.",{s:["acq"],src:[["Cybersecurity & fraud prevention hub",M+"/us/en/business/cybersecurity-fraud-prevention.html"]]}),
+    P("matchpro","MATCH Pro","The Member Alert To Control High-risk merchants list, as an API: acquirers check a prospective merchant's history before signing an agreement.",{s:["acq"],lc:"before",src:[["MATCH Pro — Developers",D+"/product/match"]]}),
+    P("orc","Onboard Risk Check","Merchant-onboarding risk assessment combining Mastercard data and third-party signals so acquirers and payfacs can decide who to board.",{s:["acq","fin"],lc:"before",src:[["Onboard Risk Check — Developers",D+"/product/onboard-risk-check"]]}),
+    P("fld","Fraud and Loss Database (SAFE)","System of record for confirmed fraud filed by issuers; consumed by acquirers, the MATCH list and risk models.",{s:["iss","acq"],lc:"after",src:[["FLD — Developers",D+"/product/fld-fraud-submission/"]]}),
+    P("medi","Mastercard Early Detect Insights (MEDI)","Authorisation anomaly and false-decline monitoring; the closest match to 'Alert Insights'.",{s:["iss","acq"],lc:"auth",rev:"ins",src:[["MEDI",M+"/us/en/business/insights-intelligence/operations-intelligence/solutions/mastercard-early-detect-insights.html"]]}),
+    P("safetynet","Safety Net","Network-level fraud backstop (~2014) that blocks anomalous authorisation patterns even when an issuer has set no limits. No current public page found; may have been absorbed into On-Behalf Rules or DI.",{s:["iss"],lc:"auth",st:"unconf",div:"core"}),
+   ]},
+   {id:"3.4", name:"Disputes & resolution", blurb:"Fix what goes wrong, before it becomes a chargeback.", div:"svc", rev:"sec", products:[
+    P("ethocaalerts","Ethoca Alerts","Near-real-time issuer↔merchant alerts so merchants can refund before a chargeback is filed; 39m chargebacks prevented in 2025.",{s:["mer","iss"],lc:"after",o:"A",ay:"2019",at:"Ethoca",src:[["Ethoca Alerts",M+"/us/en/business/cybersecurity-fraud-prevention/dispute-management/ethoca-alerts.html"]]}),
+    P("ethocacc","Ethoca Consumer Clarity","Merchant purchase details and logos surfaced in banking apps and call centres to stop 'I don't recognise this' disputes.",{s:["iss","mer","con"],lc:"after",o:"A",ay:"2019",at:"Ethoca",src:[["Ethoca Consumer Clarity",M+"/global/en/business/cybersecurity-fraud-prevention/dispute-management/ethoca-consumer-clarity.html"]]}),
+    P("ethocaelim","Ethoca Eliminator","Automated chargeback elimination on the Alerts network; thinly documented on Mastercard's own site.",{s:["mer"],lc:"after",st:"unconf",o:"A",ay:"2019",at:"Ethoca",src:[["Third-party explainer","https://corepay.net/articles/how-ethoca-eliminator-reduces-chargeback-and-prevents-fraud/"]]}),
+    P("mastercom","Mastercom & Dispute Resolution","Core case-management system and the formal chargeback, pre-arbitration and arbitration framework.",{s:["iss","acq","mer"],lc:"after",src:[["Mastercom summary (PDF)",M+"/content/dam/public/mastercardcom/globalrisk/pdf/MastercomDisputeResolutionClaimsManagerExternalSummaryGLOBALJan20.pdf"]]}),
+    P("fpt","First-Party Trust & Trusted Transactions","Merchant-shared trust and behavioural signals to fight friendly fraud; expanded to new markets in June 2025.",{s:["mer","iss"],lc:"after",st:"new",src:[["First-Party Trust expansion, Jun 2025",M+"/us/en/news-and-trends/press/2025/june/first-party-trust-countering-friendly-fraud.html"]]}),
+    P("merchantid","Merchant Identifier","Resolves unrecognisable merchant names on statements to real merchant details — the classic cause of 'I don't recognise this charge' disputes.",{s:["iss","fin"],lc:"after",src:[["Merchant Identifier — Developers",D+"/product/merchant-identifier"]]}),
+   ]},
+   {id:"3.5", name:"Account services", blurb:"Keep the credential current; share what happens on it.", div:"core", rev:"dig", products:[
+    P("abu","Automatic Billing Updater (ABU)","Pushes reissued card details to enrolled card-on-file merchants so recurring billing doesn't fail.",{s:["mer","iss","con"],lc:"after",src:[["ABU — Developers",D+"/product/automatic-billing-updater-abu/"]]}),
+    P("asi","Account Status Inquiry & Payment Account Management","Card-validity checks and account-management APIs, documented mostly through processors' docs.",{s:["mer","acq"],lc:"before",src:[["Payment Account Management — Developers",D+"/product/payment-account-management"]]}),
+    P("cardlc","Card lifecycle (Processing Core APIs)","Issuance, reissue, status changes and closure inside Mastercard Processing.",{s:["iss","fin"],lc:"before",rel:["processing"],src:[["Card lifecycle use case",D+"/mastercard-processing-core/documentation/use-cases/card-lifecycle/"]]}),
+    P("minna","Minna Technologies","In-app subscription visibility, management and cancellation for banks' customers.",{s:["iss","con"],lc:"after",o:"A",ay:"Oct 2024",at:"Minna Technologies",rev:"eng",src:[["CNBC on the deal","https://www.cnbc.com/2024/10/01/mastercard-to-buy-subscription-management-startup-minna-technologies.html"]]}),
+    P("alm","Account Level Management (ALM)","Named in the brief; no current Mastercard product found under this name (Marqeta uses it for its own tooling).",{s:["iss"],st:"unconf"}),
+    P("txnnotif","Transaction Notifications","Real-time purchase alerts a cardholder can share with third-party apps and services, with consent managed through Mastercard's Consent Management & Enrollment APIs.",{s:["fin","iss","con"],lc:"after",src:[["Transaction Notifications — Developers",D+"/product/transaction-notifications"]]}),
+    P("asc","Account Services Catalogue","One universal specification for account-range and PAN services — enablement, closure, replacement, product graduation and One Credential registration — routed to the right Mastercard service provider.",{s:["iss","fin"],lc:"before",src:[["Account Services Catalogue — Developers",D+"/product/account-services-catalogue"]]}),
+    P("acctval","Mastercard Account Validation","Checks a cardholder's name against the issuer's records in real time, for account opening and transaction protection.",{s:["mer","fin","iss"],lc:"before",src:[["Account Validation — Developers",D+"/product/mastercard-account-validation"]]}),
+   ]},
+   {id:"3.6", name:"Agentic commerce", blurb:"Let an AI agent pay — safely.", div:"core", rev:"dig", products:[
+    P("agentpay","Mastercard Agent Pay","Framework for AI agents to transact on a person's or business's behalf: trusted agent registration, safe transactions, consumer control and fraud protection. Partners include Microsoft, IBM, PayPal, Google, Braintree and Checkout.com.",{s:["ai","mer","iss","con"],lc:"checkout",st:"new",ay:"Apr 2025",rel:["agentictokens","kya","vintent","ap4m","agentsuite"],src:[["Agent Pay unveiled, Apr 2025",M+"/global/en/news-and-trends/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai.html"],["Agent Pay product page",M+"/global/en/business/artificial-intelligence/mastercard-agent-pay.html"]]}),
+    P("agentictokens","Agentic Tokens","MDES-derived tokens that carry which agent is acting and on whose behalf, end to end.",{s:["ai","iss","mer"],lc:"checkout",st:"new",ay:"2025",rel:["mdes"],src:[["Agentic commerce momentum",M+"/global/en/news-and-trends/stories/2025/agentic-commerce-momentum.html"]]}),
+    P("kya","Know Your Agent (KYA)","Registration and verification so only vetted, traceable agents can obtain agentic tokens — 'KYC for AI agents'.",{s:["ai","iss"],lc:"before",st:"new",ay:"2025",src:[["Checkout.com interview","https://www.checkout.com/blog/mastercard-checkout-discuss-agentic-commerce-agent-pay"]]}),
+    P("vintent","Verifiable Intent","Open, standards-based proof that an agent acted within explicit consumer authorisation; co-developed with Google (AP2/UCP-aligned). Interoperability talks with Visa's Trusted Agent Protocol, September 2026.",{s:["ai","mer","iss","con"],lc:"checkout",st:"new",ay:"Mar 2026",src:[["Verifiable Intent",M+"/global/en/news-and-trends/stories/2026/verifiable-intent.html"],["Finextra: Verifiable Intent vs Visa TAP","https://www.finextra.com/blogposting/31107/deep-dive-mastercard-verifiable-intent-vs-visa-trusted-agent-protocol"]]}),
+    P("ap4m","Agent Pay for Machines (AP4M)","Machine-to-machine, high-frequency, low-value payments across cards, accounts and stablecoins; 30+ launch partners including Stripe, Adyen, Coinbase and the Solana Foundation.",{s:["ai","corp"],lc:"checkout",st:"new",ay:"Jun 2026",src:[["Launch press release, Jun 2026",M+"/global/en/news-and-trends/press/2026/june/mastercard-launches-agent-pay-for-machines.html"]]}),
+    P("agentsign","'Agent Sign' / 'Verified Agents'","Not found as official names; the functional equivalents are Know Your Agent and Verifiable Intent.",{s:["ai"],st:"unconf",rel:["kya","vintent"]}),
+   ]},
+  ]},
+
+ {id:"L2", name:"Rails", analogy:"drivers · I/O", color:"--l2",
+  desc:"Mastercard is multi-rail: five ways money moves, all plugging into the same kernel and able to call the same network services. Cards earn Payment network revenue; the other rails report inside Value-added services.",
+  tiles:[
+   {id:"2.1", name:"Card rails", blurb:"Credit, debit, prepaid, commercial.", div:"core", rev:"net", products:[
+    P("cardsconsumer","Credit, debit & prepaid card products","Consumer card programmes on the core network — the source of the Payment network revenue line.",{s:["iss","con"],lc:"auth",src:[["Consumer payments",M+"/us/en/business/payments/consumer-payments.html"]]}),
+    P("cardscommercial","Commercial card products","SME, T&E, purchasing, virtual and fleet programmes. Fleet cards (bp, Fuelman, Comdata) are partner co-brands riding the network.",{s:["iss","corp"],lc:"auth",div:"cnpf",src:[["Commercial payments",M+"/us/en/business/payments/commercial-payments.html"]]}),
+    P("installments","Mastercard Installments","BNPL built into existing cards so issuers can offer instalment plans without a separate loan product; LoanPro partnership 2025.",{s:["iss","mer","con"],lc:"checkout",ay:"2021",note:"Vyze (acquired 2019) underpinned the instalments capability.",src:[["Mastercard Installments",M+"/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-installments.html"]]}),
+    P("contactless","Contactless, EMV & open-loop transit","Tap-to-pay at POS and tap-to-ride on transit (Transport NSW; Azerbaijan, November 2025).",{s:["acq","mer","gov","con"],lc:"checkout",src:[["Open-loop transit, Azerbaijan 2025",M+"/news/eemea/en/newsroom/press-releases/en/2025-1/november/mastercard-accelerates-the-future-of-mobility-with-open-loop-transit-payments-in-azerbaijan/"]]}),
+   ]},
+   {id:"2.2", name:"A2A & real-time", blurb:"Bank-account rails, mostly Vocalink.", div:"core", rev:"oth", products:[
+    P("vocalink","Vocalink","Operator and technology provider of national real-time and bulk payment infrastructures.",{s:["iss","gov"],lc:"settle",st:"flux",o:"A",ay:"2016",at:"Vocalink (~£700m; full ownership later)",note:"Mastercard was reported in 2025–26 to be exploring the sale of a 51% stake to a UK bank consortium, after a £11.9m Bank of England fine in July 2025.",src:[["Vocalink acquisition, 2016",I+"/investor-news/investor-news-details/2016/MasterCard-Announces-Acquisition-of-VocaLink/default.aspx"],["The Paypers on the stake sale","https://thepaypers.com/mergers-aquisitions-and-investments/news/mastercard-examines-sale-of-uk-payments-subsidiary-vocalink"],["Bank of England final notice, Jul 2025","https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/regulatory-action/2025/final-notice-from-boe-and-pra-to-vocalink.pdf"]]}),
+    P("fps","UK Faster Payments infrastructure","Vocalink runs the real-time rail behind the UK's Faster Payment System.",{s:["iss","con"],lc:"settle",st:"flux",o:"A",ay:"2016",at:"Vocalink",src:[["Vocalink — about","https://www.vocalink.com/about/"]]}),
+    P("bacs","UK Bacs","Bulk direct debit and direct credit: 4.4bn+ automated payments a year (~90% of salaries, ~98% of state benefits).",{s:["iss","corp","gov"],lc:"settle",st:"flux",o:"A",ay:"2016",at:"Vocalink",src:[["Bacs case study",M+"/us/en/news-and-trends/Insights/2025/over-4-4-billion-automated-payments-annually.html"]]}),
+    P("pbba","Pay by Bank app (UK)","Account-to-account merchant payment scheme run by Vocalink.",{s:["mer","con","iss"],lc:"checkout",o:"A",ay:"2016",at:"Vocalink",src:[["Newsroom, 2018",M+"/news/europe/en-uk/newsroom/press-releases/en-gb/2018/january/vocalink-s-pay-by-bank-app-to-partner-with-shieldpay-to-provide-secure-yet-seamless-transactions/"]]}),
+    P("a2astack","Instant Payment Service · Bulk Payment Service · Proxy Directory Service · Pay by Account","The productised account-to-account stack Mastercard markets to banks and central infrastructures.",{s:["iss","gov"],lc:"settle",src:[["b2b.mastercard.com","https://b2b.mastercard.com/"]]}),
+    P("a2acommerce","Account to Account Commerce","Lets creditor and debtor service providers offer mobile account-to-account payment journeys — payments, refunds, agreements and reconciliation over MTLS APIs.",{s:["iss","fin","mer"],lc:"checkout",src:[["Account to Account Commerce — Developers",D+"/product/account-to-account-commerce"]]}),
+    P("betalingsservice","Betalingsservice (Denmark)","Denmark's automatic bill-payment scheme, run by Mastercard Payment Services since the Nets acquisition; the BS Creditor API manages delegated mandates.",{s:["corp","iss","con"],lc:"settle",o:"A",ay:"2019 (closed 2021)",at:"Nets A2A",src:[["BS Creditor API — Developers",D+"/product/bs-creditor-api"]]}),
+    P("nets","Nets account-to-account business","Nordic real-time and bulk clearing infrastructure.",{s:["iss"],lc:"settle",o:"A",ay:"2019 (closed 2021)",at:"Nets A2A",src:[["Completion, 2021",I+"/investor-news/investor-news-details/2021/Mastercard-Completes-Acquisition-of-Nets-Account-to-Account-Payment-Business/default.aspx"]]}),
+    P("rtpbuilds","National real-time payment builds","Vocalink technology behind The Clearing House RTP (US), Canada's Real-Time Rail (launch targeted Q4 2026), Saudi Arabia's sarie and Peru's CCE (Peru's current status unclear).",{s:["gov","iss"],lc:"settle",o:"A",ay:"2016",at:"Vocalink",src:[["The Clearing House RTP","https://www.theclearinghouse.org/payment-systems/articles/2017/11/20171114-rtp-first-new-core-payments-system"],["Payments Canada — RTR","https://www.payments.ca/systems-services/payment-systems/real-time-rail-payment-system"]]}),
+    P("p27","P27 Nordic Payments Platform","Pan-Nordic clearing platform Vocalink was selected to build in 2019; collapsed in 2023 after Danish banks withdrew.",{s:["iss"],lc:"settle",st:"retired",src:[["P27 post-mortem","https://flagshipadvisorypartners.com/insights/p27-lessons-learned-from-the-latest-failure-in-pan-european-payment-collaborations/"]]}),
+   ]},
+   {id:"2.3", name:"Mastercard Move", blurb:"Push payments and cross-border.", div:"cnpf", rev:"oth", products:[
+    P("move","Mastercard Move","Umbrella brand for money movement: 200+ countries, 150+ currencies, ~17bn endpoints across cards, accounts, wallets and cash.",{s:["iss","fin","corp","gov"],lc:"settle",ay:"2023 (brand)",src:[["Mastercard Move",M+"/us/en/business/payments/mastercard-move.html"]]}),
+    P("send","Mastercard Send","Real-time push-to-card API for disbursements, P2P, gig payouts and insurance claims.",{s:["iss","fin","corp"],lc:"settle",ay:"~2017 (ex-MoneySend)",src:[["Mastercard Send — Developers",D+"/product/mastercard-send/"]]}),
+    P("xborder","Cross-Border Services","Multi-rail cross-border network paying out to bank accounts, wallets, cards and 300,000+ cash locations.",{s:["iss","fin","corp"],lc:"settle",o:"A",ay:"2019",at:"Transfast (+ HomeSend JV)",src:[["Transfast acquisition, 2019",I+"/investor-news/investor-news-details/2019/Mastercard-Advances-Cross-Border-Capabilities-with-Acquisition-of-Transfast/default.aspx"]]}),
+    P("movecomm","Move Commercial Payments","Bank-to-bank cross-border B2B payments with upfront FX transparency; positioned against Visa B2B Connect.",{s:["iss","corp"],lc:"settle",st:"new",ay:"Oct 2024",src:[["Press release, Oct 2024",M+"/us/en/news-and-trends/press/2024/october/mastercard-transforms-cross-border-payments-for-banks-with-industry-first-innovation.html"]]}),
+    P("disb","Disbursements & remittances partnerships","Government benefits, payroll, insurance and remittances through partners such as Félix, Remitly, MoneyGram, Corpay and VoPay.",{s:["gov","corp","fin","con"],lc:"settle",src:[["Corpay partnership, 2025","https://s25.q4cdn.com/479285134/files/doc_news/Mastercard-and-Corpay-Launch-Strategic-Partnership-in-Cross-Border-Payments-2025.pdf"]]}),
+    P("tips","TIPS cross-currency pilot","Pilot connecting Move rails to the Eurosystem's TARGET Instant Payment Settlement for instant cross-currency settlement.",{s:["iss"],lc:"settle",st:"new",ay:"Jun 2026",src:[["Press release, Jun 2026",M+"/us/en/news-and-trends/press/2026/june/Mastercard-advances-instant-cross-border-payments-with-TIPS-cross-currency-pilot.html"]]}),
+   ]},
+   {id:"2.4", name:"Digital assets", blurb:"Tokenised money, stablecoins, crypto.", div:"core", rev:"oth", products:[
+    P("mtn","Multi-Token Network (MTN)","Blockchain platform for tokenised deposits and regulated money with 24/7 interbank settlement; interoperates with J.P. Morgan Kinexys; Ondo Finance joined in 2025.",{s:["iss","fin"],lc:"settle",ay:"2023",src:[["Multi-Token Network",M+"/us/en/business/payments/consumer-payments/next-gen-payments/digital-asset-solutions/multi-token-network.html"]]}),
+    P("stable","Stablecoin settlement","Network-wide option to settle in regulated stablecoins (USDC, PYUSD, USDG, USDP, RLUSD, SoFiUSD) across chains including Ethereum, Solana, Base, Polygon and XRPL, with intraday and weekend windows.",{s:["iss","acq"],lc:"settle",st:"new",ay:"expanded Jun 2026",src:[["Press release, Jun 2026",M+"/global/en/news-and-trends/press/2026/june/mastercard-expands-settlement-capabilities-to-include-stablecoin.html"]]}),
+    P("bvnk","BVNK","Stablecoin-powered financial stack for enterprises across 130+ countries — the bridge between on-chain payments and fiat rails.",{s:["corp","fin"],lc:"settle",st:"new",o:"A",ay:"Mar 2026 (closed Aug 2026)",at:"BVNK (up to $1.8bn incl. $300m contingent)",src:[["Acquisition announcement, Mar 2026",M+"/us/en/news-and-trends/press/2026/march/Mastercard-to-acquire-BVNK-to-connect-on-chain-payments-and-fiat-rails.html"]]}),
+    P("cryptocred","Mastercard Crypto Credential","Username-based crypto transfers with VASP verification, chain and asset compatibility checks and Travel Rule support; partners include Bit2me, Bybit, Mercado Bitcoin and Mercuryo.",{s:["fin","con"],lc:"checkout",ay:"2024",src:[["First P2P pilot, May 2024",M+"/us/en/news-and-trends/press/2024/may/mastercard-crypto-credential-goes-live-with-first-peer-to-peer-pilot-transactions-adds-new-partners-to-the-ecosystem.html"]]}),
+    P("cryptocards","Crypto card programmes","Mastercard-branded cards issued by exchanges such as Binance and Bybit — a programme category rather than a single product.",{s:["fin","con"],lc:"checkout",note:"Partner co-brand issuance on the core network."}),
+   ]},
+   {id:"2.5", name:"Bill pay & local", blurb:"Billers, local wallets.", div:"cnpf", rev:"oth", products:[
+    P("billpay","Mastercard Bill Pay","Biller connectivity for recurring and one-off bill payments through banking apps; strengthened by Transactis (2019). The 2018-era 'Bill Pay Exchange' brand no longer appears on the site.",{s:["iss","corp","con"],lc:"checkout",st:"unconf",note:"Transactis acquired 2019 for bill-pay and e-invoicing technology.",src:[["Transactis acquisition, 2019","https://www.businesswire.com/news/home/20190503005240/en/Mastercard-Strengthens-Bill-Payment-Services-Acquisition-Transactis"],["Bill Pay — Developers",D+"/product/bill-pay"]]}),
+    P("arcus","Arcus","Latin-American (Mexico) real-time bill-pay and disbursement infrastructure; no 2025–26 news found.",{s:["corp","iss","con"],lc:"checkout",st:"unconf",o:"A",ay:"2021",at:"Arcus",src:[["Acquisition, 2021",M+"/news/latin-america/en/newsroom/press-releases/pr-en/2021/november/mastercard-expands-support-of-latin-america-real-time-payments-with-acquisition-of-arcus/"]]}),
+    P("rpps","RPPS (Remote Payment and Presentment Service)","Mastercard's US electronic bill-payment network connecting banks and billers; the Bill Payment Validator API checks whether an account can be paid through it.",{s:["iss","corp","fin"],lc:"settle",src:[["Bill Payment Validator — Developers",D+"/product/bill-payment-validator"]]}),
+    P("paylocal","Mastercard Pay Local","Lets cardholders pay through local wallets (Alipay, GrabPay, M-Pesa, Mercado Pago, DANA, Touch 'n Go) where cards aren't accepted.",{s:["fin","mer","con"],lc:"checkout",st:"new",ay:"Nov 2024",div:"core",src:[["Launch, Nov 2024",M+"/global/en/news-and-trends/press/2024/november/mastercard-launches-pay-local-to-empower-digital-wallet-providers-with-new-ways-to-pay.html"]]}),
+   ]},
+  ]},
+
+ {id:"L1", name:"Kernel", analogy:"the network itself", color:"--l1",
+  desc:"The thing everything else runs on: the switch, the brands, the rules and the data the network throws off. This is where the Payment network revenue line (~69% of FY2025) is earned.",
+  tiles:[
+   {id:"1.1", name:"The switch", blurb:"Authorise, clear, settle.", div:"core", rev:"net", products:[
+    P("swcore","Global switching network","Authorisation, clearing and settlement between issuers and acquirers in 210+ countries and territories and 150+ currencies.",{s:["iss","acq"],lc:"auth",ay:"1966",src:[["Mastercard — Wikipedia","https://en.wikipedia.org/wiki/Mastercard"]]}),
+    P("standin","Stand-In Authorization","Mastercard authorises on the issuer's behalf when the issuer's host is unavailable ('payment resiliency').",{s:["iss"],lc:"auth",src:[["Payment resiliency",M+"/global/en/business/cybersecurity-fraud-prevention/cybersecurity/on-demand-decisioning.html"]]}),
+    P("cbfm","Cross Border Fee Manager","Issuer tooling for cross-border fee logic; grouped by Mastercard under payment resiliency.",{s:["iss"],lc:"auth",src:[["Cybersecurity & fraud prevention hub",M+"/us/en/business/cybersecurity-fraud-prevention.html"]]}),
+    P("fx","Currency Conversion Calculator","Mastercard's foreign-exchange rates and settlement-currency conversion, retrievable instantly by API.",{s:["iss","acq","fin"],lc:"settle",src:[["Currency Conversion Calculator — Developers",D+"/product/currency-conversion-calculator"]]}),
+    P("directservices","Mastercard Direct Services","Lets customers call Mastercard's value-added services on every transaction — including non-switched, on-us and non-Mastercard-branded ones.",{s:["iss","acq","fin"],lc:"auth",src:[["Direct Services — Developers",D+"/product/direct-service-api"]]}),
+   ]},
+   {id:"1.2", name:"Brands & credentials", blurb:"What's on the card.", div:"core", rev:"net", products:[
+    P("brandmc","Mastercard","The consumer and commercial card brand: credit, debit, prepaid and commercial products in tiers from Standard to World Legend.",{s:["iss","con","corp"],lc:"before",ay:"1966",src:[["Card benefits",M+"/us/en/personal/find-a-card/card-benefits.html"]]}),
+    P("maestro","Maestro","International PIN-debit brand, used mainly outside the US.",{s:["iss","con"],lc:"before",ay:"1992",src:[["Maestro — Wikipedia","https://en.wikipedia.org/wiki/Maestro_(debit_card)"]]}),
+    P("cirrus","Cirrus","Global ATM and cash-access network brand.",{s:["iss","con"],lc:"before",o:"A",ay:"1988",at:"Cirrus",src:[["Cirrus — Wikipedia","https://en.wikipedia.org/wiki/Cirrus_(interbank_network)"]]}),
+   ]},
+   {id:"1.3", name:"Franchise & rules", blurb:"The contract everyone signs.", div:"core", rev:"net", products:[
+    P("rules","Mastercard Rules & compliance programmes","Scheme rules, licensing, interchange, BIN ranges, MATCH, the Scam Merchant Monitoring Program and dispute rules.",{s:["iss","acq"],src:[["Rules and compliance programs",M+"/us/en/business.html"]]}),
+    P("nep","Network Enablement Partners & payment-facilitator directory","Accredited third parties that help customers connect to and operate on the network.",{s:["acq","fin"],lc:"before",src:[["Mastercard for business",M+"/us/en/business.html"]]}),
+    P("binlookup","BIN Lookup","Up-to-date active Mastercard issuing account ranges for authorisation routing, fraud prevention and loyalty checks; single lookup, filtering and full or incremental download.",{s:["acq","mer","fin","iss"],lc:"auth",src:[["BIN Lookup — Developers",D+"/product/bin-lookup"]]}),
+   ]},
+   {id:"1.4", name:"Data & AI foundation", blurb:"What the network throws off.", div:"svc", rev:"na", products:[
+    P("data","Network data asset","Anonymised transaction data from the network: the raw material for every intelligence product in the Network services and Solutions layers.",{s:["iss","acq","mer","corp","gov"],lc:"after",div:"core"}),
+    P("dataai","Data & AI organisation","Cross-company org created in the May 2024 reorg under Chief AI & Data Officer Greg Ulrich, for AI and data commercialisation and governance.",{s:["iss","mer","corp"],ay:"2024",src:[["Reorg press release, Apr 2024",M+"/us/en/news-and-trends/press/2024/april/positioning-mastercard-for-the-next-era-of-growth.html"]]}),
+    P("brighterion","Brighterion AI","AI decisioning engine with 20+ years of history; the technology core of the Decision Management Platform.",{s:["iss","acq","mer"],lc:"auth",o:"A",ay:"2017",at:"Brighterion",rev:"sec",rel:["dmp"],src:[["Brighterion technology","https://b2b.mastercard.com/ai-and-security-solutions/brighterion-ai/technology/"]]}),
+   ]},
+  ]},
+];
+
+const PILLARS = [
+ {id:"pillar-brand", name:"Brand & Priceless", color:"--lu", blurb:"The consumer-facing brand and its experience platform.", products:[
+   P("brand","Mastercard brand & sponsorships","The Priceless platform and global sponsorships across sport, music and culture.",{s:["con","iss"],div:"corp",rel:["priceless"],src:[["Priceless","https://www.priceless.com/about"]]}),
+   P("sonic","Sonic Branding","The six-note sonic signature and animation played at checkout as a multisensory confirmation; available to partners as an SDK.",{s:["mer","acq","fin"],div:"corp",lc:"checkout",src:[["Sonic Branding — Developers",D+"/product/mastercard-sonic-branding"]]}),
+ ]},
+ {id:"pillar-inclusion", name:"Inclusive growth", color:"--lu", blurb:"Impact programmes that widen who the network serves.", products:[
+   P("cig","Center for Inclusive Growth","Mastercard's philanthropic arm (2014): financial health, small-business growth, tech for good; hosts the annual Global Inclusive Growth Forum.",{s:["gov","corp"],div:"corp",ay:"2014",src:[["mastercardcenter.org","https://www.mastercardcenter.org/"]]}),
+   P("communitypass","Community Pass & Farm Pass","Shared digital-ID and payments infrastructure for rural and underserved communities; the MADE Alliance: Africa targets 100m people and businesses by 2034.",{s:["gov","con","corp"],div:"corp",src:[["Community Pass",M+"/europe/en/for-the-world/prosperity/community-pass.html"]]}),
+   P("strive","Mastercard Strive","Small-business programme: 1.5m+ reached and $150m+ credit facilitated in India as of September 2026.",{s:["corp","gov"],div:"corp",src:[["Strive India milestone, Sep 2026",M+"/news/ap/en-in/newsroom/press-releases/en-in/2026/september-1/mastercard-strive-in-india-reaches-over-1-5-million-and-individuals-supporting-their-journey-to-financial-health/"]]}),
+   P("donate","Mastercard Donate","Lets partners embed charitable giving in their websites and apps — round-ups and one-off donations to vetted causes.",{s:["mer","iss","fin","con"],div:"corp",lc:"after",src:[["Mastercard Donate — Developers",D+"/product/mastercard-donate"]]}),
+ ]},
+ {id:"pillar-trust", name:"Trust & regulation", color:"--lu", blurb:"The licence to operate.", products:[
+   P("regulation","Regulatory positioning","CFPB Section 1033 (US open banking) enjoined and under reconsideration in 2026; UK scrutiny of Vocalink ownership; the 2026 leadership reshuffle unified go-to-market under a Chief Business Officer.",{s:["iss","gov"],div:"corp",rel:["vocalink","ofus","rules","trustcenter"],src:[["Leadership updates, Jun 2026",M+"/us/en/news-and-trends/press/2026/june/mastercard-leadership-updates.html"]]}),
+ ]},
+];
+
+const APIF = {yes:"Has a Mastercard Developers API", no:"No public API"};
+const LENSES = [
+  {id:"none", name:"Off"},
+  {id:"lc", name:"Lifecycle", map:LC, key:"lc", colors:["c1","c2","c3","c7","c5","c8"]},
+  {id:"s", name:"Customer", map:USERS, key:"s", colors:["c1","c2","c3","c4","c5","c6","c7","c8"], multi:true},
+  {id:"div", name:"Division", map:DIV, key:"div", colors:["c1","c2","c5","c8"]},
+  {id:"o", name:"Origin", map:OR, key:"o", colors:["c7","c5"]},
+  {id:"st", name:"Status", map:ST, key:"st", colors:["c8","c3","c6","c7","c4"]},
+  {id:"api", name:"API", map:APIF, key:"apiflag", colors:["c1","c8"]},
+];
+
+/* =========================================================
+   JOURNEYS — the flows that matter most, by scale and by novelty.
+   Each step lands on one tile (or user chip); p = the product it opens.
+   ========================================================= */
+const JGROUPS = [
+ {id:"scale", name:"Everyday, at scale", d:"The flows that carry most of the volume"},
+ {id:"money", name:"Money movement & commercial", d:"Beyond the consumer purchase"},
+ {id:"trust", name:"Trust & resilience", d:"What happens when something goes wrong"},
+ {id:"frontier", name:"Frontier", d:"New in 2025–26"},
+];
+const JOURNEYS = [
+ {id:"tap", g:"scale", name:"Tap to pay in store", why:"The single largest flow on the network. A card or phone tap runs the whole stack in under a second.",
+  scale:"~75% of in-person transactions were contactless by Q3 2024; 210bn switched purchase transactions and ~150m acceptance locations in 2025.", src:[["Investor Day 2024 (PDF)","https://s25.q4cdn.com/479285134/files/doc_events/2024-Mastercard-Investment-Community-Presentation.pdf"],["4Q25 earnings release (PDF)","https://s25.q4cdn.com/479285134/files/doc_financials/2025/q4/4Q25-Mastercard-Earnings-Release.pdf"]],
+  steps:[
+   {at:"u-con", t:"A shopper taps a card or phone", d:"A physical card, or a wallet token provisioned by MDES."},
+   {at:"3.1", p:"mdes", t:"If it's a phone, MDES supplies the token", d:"The merchant never sees the real card number."},
+   {at:"3.2", p:"taponphone", t:"The terminal — or a Tap on Phone device — reads it", d:"Cloud Commerce runs most of the contactless kernel in the cloud."},
+   {at:"u-acq", t:"The acquirer forwards the authorisation", d:""},
+   {at:"2.1", p:"cardsconsumer", t:"It rides the card rail", d:""},
+   {at:"1.1", p:"swcore", t:"The switch routes it to the issuer", d:"Milliseconds, in 220+ countries and territories."},
+   {at:"3.3", p:"di", t:"Decision Intelligence scores it in flight", d:"The issuer gets a real-time AI risk score with the request."},
+   {at:"u-iss", t:"The issuer approves", d:""},
+   {at:"3.5", p:"txnnotif", t:"A real-time alert reaches the cardholder's app", d:"Transaction Notifications, with consent."},
+   {at:"4.4", p:"spendingpulse", t:"…and the aggregate becomes SpendingPulse", d:"The flywheel turns."},
+  ]},
+ {id:"ecom", g:"scale", name:"Online checkout", why:"Where tokenisation, authentication and fraud scoring all meet — and where Mastercard has committed to removing manual card entry in Europe by 2030.",
+  scale:"~50% of European e-commerce transactions tokenised by mid-2025; Click to Pay enrolments doubled year-on-year; Merchant Cloud connects 240+ acquirers.", src:[["Tokenisation one-year update, Jun 2025","https://www.businesswire.com/news/home/20250603515548/en"],["Merchant Cloud launch, Oct 2025","https://www.mastercard.com/us/en/news-and-trends/press/2025/october/Mastercard-Merchant-Cloud-simplify-and-support-commerce-growth-in-global-acceptance-ecosystem.html"]],
+  steps:[
+   {at:"u-con", t:"A shopper chooses to pay", d:"Card on file, wallet or guest checkout."},
+   {at:"3.2", p:"c2p", t:"Click to Pay + a Payment Passkey", d:"No card number typed; biometrics replace the OTP."},
+   {at:"3.1", p:"mdes", t:"MDES swaps the PAN for a token", d:""},
+   {at:"5.2", p:"merchantcloud", t:"Merchant Cloud / Gateway carries the request", d:"Routes to the acquirer with fraud and identity signals attached."},
+   {at:"2.1", p:"cardsconsumer", t:"Rides the card rail", d:""},
+   {at:"1.1", p:"swcore", t:"The switch routes to the issuer", d:""},
+   {at:"3.2", p:"idcheck", t:"Identity Check authenticates if the risk warrants it", d:"EMV 3-D Secure, mostly frictionless."},
+   {at:"3.3", p:"di", t:"Decision Intelligence scores the risk", d:""},
+   {at:"u-iss", t:"The issuer approves", d:""},
+   {at:"3.4", p:"ethocaalerts", t:"Afterwards: Ethoca, ABU, Pay Rewards", d:"Disputes headed off, credentials kept current, points redeemed."},
+  ]},
+ {id:"subs", g:"scale", name:"A subscription renews", why:"Recurring card-on-file payments are the fastest-growing consumer flow, and the one most likely to end in a dispute or a cancelled card.",
+  scale:"6.8bn subscriptions globally, heading for 9.3bn by 2028 (Juniper, cited by Mastercard); Ethoca prevented 39m chargebacks in 2025.", src:[["Mastercard on the subscription economy, 2024","https://www.mastercard.com/us/en/news-and-trends/stories/2024/sign-us-up-transforming-the-subscription-experience.html"],["Ethoca Alerts","https://www.mastercard.com/us/en/business/cybersecurity-fraud-prevention/dispute-management/ethoca-alerts.html"]],
+  steps:[
+   {at:"u-mer", t:"The merchant bills the stored credential", d:"Monthly, without the customer present."},
+   {at:"3.1", p:"scof", t:"Secure Card on File holds a token, not a PAN", d:""},
+   {at:"3.5", p:"abu", t:"ABU has already refreshed any reissued card details", d:"So the renewal doesn't fail on an expired card."},
+   {at:"2.1", p:"cardsconsumer", t:"Rides the card rail", d:""},
+   {at:"1.1", p:"swcore", t:"The switch routes to the issuer", d:""},
+   {at:"3.3", p:"di", t:"Decision Intelligence scores it", d:"Recurring patterns are low-risk by design."},
+   {at:"u-iss", t:"The issuer approves", d:""},
+   {at:"3.4", p:"ethocacc", t:"Consumer Clarity shows the merchant and receipt in the banking app", d:"Fewer 'I don't recognise this' calls."},
+   {at:"3.5", p:"minna", t:"Subscription Controls let the cardholder manage or cancel", d:"Minna Technologies, inside the bank's app."},
+   {at:"3.4", p:"ethocaalerts", t:"If it's disputed anyway, Ethoca Alerts prompt a refund", d:"Before it becomes a chargeback."},
+  ]},
+ {id:"travel", g:"scale", name:"Paying abroad", why:"Cross-border spending is Mastercard's most valuable flow per transaction and its fastest-growing consumer volume.",
+  scale:"Cross-border volume grew 15% in 2025; the network operates in 220+ countries and territories.", src:[["4Q25 earnings release (PDF)","https://s25.q4cdn.com/479285134/files/doc_financials/2025/q4/4Q25-Mastercard-Earnings-Release.pdf"]],
+  steps:[
+   {at:"u-con", t:"A traveller pays in a foreign country", d:"Tap, chip, or a local wallet."},
+   {at:"2.5", p:"paylocal", t:"Where cards aren't accepted, Pay Local pays through a local wallet", d:"Alipay, GrabPay, M-Pesa, Mercado Pago…"},
+   {at:"u-acq", t:"A foreign acquirer forwards the authorisation", d:""},
+   {at:"1.1", p:"swcore", t:"The switch routes it cross-border", d:""},
+   {at:"1.1", p:"fx", t:"Converted at Mastercard's FX rate", d:"Currency Conversion Calculator exposes the same rates by API."},
+   {at:"3.3", p:"di", t:"Decision Intelligence scores an unusual location", d:"Travel patterns, not just a single merchant, inform the score."},
+   {at:"u-iss", t:"The home issuer approves and applies cross-border fees", d:"Cross Border Fee Manager logic."},
+   {at:"4.3", p:"priceless", t:"Priceless, airport lounges and travel benefits ride along", d:"Card-tier benefits and Travel & Lifestyle Services."},
+  ]},
+ {id:"billpay", g:"scale", name:"Paying the bills", why:"Not every payment is a card payment. In the UK, the bulk rails Mastercard operates move most salaries, bills and benefits.",
+  scale:"Bacs processes 4.4bn+ automated payments a year — ~90% of UK salaries, ~70% of household bills and ~98% of state benefits.", src:[["Bacs case study","https://www.mastercard.com/us/en/news-and-trends/Insights/2025/over-4-4-billion-automated-payments-annually.html"]],
+  steps:[
+   {at:"u-corp", t:"A biller submits a direct-debit collection", d:"Utilities, mortgages, subscriptions."},
+   {at:"2.2", p:"bacs", t:"Bacs collects it in the daily bulk cycle", d:"Three-day cycle; mandates managed by the biller."},
+   {at:"2.2", p:"vocalink", t:"Vocalink clears and settles between the banks", d:"The same operator runs Faster Payments."},
+   {at:"u-iss", t:"The payer's bank debits the account", d:""},
+   {at:"2.5", p:"rpps", t:"In the US, RPPS plays the same role for bill payments", d:"Bill Payment Validator checks the account first."},
+   {at:"u-con", t:"The consumer sees the bill paid", d:"Optionally through Bill Pay in the banking app."},
+  ]},
+
+ {id:"payout", g:"money", name:"A gig payout in seconds", why:"Push-to-card turned the card rail around: money flows to the cardholder, not from them. Insurers, marketplaces and payroll platforms run on it.",
+  scale:"Mastercard Move reaches 10bn+ endpoints and over 95% of the world's banked population, from 60+ originating to 155+ receiving countries.", src:[["Investor Day 2024 (PDF)","https://s25.q4cdn.com/479285134/files/doc_events/2024-Mastercard-Investment-Community-Presentation.pdf"],["Mastercard Move","https://www.mastercard.com/us/en/business/payments/mastercard-move.html"]],
+  steps:[
+   {at:"u-corp", t:"A platform approves a payout", d:"A driver's earnings, an insurance claim, a refund."},
+   {at:"5.1", p:"developers", t:"One call to the Mastercard Send API", d:""},
+   {at:"2.3", p:"send", t:"Send pushes the funds to the debit card", d:"An original credit transaction rather than a purchase."},
+   {at:"2.3", p:"move", t:"Move routes to a card, account, wallet or cash pick-up", d:"Whichever endpoint the recipient has."},
+   {at:"1.1", p:"swcore", t:"The switch carries the credit to the issuer", d:""},
+   {at:"u-iss", t:"The issuer posts the credit", d:""},
+   {at:"u-con", t:"Money is on the card in seconds", d:""},
+  ]},
+ {id:"remit", g:"money", name:"A cross-border remittance", why:"Remittances are the most human money flow on the network — and the one most exposed to scams and mule accounts.",
+  scale:"Cross-Border Services pays out to bank accounts, wallets, cards and 300,000+ cash locations; A2A Protect cut UK APP fraud by ~20% in 2024.", src:[["Cross-Border Services capabilities (PDF)","https://b2b.mastercard.com/media/u2tbr4d0/mastercard-cross-border-services-capabilities-paper_v2.pdf"],["A2A Protect, 2025","https://www.mastercard.com/news/europe/en-uk/newsroom/press-releases/en-gb/2025/prevent-protect-and-recover-mastercard-strengthens-trust-in-account-to-account-payments/"]],
+  steps:[
+   {at:"u-fin", t:"A remittance fintech takes an order", d:"Sender wants to pay a family member abroad."},
+   {at:"5.1", p:"developers", t:"Calls the Cross-Border Services API", d:"One integration, many corridors."},
+   {at:"2.3", p:"xborder", t:"Move Cross-Border Services routes the payment", d:"Bank account, wallet, card or cash pick-up."},
+   {at:"4.1", p:"a2aprotect", t:"A2A Protect and TRACE screen for scams and mules", d:"Risk scored on the account-to-account leg."},
+   {at:"2.2", p:"a2astack", t:"Lands on a local real-time rail", d:"Or straight to a wallet or card via Send."},
+   {at:"u-con", t:"The recipient has the money", d:"Often within seconds."},
+  ]},
+ {id:"b2b", g:"money", name:"A B2B virtual-card payment", why:"Commercial payments are the largest untapped flow — invoices worth ~$63tn a year — and virtual cards are how Mastercard is moving them onto the network.",
+  scale:"Commercial is 38% of GDV; virtual cards run in 43 countries and 174 currencies with fraud under one-fifth of physical cards.", src:[["Commercial Connect / In Control expansion, Jul 2026","https://www.mastercard.com/us/en/news-and-trends/press/2026/july/Mastercard-expands-virtual-card-platform.html"],["Investor Day 2024 (PDF)","https://s25.q4cdn.com/479285134/files/doc_events/2024-Mastercard-Investment-Community-Presentation.pdf"]],
+  steps:[
+   {at:"u-corp", t:"A buyer's AP system approves an invoice", d:"Inside SAP, Emburse or a bank portal."},
+   {at:"4.6", p:"incontrol", t:"Commercial Connect creates a virtual card with controls", d:"Amount, validity window and merchant category set at creation."},
+   {at:"4.6", p:"bpc", t:"Business Payment Controls enforce the limits", d:"At authorisation and at clearing."},
+   {at:"4.6", p:"trackbps", t:"Track BPS presents the payment to the supplier", d:"With terms and remittance data."},
+   {at:"2.1", p:"cardscommercial", t:"Rides the commercial card rail", d:""},
+   {at:"1.1", p:"swcore", t:"The switch routes to the issuing bank", d:""},
+   {at:"u-iss", t:"The issuer approves", d:""},
+   {at:"4.6", p:"receivables", t:"Receivables Manager reconciles it at the supplier", d:"Straight into the ERP."},
+   {at:"4.6", p:"cen", t:"Commercial Event Notifications confirm both sides", d:""},
+  ]},
+ {id:"stable", g:"money", name:"Settling in stablecoins", why:"The newest rail: regulated stablecoins as a settlement currency for acquirers and issuers, with BVNK bridging on-chain and fiat.",
+  scale:"Six regulated stablecoins across eight chains as of June 2026; stablecoin-funded cards already spend at 150m+ merchant locations; BVNK acquired for up to $1.8bn.", src:[["Stablecoin settlement expansion, Jun 2026","https://www.mastercard.com/global/en/news-and-trends/press/2026/june/mastercard-expands-settlement-capabilities-to-include-stablecoin.html"],["Stablecoin utility and scale, 2025","https://www.mastercard.com/us/en/news-and-trends/stories/2025/mastercard-stablecoin-utility-and-scale.html"]],
+  steps:[
+   {at:"u-acq", t:"An acquirer opts to settle in a stablecoin", d:"USDC, PYUSD, USDG, USDP, RLUSD or SoFiUSD."},
+   {at:"1.1", p:"swcore", t:"Card transactions switch exactly as before", d:"Nothing changes at the point of sale."},
+   {at:"2.4", p:"stable", t:"Settlement is made on-chain", d:"Intraday and weekend windows, not just banking days."},
+   {at:"2.4", p:"mtn", t:"The Multi-Token Network moves tokenised value", d:"Interoperating with J.P. Morgan's Kinexys."},
+   {at:"2.4", p:"bvnk", t:"BVNK bridges on-chain and fiat", d:"Chain-agnostic on- and off-ramps in 130+ countries."},
+   {at:"4.1", p:"cryptosecure", t:"Crypto Secure scores the VASP counterparties", d:""},
+   {at:"u-fin", t:"Funds land in the acquirer's wallet", d:""},
+  ]},
+
+ {id:"scam", g:"trust", name:"Stopping a scam on a real-time rail", why:"Authorised push-payment fraud is the fastest-growing loss in real-time payments. Mastercard scores the payment for the sending bank before it leaves.",
+  scale:"Consumer Fraud Risk cut UK APP fraud by ~20% in 2024; A2A Protect now covers 15 UK banks (~90% of A2A volume).", src:[["A2A Protect, 2025","https://www.mastercard.com/news/europe/en-uk/newsroom/press-releases/en-gb/2025/prevent-protect-and-recover-mastercard-strengthens-trust-in-account-to-account-payments/"],["Consumer Fraud Risk expansion, Sep 2024","https://www.mastercard.com/us/en/news-and-trends/press/2024/september/mastercard-expands-first-of-its-kind-ai-technology-to-help-banks-protect-more-consumers-from-scams-in-real-time.html"]],
+  steps:[
+   {at:"u-con", t:"A victim is talked into sending money", d:"An 'investment', a fake invoice, a romance scam."},
+   {at:"2.2", p:"fps", t:"They initiate a Faster Payment from their bank app", d:"Irrevocable once sent."},
+   {at:"4.1", p:"a2aprotect", t:"A2A Protect scores the payment in real time", d:"Sender, receiver and network patterns, in seconds."},
+   {at:"4.1", p:"trace", t:"TRACE flags the receiving account as a likely mule", d:"Newly created, unusual inflows."},
+   {at:"u-iss", t:"The sending bank warns, holds or blocks", d:""},
+   {at:"2.2", p:"vocalink", t:"If it did go, Recover runs a cross-bank return", d:"Standardised recovery over the Vocalink rail."},
+  ]},
+ {id:"dispute", g:"trust", name:"A disputed charge", why:"Most disputes are confusion, not fraud. The map's post-transaction services exist to resolve them before a chargeback — and to prove it when it's friendly fraud.",
+  scale:"39m chargebacks prevented by Ethoca in 2025; First-Party Trust expanded to new markets in June 2025.", src:[["Ethoca Alerts","https://www.mastercard.com/us/en/business/cybersecurity-fraud-prevention/dispute-management/ethoca-alerts.html"],["First-Party Trust expansion, Jun 2025","https://www.mastercard.com/us/en/news-and-trends/press/2025/june/first-party-trust-countering-friendly-fraud.html"]],
+  steps:[
+   {at:"u-con", t:"A cardholder doesn't recognise a charge", d:"'CRV*ACME 4471'?"},
+   {at:"3.4", p:"merchantid", t:"Merchant Identifier resolves the name", d:"And Consumer Clarity shows the receipt in the app."},
+   {at:"u-iss", t:"The issuer's app answers most questions on the spot", d:""},
+   {at:"3.4", p:"ethocaalerts", t:"If it's fraud, Ethoca alerts the merchant to refund", d:"Before a chargeback is filed."},
+   {at:"3.4", p:"mastercom", t:"Otherwise Mastercom manages the chargeback", d:"Pre-arbitration and arbitration under scheme rules."},
+   {at:"3.4", p:"fpt", t:"First-Party Trust shifts liability when the evidence shows friendly fraud", d:""},
+   {at:"3.3", p:"fld", t:"Confirmed fraud is recorded in FLD", d:"And feeds back into everyone's risk models."},
+  ]},
+ {id:"threat", g:"trust", name:"From cyber threat to blocked fraud", why:"Fraud rarely starts at the point of transaction; it starts as a cyberattack. Recorded Future was bought to close that gap.",
+  scale:"Recorded Future indexes 1m+ sources; its 2025 report tracked 10,500 active digital-skimming (Magecart) infections.", src:[["Mastercard Threat Intelligence launch, Oct 2025","https://www.mastercard.com/us/en/news-and-trends/press/2025/october/Mastercard-introduces-first-ever-threat-intelligence-solution.html"],["Recorded Future annual payment fraud report","https://www.mastercard.com/us/en/news-and-trends/stories/2026/recorded-future-annual-payment-fraud-report.html"]],
+  steps:[
+   {at:"u-mer", t:"A merchant's checkout page is compromised", d:"A digital skimmer starts harvesting card numbers."},
+   {at:"4.1", p:"recfut", t:"Recorded Future spots the skimmer and the cards on sale", d:"Dark-web listings and infected sites, indexed continuously."},
+   {at:"4.1", p:"mcti", t:"Threat Intelligence turns it into fraud signals", d:"Card-testing rules and merchant threat assessments."},
+   {at:"3.3", p:"odd", t:"On-Demand Decisioning blocks the card-testing attempts", d:"Rules on the network, before the issuer sees them."},
+   {at:"3.3", p:"dipro", t:"Decision Intelligence Pro scores the rest", d:"Graph AI across merchants, not one at a time."},
+   {at:"3.3", p:"fld", t:"Confirmed fraud is recorded in FLD", d:""},
+   {at:"4.1", p:"riskrecon", t:"RiskRecon rates the merchant's cyber posture", d:"So the acquirer can act."},
+  ]},
+ {id:"outage", g:"trust", name:"An issuer goes down", why:"Resilience is a product. When an issuer's host fails, the kernel answers for it so cardholders keep paying.",
+  scale:"Stand-In Authorization and Stand-In risk-based authentication run on the network for every issuer that enables them.", src:[["Payment resiliency","https://www.mastercard.com/global/en/business/cybersecurity-fraud-prevention/cybersecurity/on-demand-decisioning.html"]],
+  steps:[
+   {at:"u-iss", t:"An issuer's authorisation host stops responding", d:""},
+   {at:"1.1", p:"standin", t:"Stand-In Authorization answers on its behalf", d:"Using the issuer's pre-agreed parameters."},
+   {at:"3.3", p:"obrs", t:"On-Behalf Rules keep fraud controls in place", d:"Mastercard-managed rule cartridges."},
+   {at:"3.2", p:"smartauth", t:"Stand-In RBA keeps 3-D Secure frictionless", d:"When the issuer's ACS is also down."},
+   {at:"u-con", t:"Cardholders never notice", d:""},
+  ]},
+
+ {id:"agent", g:"frontier", name:"An AI agent buys on your behalf", why:"Agentic commerce needs a way to know which agent is acting, for whom, and within what authorisation. That is what Agent Pay adds to the stack.",
+  scale:"First live authenticated agentic transaction in Hong Kong, 27 March 2026 (HSBC, DBS, CardInfoLink, hoppa), following Australia, Singapore, India and others.", src:[["First live agentic transaction, Hong Kong, Mar 2026","https://www.mastercard.com/news/ap/en-hk/newsroom/press-releases/en-hk/2026/mastercard-completes-its-first-live-agentic-transaction-in-hong-kong/"],["Agent Pay unveiled, Apr 2025","https://www.mastercard.com/global/en/news-and-trends/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai.html"]],
+  steps:[
+   {at:"u-ai", t:"An agent is given a task", d:"'Book me a ride to the airport.'"},
+   {at:"3.6", p:"kya", t:"Know Your Agent has registered it", d:"Only vetted, traceable agents can hold tokens."},
+   {at:"3.6", p:"vintent", t:"Agentic Token + Verifiable Intent", d:"Proof the agent acted within your authorisation."},
+   {at:"3.2", p:"passkeys", t:"You confirm with a Payment Passkey", d:"Explicit consent, captured once."},
+   {at:"3.6", p:"agentpay", t:"Agent Pay initiates the payment", d:""},
+   {at:"5.2", p:"merchantcloud", t:"Merchant Cloud accepts an agent-initiated payment", d:"The merchant can see it is an agent — and which one."},
+   {at:"1.1", p:"swcore", t:"The switch routes to the issuer", d:""},
+   {at:"3.3", p:"dipro", t:"Decision Intelligence Pro scores it with agent-level traceability", d:""},
+   {at:"u-iss", t:"The issuer approves", d:""},
+   {at:"3.4", p:"ethocacc", t:"Consumer Clarity shows exactly what the agent bought", d:""},
+  ]},
+ {id:"machine", g:"frontier", name:"Machines paying machines", why:"The step after agents: devices and services paying each other in high-frequency micro-payments, across cards, accounts and stablecoins.",
+  scale:"Agent Pay for Machines launched June 2026 with 30+ partners including Stripe, Adyen, Coinbase and the Solana Foundation.", src:[["Agent Pay for Machines launch, Jun 2026","https://www.mastercard.com/global/en/news-and-trends/press/2026/june/mastercard-launches-agent-pay-for-machines.html"]],
+  steps:[
+   {at:"u-ai", t:"A device needs to buy something", d:"Compute, data, charging, a toll — many times an hour."},
+   {at:"3.6", p:"ap4m", t:"Agent Pay for Machines credentials and permissions it", d:"Spend rules set by the owner."},
+   {at:"3.6", p:"kya", t:"Know Your Agent verifies the machine's identity", d:""},
+   {at:"2.4", p:"stable", t:"Settles over cards, accounts or stablecoins", d:"Whichever rail fits the size and speed."},
+   {at:"1.1", p:"swcore", t:"Through the kernel like any other flow", d:""},
+   {at:"u-corp", t:"The supplier's machine is paid", d:"Reconciled automatically."},
+  ]},
+ {id:"onecred", g:"frontier", name:"One card, many ways to pay", why:"Mastercard's answer to 'why do I need three cards?': one credential, issued instantly, with debit, credit, prepaid and instalments behind it and a passkey instead of passwords.",
+  scale:"One Credential partners include Wio Bank, Marqeta, Lithic and Botim (Aug 2026); Digital First issuers see +8% tokenised and +10% contactless transactions.", src:[["One Credential","https://www.mastercard.com/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-one-credential.html"],["Digital First","https://www.mastercard.com/global/en/business/payments/consumer-payments/next-gen-payments/digital-first.html"]],
+  steps:[
+   {at:"u-con", t:"A new customer opens an account in-app", d:""},
+   {at:"5.3", p:"processing", t:"Mastercard Processing issues the card instantly", d:"Or the issuer's own processor, via Cloud Edge."},
+   {at:"3.1", p:"digitalfirst", t:"Digital First: usable before the plastic arrives", d:""},
+   {at:"3.1", p:"onecred", t:"One Credential links debit, credit, prepaid and instalments", d:"The customer sets which to use when."},
+   {at:"3.1", p:"mdes", t:"MDES tokenises it into the wallet", d:""},
+   {at:"3.2", p:"passkeys", t:"Checkout confirms with a passkey", d:"No OTPs."},
+   {at:"2.1", p:"installments", t:"A big purchase is split into instalments", d:"Same credential, different funding."},
+   {at:"u-iss", t:"The issuer sees one customer, not three cards", d:""},
+  ]},
+ {id:"lend", g:"frontier", name:"Open-finance-powered lending", why:"Consumer-permissioned bank data replaces paperwork: verify the applicant, read their cash flow, decide — and move their payroll to the new account.",
+  scale:"Open Finance US reaches ~95% of US deposit accounts; Open Finance Europe connects to ~3,000 banks.", src:[["Open Finance (US)","https://www.mastercard.com/us/en/business/open-finance.html"],["Open Finance (Europe) — Developers","https://developer.mastercard.com/product/open-finance-europe"]],
+  steps:[
+   {at:"u-con", t:"An applicant applies for a loan", d:"On their phone, in minutes."},
+   {at:"4.2", p:"dataconnect", t:"Data Connect captures consent to share bank data", d:""},
+   {at:"4.2", p:"ofus", t:"Open Finance verifies accounts, owner, income and assets", d:"Finicity in the US, Aiia in Europe."},
+   {at:"4.1", p:"mcidentity", t:"Identity Insights checks the applicant is who they say", d:""},
+   {at:"4.4", p:"creditintel", t:"Credit Intelligence scores the cash flow", d:"Alternative data for thin-file applicants."},
+   {at:"u-iss", t:"The lender decides", d:""},
+   {at:"4.2", p:"ofus", t:"Deposit Switch moves payroll to the new account", d:"Bill Pay Switch updates the billers."},
+  ]},
+ {id:"inclusion", g:"frontier", name:"A smallholder farmer gets paid", why:"Community Pass takes the same stack to places with no connectivity and no bank: a digital identity, an offline-capable credential and a disbursement rail.",
+  scale:"MADE Alliance: Africa targets 100m people and businesses by 2034; Mastercard's Africa acceptance network grew 45% in 2025.", src:[["Community Pass","https://www.mastercard.com/europe/en/for-the-world/prosperity/community-pass.html"],["Africa acceptance +45%, Dec 2025","https://www.mastercard.com/news/eemea/en/newsroom/press-releases/en/2025-1/december/mastercard-boosts-africa-acceptance-network-by-45-in-2025-accelerating-the-continent-s-digital-economy/"]],
+  steps:[
+   {at:"u-gov", t:"A cooperative or agency registers farmers", d:"Often offline, in the field."},
+   {at:"pillar-inclusion", p:"communitypass", t:"Community Pass issues a digital ID and Farm Pass record", d:"Biometric, with IDEMIA."},
+   {at:"u-corp", t:"An agri-buyer purchases the harvest", d:""},
+   {at:"2.3", p:"disb", t:"Payment is disbursed through Move", d:"To a card, account or wallet."},
+   {at:"2.1", p:"cardsconsumer", t:"Or onto a prepaid card that works offline", d:""},
+   {at:"u-con", t:"The farmer is paid — and has a record", d:"Which becomes a credit history."},
+  ]},
+];
+
+/* =========================================================
+   MASTERCARD DEVELOPERS API CATALOGUE — read from developer.mastercard.com/apis
+   on 23 Sep 2026 (90 product cards) plus llms.txt (adds Insurance Programs).
+   Each entry: [API name, slug, home product id]
+   ========================================================= */
+const APIS = [
+ ["Account Services Catalogue","account-services-catalogue","asc"],
+ ["Account to Account Commerce","account-to-account-commerce","a2acommerce"],
+ ["Agent Suite for Merchants","agent-suite-for-merchants","agentsuite"],
+ ["AML Account Risk","aml-account-risk-api","amlrisk"],
+ ["Authentication Solutions","authentication-solutions","smartauth"],
+ ["Automatic Billing Updater (ABU)","automatic-billing-updater-abu","abu"],
+ ["Benefit Allocation Service","benefit-allocations","benefits"],
+ ["Benefits Eligibility Service","benefits-eligibility","benefits"],
+ ["Bill Pay","bill-pay","billpay"],
+ ["Bill Payment Validator","bill-payment-validator","rpps"],
+ ["BIN Lookup","bin-lookup","binlookup"],
+ ["BS Creditor API","bs-creditor-api","betalingsservice"],
+ ["Business Payment Controls","business-payment-controls","bpc"],
+ ["Carbon Calculator","carbon-calculator","carbon"],
+ ["Carbon Calculator Experience","carbon-calculator-experience","carbon"],
+ ["Card on File Tokenization","card-on-file-tokenization","scof"],
+ ["Click to Pay","click-to-pay","c2p"],
+ ["Commercial Direct Payments","commercial-direct-payments","cdp"],
+ ["Commercial Event Notifications","commercial-event-notifications","cen"],
+ ["Community Pass","community-pass","communitypass"],
+ ["Consumer Credit Analytics","consumer-credit-analytics","creditintel"],
+ ["Currency Conversion Calculator","currency-conversion-calculator","fx"],
+ ["Doconomy Aland Index","doconomy-aland-index","carbon"],
+ ["Dynamic Yield","dynamic-yield","dy"],
+ ["Ethoca Alerts","ethoca-alerts-for-merchants","ethocaalerts"],
+ ["Ethoca Consumer Clarity for Merchants","ethoca-consumer-clarity-for-merchants","ethocacc"],
+ ["Ethoca Consumer Clarity","ethoca-consumer-digital-experience","ethocacc"],
+ ["First-Party Trust","first-party-trust","fpt"],
+ ["Fraud and Loss Database (FLD)","fld-fraud-submission","fld"],
+ ["Identity Insights for Accounts","identity-insights-for-accounts","mcidentity"],
+ ["Identity Insights for Transactions","identity-insights-for-transactions","iift"],
+ ["In Control for Commercial Payments","in-control-for-commercial-payments","incontrol"],
+ ["India Online Dispute Resolution","india-online-dispute-resolution","mastercom"],
+ ["Installments","installments","installments"],
+ ["Location Intelligence","location-intelligence","places"],
+ ["Mastercard Account Validation","mastercard-account-validation","acctval"],
+ ["Mastercard Benefits & Experiences Portal","mastercard-benefits-and-experiences-portal","benefits"],
+ ["Mastercard Cloud Commerce","cloud-commerce","taponphone"],
+ ["Mastercard Commercial Connect API","commercial-connect-api","incontrol"],
+ ["Mastercard Contactless Reader SDK","tap-on-phone-terminal-sdk","taponphone"],
+ ["Mastercard Cross-Border Services","cross-border-services","xborder"],
+ ["Mastercard Cyber and Payment Threat Solutions","mastercard-cyber-and-payment-threat-solutions","mcti"],
+ ["Mastercard Developer Hub for FDX APIs","fdx-developer-hub","fdxhub"],
+ ["Mastercard Direct Services","direct-service-api","directservices"],
+ ["Mastercard Donate","mastercard-donate","donate"],
+ ["Mastercard Easy Savings Program","mastercard-easy-savings-program","easysavings"],
+ ["Mastercard Gateway","mastercard-gateway","gateway"],
+ ["Mastercard Installments at Checkout","mastercard-installments-at-checkout","installments"],
+ ["Mastercard Insurance Programs","","insurance"],
+ ["Mastercard Loyalty Management","mastercard-loyalty-management","loyalty"],
+ ["Mastercard Loyalty Promotions","mastercard-loyalty-promotions","loyalty"],
+ ["Mastercard Merchant Presented QR: SRC","mastercard-merchant-presented-qr-src","qr"],
+ ["Mastercard Move","move","move"],
+ ["Mastercard Open Finance Theming API","mastercard-ob-theming","ofus"],
+ ["Mastercard Pay with Rewards","mastercard-pay-with-rewards","loyalty"],
+ ["Mastercard Processing","mastercard-processing","processing"],
+ ["Mastercard QR","mastercard-qr","qr"],
+ ["Mastercard Redemption Services","mastercard-redemption-services","loyalty"],
+ ["Mastercard Send","mastercard-send","send"],
+ ["Mastercard Sonic Branding","mastercard-sonic-branding","sonic"],
+ ["Mastercard Threat Intelligence","mastercard-threat-intelligence","mcti"],
+ ["Mastercard Track Business Payment Service","mastercard-track-business-payment-service","trackbps"],
+ ["Mastercard Virtual Card Tokens","mastercard-virtual-card-tokens","vctokens"],
+ ["Mastercard Wallet Services","mastercard-wallet-services","walletservices"],
+ ["Mastercard Identity Check","identity-check","idcheck"],
+ ["Mastercom","mastercom","mastercom"],
+ ["MATCH Pro","match","matchpro"],
+ ["MCBP MP SDK","mobile-payments-sdk","mcbp"],
+ ["MDES","mdes","mdes"],
+ ["Merchant Cloud","merchant-cloud","merchantcloud"],
+ ["Merchant Identifier","merchant-identifier","merchantid"],
+ ["Mexico Insights","mexico-insights","spendingpulse"],
+ ["Offers for Publishers","personalized-offers","offers"],
+ ["Offers Merchant Content","eop-admin","offers"],
+ ["Onboard Risk Check","onboard-risk-check","orc"],
+ ["Open Finance (Europe)","open-finance-europe","ofeu"],
+ ["Open Finance (US & AU)","open-finance","ofus"],
+ ["Pay by Account","pay-by-account","a2astack"],
+ ["Payment Account Management","payment-account-management","asi"],
+ ["Payment Account Reference Inquiry","payment-account-reference-inquiry","par"],
+ ["Places","places","places"],
+ ["Priceless Cities","priceless-cities","priceless"],
+ ["Priceless Platform","priceless-platform","priceless"],
+ ["Priceless Specials","priceless-specials","priceless"],
+ ["RiskRecon API","riskrecon","riskrecon"],
+ ["Small Business Credit Analytics","small-business-credit-analytics","creditintel"],
+ ["Subscription Controls","subscription-controls","minna"],
+ ["Test & Learn","test-and-learn","testlearn"],
+ ["Token Authentication Service (TAS)","token-authentication-service","tas"],
+ ["Track Search","track-search","trackbps"],
+ ["Transaction Notifications","transaction-notifications","txnnotif"],
+];
+
+/* ========================================================= INDEX */
+const TILES = {}, PRODUCTS = {}; let ALL_APIS = [];
+LAYERS.forEach(L=>{ L.tiles.forEach(T=>{ T.layer=L; TILES[T.id]=T; (T.products||[]).forEach(p=>{ p.tile=T; PRODUCTS[p.id]=p; if(!p.div) p.div=T.div||"core"; if(!p.rev) p.rev=T.rev||"na"; }); }); });
+PILLARS.forEach(T=>{ T.layer={id:"P",name:"Pillar",color:"--lu",analogy:"cross-cutting"}; TILES[T.id]=T; T.products.forEach(p=>{ p.tile=T; PRODUCTS[p.id]=p; if(!p.div) p.div="corp"; if(!p.rev) p.rev="na"; }); });
+APIS.forEach(([n,slug,home])=>{ const p=PRODUCTS[home]; if(!p){ console.warn("API without home:",n); return; } const u = slug? D+"/product/"+slug : D+"/apis"; (p.api=p.api||[]).push({n,u}); ALL_APIS.push({n,u,p}); });
+Object.values(PRODUCTS).forEach(p=>{ p.apiflag=(p.api&&p.api.length)?"yes":"no"; });
+const ALL = Object.values(PRODUCTS);
+const TOTAL = ALL.filter(p=>p.st!=="retired").length;
+JOURNEYS.forEach(J=>J.steps.forEach(s=>{ if(s.p&&!PRODUCTS[s.p]) console.warn("journey step product missing:",J.id,s.p); if(!s.at.startsWith("u-")&&!TILES[s.at]) console.warn("journey step tile missing:",J.id,s.at); }));
+
+/* ========================================================= STATE */
+const state = {lens:"none", filter:null, journey:null, q:""};
+const $ = s=>document.querySelector(s);
+const el = (t,c,h)=>{const e=document.createElement(t); if(c) e.className=c; if(h!==undefined) e.innerHTML=h; return e;};
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function lensDef(){ return LENSES.find(l=>l.id===state.lens); }
+function catsOf(p, lens){ const v=p[lens.key]; return Array.isArray(v)?v:[v]; }
+function colorFor(lens, cat){ const keys=Object.keys(lens.map); const i=keys.indexOf(cat); return "var(--"+(lens.colors[i]||"c8")+")"; }
+function matches(p){
+  if(state.lens!=="none" && state.filter){ if(!catsOf(p,lensDef()).includes(state.filter)) return false; }
+  if(state.q){ const q=state.q.toLowerCase(); if(!(p.n.toLowerCase().includes(q)||p.d.toLowerCase().includes(q)||(p.at||"").toLowerCase().includes(q)||(p.api||[]).some(a=>a.n.toLowerCase().includes(q)))) return false; }
+  return true;
+}
+function tileEl(id){ return document.getElementById("t-"+String(id).replace(/\./g,"-")); }
+
+/* ========================================================= RENDER */
+function renderFacts(){
+  const fresh = ALL.filter(p=>p.st==="new").length;
+  const items=[[String(TOTAL),"products"],[String(ALL_APIS.length),"developer APIs"],[String(JOURNEYS.length),"journeys"],[String(fresh),"new in 2025–26"]];
+  $("#facts").innerHTML = items.map(([n,l])=>`<span><b>${n}</b> ${l}</span>`).join('<span class="sep">·</span>');
+  $("#foot").innerHTML = `Compiled 23 September 2026 from Mastercard corporate, investor and developer sites, press releases and trade press; the Developer API layer was read directly from the developer.mastercard.com catalogue. Every product sits in exactly one tile; lenses re-slice the same set without duplicating anything. Unconfirmed (○) items are named in briefs but have no current public source; retired (✕) items are kept for the record and shown only under the Status lens. Journey scale figures are as reported by Mastercard or the cited source. Independent reference, not affiliated with or endorsed by Mastercard.`;
+}
+function renderStack(){
+  const stack=$("#stack"); stack.innerHTML="";
+  LAYERS.forEach(L=>{
+    const row=el("div","layer"+(L.users?" users":"")); row.style.setProperty("--lc",`var(${L.color})`); row.dataset.layer=L.id;
+    const lab=el("button","lab"); lab.setAttribute("aria-label",`Open layer ${L.name}`);
+    const count = L.users?"": `<span class="cnt">${L.tiles.reduce((n,T)=>n+T.products.filter(p=>p.st!=="retired").length,0)} products</span>`;
+    lab.innerHTML=`<span class="id">${L.users?"Users":L.id}</span><span class="nm">${esc(L.name)}</span><span class="an">${esc(L.analogy)}</span>${count}`;
+    lab.addEventListener("click",()=>openLayer(L)); row.appendChild(lab);
+    const tiles=el("div","tiles");
+    L.tiles.forEach(T=>{
+      const b=el("button","tile"); b.dataset.tile=T.id; b.id="t-"+T.id.replace(/\./g,"-");
+      if(L.users){ b.innerHTML=`<span class="tn">${esc(T.name)}</span><span class="tf"><span class="usw" hidden></span><span class="tc"></span></span>`; b.addEventListener("click",()=>openUser(T.user)); }
+      else { b.innerHTML=`<span class="tid">${T.id}</span><span class="tn">${esc(T.name)}</span><span class="tf"><span class="lbar" hidden></span><span class="tc"></span></span>`; b.addEventListener("click",()=>openTile(T)); }
+      tiles.appendChild(b);
+    });
+    row.appendChild(tiles); stack.appendChild(row);
+  });
+  const pl=$("#pillars"); pl.innerHTML="";
+  PILLARS.forEach(T=>{ const b=el("button"); b.id="t-"+T.id; b.dataset.tile=T.id; b.innerHTML=`<span>${esc(T.name)}</span><span class="c">${T.products.length}</span>`; b.addEventListener("click",()=>openTile(T)); pl.appendChild(b); });
+  paint();
+}
+function paint(){
+  const lens=lensDef(); const anyFilter = (state.lens!=="none"&&state.filter)||state.q;
+  LAYERS.forEach(L=>{
+    L.tiles.forEach(T=>{
+      const b=tileEl(T.id); if(!b) return;
+      if(L.users){
+        const served = ALL.filter(p=>p.s.includes(T.user)&&p.st!=="retired");
+        b.querySelector(".tc").textContent=served.length;
+        const sw=b.querySelector(".usw"); if(state.lens==="s"){ sw.hidden=false; sw.style.background=colorFor(lens,T.user); } else sw.hidden=true;
+        b.classList.toggle("dim", state.lens==="s"&&!!state.filter&&state.filter!==T.user);
+        return;
+      }
+      const live=T.products.filter(p=>p.st!=="retired"||state.lens==="st");
+      let hits=0; live.forEach(p=>{ if(matches(p)) hits++; });
+      const bar=b.querySelector(".lbar"); bar.innerHTML="";
+      if(state.lens!=="none"){
+        const counts={}; live.forEach(p=>catsOf(p,lens).forEach(c=>counts[c]=(counts[c]||0)+1));
+        Object.keys(lens.map).forEach(cat=>{ if(!counts[cat]) return; const s=el("span","ls"); s.style.flex=String(counts[cat]); s.style.background=colorFor(lens,cat); s.title=`${lens.map[cat]} · ${counts[cat]}`; if(state.filter&&state.filter!==cat) s.classList.add("faded"); bar.appendChild(s); });
+        bar.hidden=false;
+      } else bar.hidden=true;
+      b.querySelector(".tc").textContent = anyFilter? `${hits} / ${live.length}` : String(live.length);
+      b.classList.toggle("dim", !!anyFilter&&hits===0&&!state.journey);
+      b.classList.toggle("hit", !!state.q&&hits>0);
+    });
+  });
+  paintJourney();
+}
+
+/* ========================================================= LENS + LEGEND */
+function renderLens(){
+  const seg=$("#lens"); seg.querySelectorAll("button").forEach(b=>b.remove());
+  LENSES.forEach(l=>{ const b=el("button","",esc(l.name)); b.setAttribute("aria-pressed", String(state.lens===l.id)); b.addEventListener("click",()=>{ state.lens=l.id; state.filter=null; renderLens(); renderLegend(); syncCtrl(); paint(); if(drawerCtx) rerenderDrawer(); }); seg.appendChild(b); });
+}
+function renderLegend(){
+  const lg=$("#legend"); lg.innerHTML="";
+  if(state.lens==="none") return;
+  const lens=lensDef();
+  Object.keys(lens.map).forEach(cat=>{
+    const n=ALL.filter(p=>p.st!=="retired"||state.lens==="st").filter(p=>catsOf(p,lens).includes(cat)).length; if(!n) return;
+    const b=el("button","chip"); b.setAttribute("aria-pressed",String(state.filter===cat));
+    b.innerHTML=`<span class="sw" style="background:${colorFor(lens,cat)}"></span>${esc(lens.map[cat])} <span class="cnt">${n}</span>`;
+    b.addEventListener("click",()=>{ state.filter = state.filter===cat?null:cat; renderLegend(); syncCtrl(); paint(); if(drawerCtx) rerenderDrawer(); });
+    lg.appendChild(b);
+  });
+  lg.appendChild(el("span","hint", state.filter?"Click again to clear":"Click to filter"));
+}
+
+/* ========================================================= JOURNEYS */
+const jbtn=$("#jbtn"), jmenu=$("#jmenu");
+function renderJourneyMenu(){
+  jmenu.innerHTML="";
+  JGROUPS.forEach(G=>{
+    const g=el("div","g"); g.innerHTML=`<div class="gh"><span class="gn">${esc(G.name)}</span><span class="gd">${esc(G.d)}</span></div>`;
+    JOURNEYS.filter(J=>J.g===G.id).forEach(J=>{ const b=el("button","j"); b.setAttribute("role","menuitem"); b.setAttribute("aria-pressed",String(state.journey===J.id)); b.innerHTML=`<span class="jn">${esc(J.name)}</span><span class="js">${J.steps.length} steps</span><span class="jw">${esc(J.why)}</span>`; b.addEventListener("click",()=>{ setJourney(J.id); closeMenu(); }); g.appendChild(b); });
+    jmenu.appendChild(g);
+  });
+  const active=JOURNEYS.find(J=>J.id===state.journey);
+  $("#jbtnl").textContent = active? active.name : "Journeys";
+  jbtn.classList.toggle("active", !!active);
+}
+function openMenu(){ renderJourneyMenu(); jmenu.hidden=false; jbtn.setAttribute("aria-expanded","true"); }
+function closeMenu(){ jmenu.hidden=true; jbtn.setAttribute("aria-expanded","false"); }
+jbtn.addEventListener("click",()=>{ jmenu.hidden? openMenu() : closeMenu(); });
+document.addEventListener("click",e=>{ if(!e.target.closest(".jwrap")) closeMenu(); if(!e.target.closest(".search")) $("#results").hidden=true; });
+function setJourney(id){
+  state.journey = id;
+  const J=JOURNEYS.find(j=>j.id===id); renderJourneyMenu();
+  if(J){ renderJourneyStatus(J); openJourneyPanel(J); } else { $("#jstatus").classList.remove("on"); }
+  syncCtrl(); paint(); requestAnimationFrame(()=>{ paintJourney(); setTimeout(paintJourney,350); });
+}
+function closeJourney(){ setJourney(null); }
+function renderJourneyStatus(J){
+  const G=JGROUPS.find(g=>g.id===J.g);
+  const s=$("#jstatus"); s.innerHTML=`<span class="g">${esc(G.name)}</span><span class="n">${esc(J.name)}</span><span>${esc(J.scale)}</span><button class="x" id="jexit">Exit journey</button>`; s.classList.add("on");
+  $("#jexit").addEventListener("click",closeJourney);
+}
+function openJourneyPanel(J){
+  const G=JGROUPS.find(g=>g.id===J.g);
+  $("#jgroup").textContent=G.name; $("#jtitle").textContent=J.name;
+  const body=$("#jbody"); body.innerHTML="";
+  body.appendChild(el("p","why",esc(J.why)));
+  const sc=el("div","scale"); sc.innerHTML=`<b>Scale</b> · ${esc(J.scale)}${(J.src||[]).map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}`; body.appendChild(sc);
+  const st=el("div","steps");
+  J.steps.forEach((s,i)=>{
+    const where = s.at.startsWith("u-")? USERS[s.at.slice(2)] : (TILES[s.at]? (TILES[s.at].id.startsWith("pillar")?"Pillar":TILES[s.at].id)+" · "+TILES[s.at].name : s.at);
+    const b=el("button"); b.innerHTML=`<span class="no">${i+1}</span><span><span class="sw2">${esc(where)}</span><span class="st">${esc(s.t)}</span>${s.d?`<span class="sd">${esc(s.d)}</span>`:""}</span>`;
+    b.addEventListener("click",()=>{ if(s.p) openProduct(PRODUCTS[s.p]); else if(s.at.startsWith("u-")) openUser(s.at.slice(2)); else openTile(TILES[s.at]); });
+    st.appendChild(b);
+  });
+  body.appendChild(st); body.scrollTop=0;
+}
+$("#jclose").addEventListener("click",closeJourney);
+function paintJourney(){
+  const svg=$("#jpath"), nodes=$("#jnodes"); svg.innerHTML=""; nodes.innerHTML="";
+  document.querySelectorAll(".tile.on-path,.pillars button.on-path").forEach(e=>e.classList.remove("on-path"));
+  $("#board").classList.toggle("journey", !!state.journey);
+  if(!state.journey){ if(!((state.lens!=="none"&&state.filter)||state.q)) document.querySelectorAll(".tile.dim").forEach(e=>e.classList.remove("dim")); return; }
+  const J=JOURNEYS.find(j=>j.id===state.journey);
+  const by={}; J.steps.forEach((s,i)=>{ (by[s.at]=by[s.at]||[]).push(i+1); });
+  document.querySelectorAll(".tile").forEach(b=>{ const id=b.dataset.tile; if(by[id]){ b.classList.add("on-path"); b.classList.remove("dim"); } else b.classList.add("dim"); });
+  document.querySelectorAll(".pillars button").forEach(b=>{ if(by[b.dataset.tile]) b.classList.add("on-path"); });
+  const board=$("#board").getBoundingClientRect();
+  const pts=[]; let last=null; const seen={};
+  J.steps.forEach(s=>{ if(s.at===last) return; last=s.at; const e=tileEl(s.at); if(!e) return; const r=e.getBoundingClientRect(); pts.push({cx:r.left-board.left+r.width/2, cy:r.top-board.top+r.height/2, nx:r.right-board.left-10, ny:r.top-board.top-1, at:s.at}); });
+  const ns="http://www.w3.org/2000/svg";
+  if(pts.length>1){ const d=pts.map((p,i)=>(i?"L":"M")+p.cx+","+p.cy).join(" "); const path=document.createElementNS(ns,"path"); path.setAttribute("d",d); svg.appendChild(path); }
+  pts.forEach(p=>{ if(seen[p.at]) return; seen[p.at]=1; const g=document.createElementNS(ns,"g"); g.setAttribute("class","node"); g.setAttribute("transform",`translate(${p.nx},${p.ny})`);
+    const label=by[p.at].join(","); const w=Math.max(22, 12+label.length*6.5);
+    const c=document.createElementNS(ns,"rect"); c.setAttribute("x",-w/2); c.setAttribute("y",-11); c.setAttribute("width",w); c.setAttribute("height",22); c.setAttribute("rx",11); g.appendChild(c);
+    const t=document.createElementNS(ns,"text"); t.textContent=label; g.appendChild(t); nodes.appendChild(g); });
+}
+function syncCtrl(){ document.documentElement.style.setProperty("--ctrl-h", $(".controls").offsetHeight+"px"); }
+window.addEventListener("resize",()=>{ syncCtrl(); if(state.journey) paintJourney(); });
+
+/* ========================================================= SEARCH */
+const qi=$("#q"), res=$("#results");
+qi.addEventListener("input",()=>{ state.q=qi.value.trim(); paint(); renderResults(); });
+qi.addEventListener("keydown",e=>{ if(e.key==="Enter"){ const f=res.querySelector("button"); if(f) f.click(); } if(e.key==="Escape"){ qi.value=""; state.q=""; paint(); renderResults(); qi.blur(); } });
+document.addEventListener("keydown",e=>{ if(e.key==="/"&&document.activeElement!==qi&&!drawerOpen()){ e.preventDefault(); qi.focus(); } if(e.key==="Escape"){ if(drawerOpen()) closeDrawer(); else if(!jmenu.hidden) closeMenu(); else if(state.journey) closeJourney(); } });
+function renderResults(){
+  if(!state.q){ res.hidden=true; return; }
+  const q=state.q.toLowerCase();
+  const score=p=> p.n.toLowerCase().includes(q)?0 : (p.api||[]).some(a=>a.n.toLowerCase().includes(q))?1 : (p.at||"").toLowerCase().includes(q)?2 : p.d.toLowerCase().includes(q)?3 : 9;
+  const hits=ALL.filter(p=>score(p)<9).sort((a,b)=>score(a)-score(b)||a.n.localeCompare(b.n)).slice(0,14);
+  res.innerHTML = hits.length? hits.map(p=>`<button data-p="${p.id}"><span class="rn">${esc(p.n)}</span><span class="rt">${esc(p.tile.id.startsWith("pillar")?"Pillar":p.tile.id)} · ${esc(p.tile.name)}</span></button>`).join("") : `<div class="empty">No product or API matches “${esc(state.q)}”.</div>`;
+  res.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ openProduct(PRODUCTS[b.dataset.p]); res.hidden=true; }));
+  res.hidden=false;
+}
+
+/* ========================================================= DIALOG */
+let drawerCtx=null, lastFocus=null;
+const drawer=$("#drawer"), scrim=$("#scrim");
+function drawerOpen(){ return drawer.classList.contains("open"); }
+function openDrawer(){ const was=drawerOpen(); if(!was) lastFocus=document.activeElement; drawer.classList.add("open"); scrim.classList.add("open"); if(!was) setTimeout(()=>$("#close").focus(),50); }
+function closeDrawer(){ drawer.classList.remove("open"); scrim.classList.remove("open"); drawerCtx=null; if(lastFocus&&lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} } lastFocus=null; }
+$("#close").addEventListener("click",closeDrawer); scrim.addEventListener("click",closeDrawer);
+function setHead(crumbs, lid, title, color){
+  $("#crumbs").innerHTML = crumbs.map((c,i)=> (i? '<span class="sep">/</span>':'') + (c.fn? `<button data-i="${i}">${esc(c.t)}</button>` : `<span>${esc(c.t)}</span>`)).join("");
+  $("#crumbs").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>crumbs[+b.dataset.i].fn()));
+  $("#dlid").textContent=lid||""; drawer.style.setProperty("--lc", color?`var(${color})`:"var(--accent)");
+  $("#dtitle").textContent=title;
+}
+function rerenderDrawer(){ if(!drawerCtx) return; const c=drawerCtx; if(c.kind==="tile") openTile(c.tile,true); else if(c.kind==="layer") openLayer(c.layer,true); else if(c.kind==="user") openUser(c.user,true); else if(c.kind==="product") openProduct(c.product,true); }
+function tagHtml(p){
+  const lens=lensDef(); let out="";
+  if(p.st!=="active") out+=`<span class="badge ${p.st}">${p.st==="new"?"✦ New":p.st==="flux"?"◐ In flux":p.st==="unconf"?"○ Unconfirmed":"✕ Retired"}</span>`;
+  if(p.o==="A") out+=`<span class="badge acq">Acquired ${esc(p.ay||"")}</span>`;
+  if(p.api&&p.api.length) out+=`<span class="badge api">API${p.api.length>1?" ×"+p.api.length:""}</span>`;
+  if(state.lens!=="none"&&state.lens!=="st"&&state.lens!=="o"&&state.lens!=="api"){ catsOf(p,lens).slice(0,3).forEach(c=>{ out+=`<span class="badge lens" style="background:color-mix(in oklab,${colorFor(lens,c)} 14%,var(--ground))">${esc(lens.map[c])}</span>`; }); }
+  return out;
+}
+function productCard(p, opts){
+  const wrap=el("div","prod"+(matches(p)?"":" dim")); wrap.dataset.p=p.id;
+  const b=el("button"); b.innerHTML=`<span class="pn">${esc(p.n)}</span><span class="badges">${tagHtml(p)}</span><span class="pd">${esc(p.d)}</span>`;
+  b.addEventListener("click",()=>{ const open=wrap.classList.toggle("open"); let d=wrap.querySelector(".detail"); if(open&&!d){ d=detailHtml(p); wrap.appendChild(d);} else if(!open&&d){ d.remove(); } });
+  wrap.appendChild(b);
+  if(opts&&opts.open){ wrap.classList.add("open"); wrap.appendChild(detailHtml(p)); }
+  return wrap;
+}
+function detailHtml(p){
+  const d=el("div","detail");
+  const srcs = p.src&&p.src.length? p.src.map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("") : `<span style="color:var(--muted)">No first-party source found — treat as unconfirmed.</span>`;
+  const rel = (p.rel||[]).filter(id=>PRODUCTS[id]).map(id=>`<button data-rel="${id}">${esc(PRODUCTS[id].n)}</button>`).join("");
+  const inJ = JOURNEYS.filter(J=>J.steps.some(s=>s.p===p.id));
+  d.innerHTML=`<dl class="kv">
+    <dt>What it is</dt><dd>${esc(p.d)}</dd>
+    <dt>Home</dt><dd>${esc(p.tile.layer.name)} / ${esc(p.tile.id.startsWith("pillar")?"":p.tile.id+" ")}${esc(p.tile.name)}</dd>
+    <dt>Serves</dt><dd>${p.s.map(k=>esc(USERS[k])).join(" · ")||"—"}</dd>
+    <dt>Lifecycle</dt><dd>${esc(LC[p.lc])}</dd>
+    <dt>Origin</dt><dd>${p.o==="A"?`Acquired — ${esc(p.at||"")}${p.ay?" ("+esc(p.ay)+")":""}`:`Built in-house${p.ay?" ("+esc(p.ay)+")":""}`}</dd>
+    <dt>Status</dt><dd>${esc(ST[p.st])}</dd>
+    <dt>Division</dt><dd>${esc(DIV[p.div]||"—")}</dd>
+    <dt>Revenue line</dt><dd>${esc(REV[p.rev]||"—")}</dd>
+    ${p.note?`<dt>Notes</dt><dd>${esc(p.note)}</dd>`:""}
+    ${(p.api&&p.api.length)?`<dt>Developer APIs</dt><dd class="srcs">${p.api.map(a=>`<a href="${esc(a.u)}" target="_blank" rel="noopener">${esc(a.n)}</a>`).join("")}</dd>`:""}
+    ${inJ.length?`<dt>In journeys</dt><dd class="rel">${inJ.map(J=>`<button data-j="${J.id}">${esc(J.name)}</button>`).join("")}</dd>`:""}
+    ${rel?`<dt>Related</dt><dd class="rel">${rel}</dd>`:""}
+    <dt>Sources</dt><dd class="srcs">${srcs}</dd>
+  </dl>`;
+  d.querySelectorAll("[data-rel]").forEach(b=>b.addEventListener("click",()=>openProduct(PRODUCTS[b.dataset.rel])));
+  d.querySelectorAll("[data-j]").forEach(b=>b.addEventListener("click",()=>{ closeDrawer(); setJourney(b.dataset.j); }));
+  return d;
+}
+function openLayer(L, keep){
+  drawerCtx={kind:"layer",layer:L};
+  setHead([{t:"Map",fn:closeDrawer},{t:L.name}], L.users?"Users":L.id+" · "+L.analogy, L.name, L.color);
+  const body=$("#dbody"); body.innerHTML=`<p class="lead">${esc(L.desc)}</p>`;
+  const list=el("div","tileline"); list.style.setProperty("--lc",`var(${L.color})`);
+  L.tiles.forEach(T=>{
+    const b=el("button");
+    if(L.users){ const served=ALL.filter(p=>p.s.includes(T.user)&&p.st!=="retired"); b.innerHTML=`<span class="tid">·</span><span class="tn">${esc(T.name)}</span><span class="tb">${served.length} products serve this user</span>`; b.addEventListener("click",()=>openUser(T.user)); }
+    else { const live=T.products.filter(p=>p.st!=="retired"); b.innerHTML=`<span class="tid">${T.id}</span><span class="tn">${esc(T.name)}</span><span class="tb">${esc(T.blurb||"")}</span><span class="tp">${live.slice(0,4).map(p=>esc(p.n)).join(" · ")}${live.length>4?` · +${live.length-4} more`:""}</span>`; b.addEventListener("click",()=>openTile(T)); }
+    list.appendChild(b);
+  });
+  body.appendChild(list); if(!keep) openDrawer(); body.scrollTop=0;
+}
+function openTile(T, keep){
+  drawerCtx={kind:"tile",tile:T};
+  const L=T.layer; const isPillar=T.id.startsWith("pillar");
+  setHead([{t:"Map",fn:closeDrawer},{t:isPillar?"Pillars":L.name,fn:isPillar?null:()=>openLayer(L)},{t:T.name}], isPillar?"Cross-cutting pillar":T.id+" · "+L.name, T.name, L.color);
+  const body=$("#dbody"); body.innerHTML="";
+  if(T.blurb) body.appendChild(el("p","lead",esc(T.blurb)));
+  const live=T.products.filter(p=>p.st!=="retired"), gone=T.products.filter(p=>p.st==="retired");
+  const list=el("div","plist"); live.forEach(p=>list.appendChild(productCard(p))); body.appendChild(list);
+  if(gone.length){ body.appendChild(el("h4","","Retired or divested")); const g=el("div","plist"); gone.forEach(p=>g.appendChild(productCard(p))); body.appendChild(g); }
+  if(T.id==="5.1"){
+    body.appendChild(el("h4","",`API catalogue — ${ALL_APIS.length} products on developer.mastercard.com, by home layer`));
+    const groups={}; ALL_APIS.forEach(a=>{ const L2=a.p.tile.layer; (groups[L2.id]=groups[L2.id]||{L:L2,items:[]}).items.push(a); });
+    ["L1","L2","L3","L4","L5","P"].forEach(k=>{ const g=groups[k]; if(!g) return; const h=el("div","apigrp"); h.innerHTML=`<div class="apih" style="--lc:var(${g.L.color})">${esc(g.L.name)} · ${g.items.length}</div>`; const ul=el("div","apilist");
+      g.items.sort((a,b)=>a.n.localeCompare(b.n)).forEach(a=>{ const r=el("div","apirow"); r.innerHTML=`<a href="${esc(a.u)}" target="_blank" rel="noopener">${esc(a.n)}</a><button class="apihome" data-p="${a.p.id}">${esc(a.p.tile.id.startsWith("pillar")?"Pillar":a.p.tile.id)} · ${esc(a.p.n)}</button>`; ul.appendChild(r); });
+      h.appendChild(ul); body.appendChild(h); });
+    body.querySelectorAll(".apihome").forEach(b=>b.addEventListener("click",()=>openProduct(PRODUCTS[b.dataset.p])));
+  }
+  if(T.id==="4.7"){ body.appendChild(el("h4","","Also AI, elsewhere on the map")); const sa=el("p","seealso"); ["agentpay","dipro","dy","practices","merchantcloud"].forEach(id=>{ const b=el("button","",esc(PRODUCTS[id].n)); b.addEventListener("click",()=>openProduct(PRODUCTS[id])); sa.appendChild(b); sa.appendChild(document.createTextNode("  ")); }); body.appendChild(sa); }
+  if(!keep) openDrawer(); body.scrollTop=0;
+}
+function openUser(u, keep){
+  drawerCtx={kind:"user",user:u};
+  setHead([{t:"Map",fn:closeDrawer},{t:"Users",fn:()=>openLayer(LAYERS[0])},{t:USERS[u]}], "User", USERS[u], "--lu");
+  const body=$("#dbody"); body.innerHTML="";
+  const served=ALL.filter(p=>p.s.includes(u)&&p.st!=="retired");
+  body.appendChild(el("p","lead",`${served.length} products serve ${esc(USERS[u].toLowerCase())}, grouped by layer.`));
+  LAYERS.filter(L=>!L.users).forEach(L=>{ const mine=served.filter(p=>p.tile.layer===L); if(!mine.length) return; body.appendChild(el("h4","",`${L.id} · ${esc(L.name)} · ${mine.length}`)); const list=el("div","plist"); mine.forEach(p=>list.appendChild(productCard(p))); body.appendChild(list); });
+  const pil=served.filter(p=>p.tile.id.startsWith("pillar")); if(pil.length){ body.appendChild(el("h4","","Cross-cutting pillars")); const list=el("div","plist"); pil.forEach(p=>list.appendChild(productCard(p))); body.appendChild(list); }
+  if(!keep) openDrawer(); body.scrollTop=0;
+}
+function openProduct(p, keep){
+  drawerCtx={kind:"product",product:p};
+  const T=p.tile, L=T.layer, isPillar=T.id.startsWith("pillar");
+  setHead([{t:"Map",fn:closeDrawer},{t:isPillar?"Pillars":L.name,fn:isPillar?null:()=>openLayer(L)},{t:T.name,fn:()=>openTile(T)},{t:p.n}], isPillar?"Cross-cutting pillar":T.id+" · "+T.name, p.n, L.color);
+  const body=$("#dbody"); body.innerHTML="";
+  const list=el("div","plist"); list.appendChild(productCard(p,{open:true})); body.appendChild(list);
+  const sib=T.products.filter(x=>x!==p&&x.st!=="retired");
+  if(sib.length){ body.appendChild(el("h4","",`Also in ${esc(T.name)}`)); const l2=el("div","plist"); sib.forEach(x=>l2.appendChild(productCard(x))); body.appendChild(l2); }
+  if(!keep) openDrawer(); body.scrollTop=0;
+}
+
+/* ========================================================= HOME VISUALISATION */
+function renderViz(){
+  const ns="http://www.w3.org/2000/svg"; const W=560,H=560; const cx=250, base=440, step=62, hw=170, hh=72;
+  const svg=document.createElementNS(ns,"svg"); svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("role","img");
+  const mk=(t,a,txt)=>{ const e=document.createElementNS(ns,t); for(const k in a) e.setAttribute(k,a[k]); if(txt!==undefined) e.textContent=txt; return e; };
+  const sh=mk("ellipse",{class:"shadow",cx:cx,cy:base+40,rx:hw+30,ry:34}); svg.appendChild(sh);
+  const tower=mk("g",{class:"tower"}); svg.appendChild(tower);
+  const layers=LAYERS.filter(L=>!L.users); // L5..L1 order in data; draw L1 first (bottom)
+  const bottomUp=[...layers].reverse();
+  bottomUp.forEach((L,i)=>{
+    const y=base-i*step; const g=mk("g",{class:"plane"}); g.dataset.layer=L.id;
+    const poly=mk("polygon",{points:`${cx},${y-hh} ${cx+hw},${y} ${cx},${y+hh} ${cx-hw},${y}`, fill:`color-mix(in oklab, var(${L.color}) ${i===0?22:10}%, var(--ground))`, stroke:`var(${L.color})`, "stroke-width":"1.25", "stroke-opacity":".7"});
+    g.appendChild(poly);
+    const lx=cx+hw+18, ly=y+4;
+    g.appendChild(mk("line",{x1:cx+hw+2,y1:y,x2:lx-6,y2:y,stroke:"var(--line-2)","stroke-width":"1"}));
+    g.appendChild(mk("text",{x:lx,y:ly},L.id+" · "+L.name));
+    g.appendChild(mk("text",{x:lx,y:ly+15,class:"an"},L.analogy));
+    g.addEventListener("click",()=>goMap(()=>openLayer(L)));
+    tower.appendChild(g);
+  });
+  // users above the top plane
+  const topY=base-(bottomUp.length-1)*step-hh-34;
+  const ug=mk("g",{class:"users"}); const ukeys=Object.keys(USERS);
+  ukeys.forEach((k,i)=>{ const x=cx-((ukeys.length-1)*22)/2+i*22; ug.appendChild(mk("circle",{cx:x,cy:topY,r:6})); });
+  ug.appendChild(mk("text",{x:cx+((ukeys.length-1)*22)/2+16,y:topY+4},"users"));
+  tower.appendChild(ug);
+  // orbit (flywheel) around the middle of the stack
+  const midY=base-((bottomUp.length-1)*step)/2;
+  tower.appendChild(mk("ellipse",{class:"orbit",cx:cx,cy:midY,rx:hw+40,ry:hh+150}));
+  // packets: requests flow down through the kernel, responses come back up
+  const bottom=base+hh+8;
+  for(let i=0;i<6;i++){
+    const down=mk("circle",{class:"pk",r:"3.5",cx:cx-14,cy:0});
+    const am=mk("animateMotion",{dur:(4.2+i*0.35)+"s",repeatCount:"indefinite",begin:(-i*0.7)+"s",path:`M0,${topY+12} L0,${bottom-16}`}); down.appendChild(am); tower.appendChild(down);
+    const up=mk("circle",{class:"pk up",r:"3",cx:cx+14,cy:0});
+    const am2=mk("animateMotion",{dur:(4.6+i*0.3)+"s",repeatCount:"indefinite",begin:(-(0.4+i*0.75))+"s",path:`M0,${bottom-16} L0,${topY+12}`}); up.appendChild(am2); tower.appendChild(up);
+  }
+  $("#viz").innerHTML=""; $("#viz").appendChild(svg);
+}
+function goMap(after){
+  const stack=$("#stack"); stack.classList.remove("enter"); void stack.offsetWidth; stack.classList.add("enter");
+  const target=$("#map"); const y=target.getBoundingClientRect().top+window.scrollY-8;
+  window.scrollTo({top:y,behavior:"smooth"});
+  if(after) setTimeout(after, 520);
+  setTimeout(()=>stack.classList.remove("enter"), 1400);
+}
+function goHome(){ window.scrollTo({top:0,behavior:"smooth"}); }
+
+/* ========================================================= BOOT */
+function boot(){
+  renderFacts(); renderLens(); renderLegend(); renderJourneyMenu(); renderStack(); renderViz(); syncCtrl();
+  $("#explore").addEventListener("click",()=>goMap()); $("#homebtn").addEventListener("click",goHome);
+  $("#cta-journey").addEventListener("click",()=>goMap(()=>openMenu()));
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ syncCtrl(); if(state.journey) paintJourney(); });
+  const h=(location.hash||"").slice(1);
+  if(h){ const t=$("#map"); if(t) window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-8}); }
+  if(/^L[1-5]$/.test(h)||h==="U"){ const L=LAYERS.find(l=>l.id===h); if(L) openLayer(L); }
+  else if(/^t\d-\d$/.test(h)){ const T=TILES[h.slice(1).replace("-",".")]; if(T) openTile(T); }
+  else if(/^p-/.test(h)){ const p=PRODUCTS[h.slice(2)]; if(p) openProduct(p); }
+  else if(/^u-/.test(h)){ const u=h.slice(2); if(USERS[u]) openUser(u); }
+  else if(/^pillar-/.test(h)){ const T=TILES[h]; if(T) openTile(T); }
+  else if(/^j-/.test(h)){ const J=JOURNEYS.find(j=>j.id===h.slice(2)); if(J) setJourney(J.id); }
+}
+boot();
+</script>

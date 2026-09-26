@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>End card</title>
+<style>
+:root{--ground:#FFFFFF;--ink:#0F1419;--muted:#667085;--faint:#98A2B3;--accent:#FF5F00;--accent-ink:#C74A00;--line:#E7EAEE}
+html,body{height:100%;margin:0}
+body{background:var(--ground);color:var(--ink);font-family:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;display:grid;place-items:center;overflow:hidden;position:relative}
+.wash{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.wash::before{content:"";position:absolute;right:-10%;top:-30%;width:70vw;height:90vh;border-radius:50%;background:radial-gradient(closest-side, rgba(255,95,0,.18), rgba(247,158,27,.11) 45%, rgba(235,0,27,.05) 70%, transparent 75%);filter:blur(28px)}
+.wash::after{content:"";position:absolute;left:-15%;bottom:-40%;width:60vw;height:80vh;border-radius:50%;background:radial-gradient(closest-side, rgba(235,0,27,.10), rgba(255,95,0,.06) 50%, transparent 75%);filter:blur(30px)}
+.card{position:relative;text-align:center;max-width:1100px;padding:0 40px;animation:in 1.2s cubic-bezier(.2,.7,.2,1) both}
+.kicker{font-size:22px;font-weight:500;color:var(--accent-ink);letter-spacing:.005em}
+h1{font-weight:600;font-size:88px;letter-spacing:-.045em;line-height:1;margin:22px 0 28px}
+.sub{font-size:22px;color:var(--muted);margin:0}
+.sub b{color:var(--ink);font-weight:500}
+.rule{width:120px;height:4px;border-radius:2px;margin:40px auto 0;background:linear-gradient(90deg,#EB001B,#FF5F00 50%,#F79E1B)}
+.note{position:absolute;bottom:40px;left:0;right:0;text-align:center;color:var(--faint);font-size:15px}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+</style></head>
+<body>
+<div class="wash"></div>
+<div class="card">
+  <div class="kicker">The Mastercard Operating System</div>
+  <h1>Powering economies.<br>Empowering people.</h1>
+  <p class="sub">One <b>kernel</b> · Five <b>rails</b> · <b>Network services</b> every rail can call · <b>Solutions</b> built on the data · An <b>access</b> layer the world plugs into</p>
+  <div class="rule"></div>
+</div>
+<div class="note">An independent capability map compiled from Mastercard's public sources · September 2026</div>
+</body></html>

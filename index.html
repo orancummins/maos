@@ -70,8 +70,8 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .hero{min-height:calc(100svh - 0px);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px 48px;align-items:center;padding-block:48px 40px}
 .hero .kicker{font-size:13px;font-weight:600;color:var(--red);display:inline-flex;align-items:center;gap:8px}
 .hero .kicker::before{content:"";width:22px;height:4px;border-radius:2px;background:var(--brand-grad)}
-.hero h1{font-weight:600;font-size:clamp(38px,5.2vw,64px);letter-spacing:-.04em;line-height:.98;margin:12px 0 18px}
-.hero h1 .os{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+.hero h1{font-weight:600;font-size:clamp(30px,5.2vw,64px);letter-spacing:-.04em;line-height:1.02;margin:12px 0 18px}
+.hero h1 .os{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;white-space:nowrap}
 .hero .sub{margin:0;color:var(--ink-2);font-size:18px;line-height:1.5;max-width:56ch;text-wrap:pretty}
 .hero .sub b{color:var(--ink);font-weight:500}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;align-items:center}
@@ -326,6 +326,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 }
 @media (max-width:720px){
   .hero{grid-template-columns:minmax(0,1fr);padding-block:32px 24px;min-height:0}
+  .hero h1{font-size:clamp(26px,10vw,44px)}
   .hero .sub{font-size:16px}
   .viz{justify-self:center;max-width:420px}
   .layer,.users,.under{grid-template-columns:minmax(0,1fr);gap:10px}
@@ -356,7 +357,7 @@ img{max-width:100%}
   <header class="hero" id="home">
     <div>
       <div class="kicker">Capability map · as at 23 September 2026</div>
-      <h1>Mastercard <span class="os">Operating System</span></h1>
+      <h1>Mastercard<br><span class="os">Operating System</span></h1>
       <p class="sub">Everything Mastercard runs, on one map: a <b>kernel</b>, six <b>rails</b>, the <b>network services</b> every rail can call, the <b>solutions</b> built on the data, and the <b>access</b> layer people plug into.</p>
       <div class="cta">
         <button class="btn" id="explore">Explore the map <span class="ar">→</span></button>

@@ -308,8 +308,8 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .seealso button{border:0;background:none;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:13px}
 
 /* ================= footer ================= */
-.foot{border-top:3px solid;border-image:var(--brand-grad) 1;padding-block:24px 56px;margin-top:20px}
-#foot{margin:14px 0 0;color:var(--faint);font-size:12.5px;line-height:1.55;max-width:90ch}
+.foot{border-top:3px solid;border-image:var(--brand-grad) 1;padding-block:24px 56px;margin-top:20px;margin-inline:-16px;padding-inline:16px}
+#foot{margin:14px 0 0;color:var(--faint);font-size:12.5px;line-height:1.55}
 .legendkeys{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted)}
 .legendkeys .sym{font-family:var(--mono);color:var(--ink);margin-right:5px}
 
@@ -395,8 +395,10 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
     <svg class="jpath" id="jpath" aria-hidden="true"></svg>
     <svg class="jnodes" id="jnodes" aria-hidden="true"></svg>
   </div>
+</div>
 
-  <footer class="foot">
+<footer class="foot">
+  <div class="wrap">
     <div class="legendkeys">
       <span><span class="sym">✦</span>new or expanded in 2025–26</span>
       <span><span class="sym">◐</span>in flux</span>
@@ -406,8 +408,8 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
       <span><span class="sym">/</span>search · <span class="sym">Esc</span>close</span>
     </div>
     <p id="foot"></p>
-  </footer>
-</div>
+  </div>
+</footer>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dtitle">

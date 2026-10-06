@@ -1337,15 +1337,15 @@ function updateJump(){
 const el=(t,c,h)=>{const e=document.createElement(t); if(c) e.className=c; if(h!==undefined) e.innerHTML=h; return e;};
 const LCK=["before","checkout","auth","settle","after","beyond"];
 let lastFocus=null;
-const drawer=$("#drawer"), scrim=$("#scrim");
-const drawerOpen=()=>drawer.classList.contains("open");
-function openDrawer(){ const was=drawerOpen(); if(!was) lastFocus=document.activeElement; drawer.classList.add("open"); scrim.classList.add("open"); document.documentElement.classList.add("lock"); updateJump(); if(!was) setTimeout(()=>$("#close").focus(),50); }
-function closeDrawer(){ drawer.classList.remove("open"); scrim.classList.remove("open"); document.documentElement.classList.remove("lock"); if(lastFocus&&lastFocus.focus){ try{ lastFocus.focus({preventScroll:true}); }catch(e){} } lastFocus=null; updateJump(); }
+const dlgEl=$("#drawer"), scrimEl=$("#scrim");
+const drawerOpen=()=>dlgEl.classList.contains("open");
+function openDrawer(){ const was=drawerOpen(); if(!was) lastFocus=document.activeElement; dlgEl.classList.add("open"); scrimEl.classList.add("open"); document.documentElement.classList.add("lock"); updateJump(); if(!was) setTimeout(()=>$("#close").focus(),50); }
+function closeDrawer(){ dlgEl.classList.remove("open"); scrimEl.classList.remove("open"); document.documentElement.classList.remove("lock"); if(lastFocus&&lastFocus.focus){ try{ lastFocus.focus({preventScroll:true}); }catch(e){} } lastFocus=null; updateJump(); }
 function setHead(crumbs,o){
-  drawer.classList.remove("scrolled");
+  dlgEl.classList.remove("scrolled");
   $("#crumbs").innerHTML=crumbs.map((c,i)=>(i?'<span class="csep">/</span>':'')+(c.fn?`<button data-i="${i}">${esc(c.t)}</button>`:`<span>${esc(c.t)}</span>`)).join("");
   $("#crumbs").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>crumbs[+b.dataset.i].fn()));
-  drawer.style.setProperty("--lc",`var(${o.color})`); drawer.style.setProperty("--lcf",`var(${o.color}f)`);
+  dlgEl.style.setProperty("--lc",`var(${o.color})`); dlgEl.style.setProperty("--lcf",`var(${o.color}f)`);
   $("#dicon").innerHTML=svgi(o.icon,"");
   $("#dlid").innerHTML=(o.chip?`<span class="chip${o.dark?" dark":""}">${esc(o.chip)}</span>`:"")+`<span>${esc(o.lid)}</span>`;
   $("#dtitle").textContent=o.title;
@@ -1437,10 +1437,10 @@ function openProduct(p){
   if(sib.length){ body.appendChild(el("h4","",`Also in ${esc(T.name)}`)); const l2=el("div","plist"); sib.forEach(x=>l2.appendChild(productCard(x))); body.appendChild(l2); }
   openDrawer(); body.scrollTop=0;
 }
-$("#close").addEventListener("click",closeDrawer); scrim.addEventListener("click",closeDrawer);
+$("#close").addEventListener("click",closeDrawer); scrimEl.addEventListener("click",closeDrawer);
 
 const beside=window.matchMedia?matchMedia("(orientation:landscape) and (max-height:540px) and (min-width:561px) and (max-width:1000px)"):{matches:false};
-$("#dbody").addEventListener("scroll",function(){ if(beside.matches){ drawer.classList.remove("scrolled"); return; } const y=this.scrollTop; if(y>28) drawer.classList.add("scrolled"); else if(y<=0) drawer.classList.remove("scrolled"); },{passive:true});
+$("#dbody").addEventListener("scroll",function(){ if(beside.matches){ dlgEl.classList.remove("scrolled"); return; } const y=this.scrollTop; if(y>28) dlgEl.classList.add("scrolled"); else if(y<=0) dlgEl.classList.remove("scrolled"); },{passive:true});
 /* ---------- events ---------- */
 /* The stack is its own control: a click opens it, a click on an area opens that area's products, a click on a slice lists its areas. */
 $("#again").addEventListener("click",backToDisc);
@@ -1496,5 +1496,10 @@ const h0=(location.hash||"").slice(1);
 st.p=(h0||reduce)?1:0;
 layout(); renderPick(); renderSide(); applyIntro();
 if(h0==="open"||h0==="sliced") openStack(); else if(h0==="U"||LAYERS.some(l=>l.id===h0)) setFocus(h0); else if(/^o-/.test(h0)) pickOut(h0.slice(2));
-else if(st.p<1) setTimeout(()=>{ if(st.p<=0) runIntro(1); },2200);
+else if(st.p<1){
+  let armed=false;
+  const arm=()=>{ if(armed||st.p>0) return; const r=$("#pic").getBoundingClientRect(); if(r.bottom<=0||r.top+r.height*.8>window.innerHeight) return;
+    armed=true; window.removeEventListener("scroll",arm); window.removeEventListener("resize",arm); setTimeout(()=>{ if(st.p<=0) runIntro(1); },2200); };
+  window.addEventListener("scroll",arm,{passive:true}); window.addEventListener("resize",arm); arm();
+}
 </script>

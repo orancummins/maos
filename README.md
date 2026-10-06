@@ -34,13 +34,15 @@ One rule keeps it simple: **every asset has exactly one home tile**; lenses and 
 |---|---|
 | `index.html` | The map, as a standalone page — open it directly |
 | `layers.html` | The layer picture, as a standalone page — open it directly |
+| `layers-standalone.html` | The layer picture as one self-contained file: styles, script, data and fonts are all inside it and it loads nothing from the network. Open it in a browser tab; the iPhone Files and Mail previews show HTML without running its script |
 | `src/template.html` | Page template: styles, markup and application code, with `/*__DATA__*/`, `/*__JOURNEYS__*/`, `/*__APIS__*/` placeholders |
 | `src/data.js` | The asset inventory — layers → tiles → products, with lens tags and sources |
 | `src/journeys.js` | The 18 journeys (steps, scale facts, sources) |
 | `src/apis.js` | The Mastercard Developers API catalogue mapped to home products (read from developer.mastercard.com, Sep 2026) |
-| `src/assemble.py` | Rebuilds `src/mastercard-os.artifact.html` and `index.html` from the template and data, and `layers.html` from `src/layers.artifact.html` — `python3 src/assemble.py` |
+| `src/assemble.py` | Rebuilds `src/mastercard-os.artifact.html` and `index.html` from the template and data, and `layers.html` and `layers-standalone.html` from `src/layers.artifact.html` — `python3 src/assemble.py` |
 | `src/mastercard-os.artifact.html` | The same page without the document skeleton, for hosts that supply their own |
-| `src/layers.artifact.html` | The layer picture's source: one hand-edited file (styles, markup, code and its own copy of the inventory), without the document skeleton. `assemble.py` wraps it into `layers.html` |
+| `src/layers.artifact.html` | The layer picture's source: one hand-edited file (styles, markup, code and its own copy of the inventory), without the document skeleton. `assemble.py` wraps it into `layers.html` and `layers-standalone.html` |
+| `src/fonts/` | Geist and Geist Mono (latin subset, variable weight, SIL Open Font License 1.1), embedded into `layers-standalone.html` |
 | `docs/framework.md` | How the map is organised and why — the design notes |
 | `docs/asset-inventory.md` | The inventory in readable form, with status and origin, plus the API-to-tile appendix |
 | `docs/business-structure-research.md` | Mastercard's segments, divisions, website taxonomy, acquisitions 2015–2026 and 2025–26 themes, with sources |

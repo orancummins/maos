@@ -362,7 +362,7 @@ button.tile:hover{background:var(--panel)}
 
 /* One screen on desktop: the picture stays put and only the right-hand column scrolls. */
 .right{display:contents}
-@media (min-width:901px){
+@media (min-width:901px) and (min-height:541px), (min-width:1001px){
   html,body{height:100%}
   body{overflow:hidden}
   .wrap{height:100%;grid-template-areas:"stage right";grid-template-rows:minmax(0,1fr);gap:0 48px;padding-block:24px 16px;align-items:stretch}
@@ -385,6 +385,77 @@ button.tile:hover{background:var(--panel)}
   .detail{padding:2px 14px 16px}
   .apirow{grid-template-columns:1fr}.apihome{text-align:left}
 }
+
+/* ================= phones and touch =================
+   Below 900px the page stacks: title, picture, list. A short landscape screen keeps two columns and lets the page scroll,
+   and the dialog puts its header beside its list. Touch screens get larger targets and pressed states in place of hover. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.lock,html.lock body{overflow:hidden}
+body{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,a,.step,#pic{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.side{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 12px)}
+/* shown when a choice changes the list and the list is below the screen */
+.jump{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);transform:translateX(-50%);z-index:30;display:inline-flex;align-items:center;gap:8px;max-width:calc(100% - 32px);min-height:44px;padding:0 14px 0 18px;border:0;border-radius:999px;background:var(--ink);color:var(--ground);font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 10px 26px -8px var(--shadow),0 0 0 1px color-mix(in oklab,var(--ground) 30%,transparent)}
+.jump span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jump svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion: no-preference){
+  .jump{animation:jin .22s cubic-bezier(.2,.8,.2,1)}
+  @keyframes jin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+}
+@media (hover:none){
+  .row:hover,.sel:hover,button.tile:hover,.step:hover,.clr:hover,.menu button:not([aria-selected="true"]):hover{background:none}
+  .row:active,.sel:active,button.tile:active,.step:active,.clr:active,.menu button:not([aria-selected="true"]):active{background:var(--panel)}
+  .prod > button:active{background:var(--panel)}
+  .jump:active{opacity:.85}
+}
+@media (pointer:coarse){
+  .menu button{min-height:44px}
+  .back{min-height:44px}
+  .again{width:40px;height:40px;opacity:.85}
+  .dh .x{width:44px;height:44px;right:10px;top:6px}
+  .crumbs{padding-right:56px;gap:6px 7px}
+  .crumbs button{padding:9px 3px;margin:-9px -3px}
+  .chips button{min-height:40px;padding:7px 14px}
+  .apis a{padding:9px 11px}
+  .links{gap:0}
+  .links a{display:inline-block;padding:9px 0}
+  .apirow a,.apihome{padding:7px 0}
+  .apirow{padding-block:3px}
+}
+@media (min-width:561px) and (max-width:900px){
+  .pic svg{max-height:86vh;max-height:86svh}
+}
+@media (max-width:720px){
+  .scrim{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .drawer{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+}
+@media (max-width:480px){
+  /* a product card gives its name the full width and drops its tags to a line of their own */
+  .prod > button{grid-template-columns:minmax(0,1fr) 18px}
+  .prod .chev{grid-column:2;grid-row:1}
+  .prod .badges{grid-column:1 / -1;grid-row:2;justify-content:flex-start}
+  .prod .badges:empty{display:none}
+  .prod .pd{grid-column:1 / -1}
+}
+@media (orientation:landscape) and (max-height:540px) and (min-width:561px) and (max-width:1000px){
+  .wrap{grid-template-columns:minmax(0,.85fr) minmax(0,1fr);grid-template-areas:"stage head" "stage side";grid-template-rows:auto 1fr;gap:14px 28px;padding-block:22px 28px;align-items:start}
+  .stage{position:static}
+  .pic svg{max-height:none}
+  .pick{flex-wrap:wrap}
+  .pw.who{flex:0 0 100%}
+  .pw.grow{flex:1 1 60%}
+  .sel .sv{white-space:normal}
+  .pw + .pw{border-left:0;border-top:1px solid var(--line)}
+  .clr{border-top:1px solid var(--line);border-radius:0 0 13px 0}
+  .scrim{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .drawer,.drawer.open{left:0;top:0;width:100%;height:100%;max-height:100%;border-radius:0;border:0;transform:none;flex-direction:row;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+  .dh{flex:0 0 40%;max-width:340px;overflow-y:auto;overscroll-behavior:contain;border-bottom:0;border-right:1px solid var(--line);padding:14px 18px 16px}
+  .dhero{flex-direction:column;align-items:flex-start;gap:10px;margin-top:12px}
+  .dpuck{width:48px;height:48px}
+  .dpuck svg{width:23px;height:23px}
+  .db{padding:16px 18px 24px}
+  .dgrid{grid-template-columns:minmax(0,1fr)}
+}
 </style>
 
 <div class="wrap">
@@ -405,6 +476,8 @@ button.tile:hover{background:var(--panel)}
     <section class="side" id="side" aria-live="polite"></section>
   </div>
 </div>
+
+<button class="jump" id="jump" hidden><span id="jump-t"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg></button>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dtitle">
@@ -1231,22 +1304,33 @@ function renderSide(){
     o.steps.forEach((s,i)=>{ const T=TILE[s.at];
       h+= T? `<li class="step" role="button" tabindex="0" data-p="${s.p}" data-t="${T.id}" style="--t:var(--l${T.L.k})"><span class="no">${i+1}</span><svg class="ti" viewBox="0 0 24 24" aria-hidden="true">${ICONS[T.ic]}</svg><span><span class="st">${esc(s.t)}</span><span class="sm"><b>${T.id}</b>${esc(T.n)} · ${esc(T.L.name)}</span></span></li>`
            : `<li class="step" role="button" tabindex="0" data-p="${s.p}" style="--t:var(--lu)"><span class="no">${i+1}</span><span></span><span><span class="st">${esc(s.t)}</span><span class="sm">Cross-cutting pillar, outside the five layers</span></span></li>`; });
-    side.innerHTML=h+`</ol>`; return;
+    side.innerHTML=h+`</ol>`; updateJump(); return;
   }
   const back=`<button class="back" data-go="">← ${o?"Back to the flow":"All slices"}</button>`;
   if(!st.focus){
     let h=`<h2>The five slices, top to bottom</h2><div class="rows"><button class="row" data-go="U" style="--c:var(--luf);--t:var(--lu)"><span class="sw"></span><span class="nm">Users</span><span class="an">the ecosystem the OS serves</span><span class="ct">8 kinds</span></button>`;
     [...LAYERS].reverse().forEach(L=>{h+=`<button class="row" data-go="${L.id}" style="--c:var(--l${L.k}f);--t:var(--l${L.k})"><span class="sw"></span><span class="nm"><span class="id">${L.id}</span>${esc(L.name)}</span><span class="an">${esc(L.an)}</span><span class="ct">${L.tiles.length} areas · ${L.total} products</span></button>`;});
-    side.innerHTML=h+"</div>"; return;
+    side.innerHTML=h+"</div>"; updateJump(); return;
   }
   if(st.focus==="U"){
     side.innerHTML=back+`<div class="lh" style="--c:var(--luf);--t:var(--ink)"><h3>Users</h3><span class="an">the ecosystem the OS serves</span></div><p class="desc">Eight kinds of user sit above the stack, including a new one. Most assets serve several of them.</p><div class="users">${USERS.map((u,i)=>`<span>${svgi(UICON[UKEYS[i]],"ti")}${esc(u)}</span>`).join("")}</div>`;
-    return;
+    updateJump(); return;
   }
   const L=LAYERS.find(l=>l.id===st.focus);
   let h=back+`<div class="lh" style="--c:var(--l${L.k}f);--t:var(--l${L.k})"><span class="chip${L.dark?" dark":""}">${L.id}</span><h3>${esc(L.name)}</h3><span class="an">${esc(L.an)}</span></div><p class="desc">${esc(L.desc)}</p><div style="--t:var(--l${L.k})">`;
   L.tiles.forEach(t=>{const more=t.c-t.p.length;h+=`<button class="tile" data-t="${t.id}" aria-label="${esc(t.n)}, open the products"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true">${ICONS[t.ic]}</svg><span class="tn"><span class="id">${t.id}</span>${esc(t.n)}</span><span class="ct">${t.c} ${t.c===1?"product":"products"}</span><span class="tb">${esc(t.b)}</span><span class="tp">${t.p.map(esc).join(" · ")}${more>0?` <span>· +${more} more</span>`:""}</span></button>`;});
-  side.innerHTML=h+"</div>";
+  side.innerHTML=h+"</div>"; updateJump();
+}
+/* On a stacked page a choice made in the picture changes a list that is below the screen. This says so, and takes you there. */
+function updateJump(){
+  const j=$("#jump"), side=$("#side"), o=curOut(); if(!j||!side) return;
+  let t="";
+  if(st.focus==="U") t="See the 8 kinds of user";
+  else if(st.focus){ const L=LAYERS.find(l=>l.id===st.focus); if(L) t=`See the ${L.tiles.length} areas in ${L.name}`; }
+  else if(o) t=`See the ${o.steps.length} steps`;
+  const show=!!t&&!document.documentElement.classList.contains("lock")&&side.getBoundingClientRect().top>window.innerHeight-20;
+  if(show) $("#jump-t").textContent=t;
+  j.hidden=!show;
 }
 
 /* ---------- detail dialog: the live map's product detail, laid out as cards ---------- */
@@ -1255,8 +1339,8 @@ const LCK=["before","checkout","auth","settle","after","beyond"];
 let lastFocus=null;
 const drawer=$("#drawer"), scrim=$("#scrim");
 const drawerOpen=()=>drawer.classList.contains("open");
-function openDrawer(){ const was=drawerOpen(); if(!was) lastFocus=document.activeElement; drawer.classList.add("open"); scrim.classList.add("open"); if(!was) setTimeout(()=>$("#close").focus(),50); }
-function closeDrawer(){ drawer.classList.remove("open"); scrim.classList.remove("open"); if(lastFocus&&lastFocus.focus){ try{ lastFocus.focus(); }catch(e){} } lastFocus=null; }
+function openDrawer(){ const was=drawerOpen(); if(!was) lastFocus=document.activeElement; drawer.classList.add("open"); scrim.classList.add("open"); document.documentElement.classList.add("lock"); updateJump(); if(!was) setTimeout(()=>$("#close").focus(),50); }
+function closeDrawer(){ drawer.classList.remove("open"); scrim.classList.remove("open"); document.documentElement.classList.remove("lock"); if(lastFocus&&lastFocus.focus){ try{ lastFocus.focus({preventScroll:true}); }catch(e){} } lastFocus=null; updateJump(); }
 function setHead(crumbs,o){
   drawer.classList.remove("scrolled");
   $("#crumbs").innerHTML=crumbs.map((c,i)=>(i?'<span class="csep">/</span>':'')+(c.fn?`<button data-i="${i}">${esc(c.t)}</button>`:`<span>${esc(c.t)}</span>`)).join("");
@@ -1355,7 +1439,8 @@ function openProduct(p){
 }
 $("#close").addEventListener("click",closeDrawer); scrim.addEventListener("click",closeDrawer);
 
-$("#dbody").addEventListener("scroll",function(){ const y=this.scrollTop; if(y>28) drawer.classList.add("scrolled"); else if(y<=0) drawer.classList.remove("scrolled"); },{passive:true});
+const beside=window.matchMedia?matchMedia("(orientation:landscape) and (max-height:540px) and (min-width:561px) and (max-width:1000px)"):{matches:false};
+$("#dbody").addEventListener("scroll",function(){ if(beside.matches){ drawer.classList.remove("scrolled"); return; } const y=this.scrollTop; if(y>28) drawer.classList.add("scrolled"); else if(y<=0) drawer.classList.remove("scrolled"); },{passive:true});
 /* ---------- events ---------- */
 /* The stack is its own control: a click opens it, a click on an area opens that area's products, a click on a slice lists its areas. */
 $("#again").addEventListener("click",backToDisc);
@@ -1374,16 +1459,16 @@ $("#pic").addEventListener("mouseover",e=>{
   if(st.p<1) return;
   const g=e.target.closest(".layer");
   if(!st.open){ if(g&&canHover&&st.e<.05) setE(.09,false,260); return; }
-  const b=e.target.closest("[data-t]"); if(!b||!g) return;
+  const b=e.target.closest("[data-t]"); if(!b||!g||!canHover) return;
   if((st.focus&&g.dataset.l===st.focus)||(!st.focus&&b.classList.contains("on"))) hot(b.dataset.t);
 });
 $("#pic").addEventListener("mouseleave",()=>{ if(!st.open&&st.e>0) setE(0,false,260); });
 $("#side").addEventListener("click",e=>{
   const go=e.target.closest("[data-go]"), t=e.target.closest(".tile"), sp=e.target.closest(".step");
-  if(go) setFocus(go.dataset.go||null); else if(t) openTile(MAP.TILES[t.dataset.t]); else if(sp) openProduct(MAP.PRODUCTS[sp.dataset.p]);
+  if(go){ setFocus(go.dataset.go||null); if($("#side").getBoundingClientRect().top<0) $("#side").scrollIntoView({block:"start"}); } else if(t) openTile(MAP.TILES[t.dataset.t]); else if(sp) openProduct(MAP.PRODUCTS[sp.dataset.p]);
 });
 $("#side").addEventListener("keydown",e=>{ const sp=e.target.closest(".step"); if(sp&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); openProduct(MAP.PRODUCTS[sp.dataset.p]); } });
-$("#side").addEventListener("mouseover",e=>{const r=e.target.closest(".tile,.step"); if(r&&r.dataset.t) hot(r.dataset.t);});
+$("#side").addEventListener("mouseover",e=>{ if(!canHover) return; const r=e.target.closest(".tile,.step"); if(r&&r.dataset.t) hot(r.dataset.t);});
 $("#side").addEventListener("mouseleave",()=>hot(null));
 $("#pick").addEventListener("click",e=>{
   e.stopPropagation();
@@ -1400,7 +1485,10 @@ document.addEventListener("keydown",e=>{
   else if(st.focus) setFocus(null);
   else if(st.open&&!st.out) closeStack();
 });
-window.addEventListener("resize",layout);
+window.addEventListener("resize",()=>{ layout(); updateJump(); });
+let jraf=0; window.addEventListener("scroll",()=>{ if(!jraf) jraf=requestAnimationFrame(()=>{ jraf=0; updateJump(); }); },{passive:true});
+$("#jump").addEventListener("click",()=>$("#side").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}));
+if(!canHover){ const sub=$(".sub"); if(sub) sub.textContent=sub.textContent.replace("Click the stack","Tap the stack"); }
 OUTCOMES.forEach(O=>O.steps.forEach(s=>{ const pr=MAP.PRODUCTS[s.p]; if(!pr||pr.tile.id!==s.at) console.warn("outcome step does not match the inventory:",O.id,s.p,s.at); }));
 LAYERS.forEach(L=>L.tiles.forEach(t=>{ const T=MAP.TILES[t.id]; if(!T) console.warn("area missing from the inventory:",t.id); else t.c=T.products.filter(x=>x.st!=="retired").length; }));
 LAYERS.forEach(L=>{ L.total=L.tiles.reduce((n,t)=>n+t.c,0); });

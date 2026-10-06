@@ -10,6 +10,12 @@ video/*.tar.bz2
 video/*.log
 video/remap.txt
 node_modules/
+video/layers/rec.html
+video/layers/silent.mp4
+video/layers/*.wav
+video/layers/board/
+video/layers/progress.txt
+video/layers/*.log
 .DS_Store
 
 # local scratch outputs

@@ -1,4 +1,5 @@
-"""Rebuild ../src/mastercard-os.artifact.html and ../index.html from the template and data files."""
+"""Rebuild ../src/mastercard-os.artifact.html and ../index.html from the template and data files,
+and wrap ../src/layers.artifact.html (the layer picture, edited directly) into the standalone ../layers.html."""
 import re, pathlib
 here = pathlib.Path(__file__).resolve().parent.parent
 src = here / "src"
@@ -29,3 +30,27 @@ img{{max-width:100%}}
 """
 (here / "index.html").write_text(doc)
 print("wrote", src / "mastercard-os.artifact.html", "and", here / "index.html")
+
+# The layer picture is a single hand-edited file with its own copy of the inventory; it only needs the document skeleton.
+lay = (src / "layers.artifact.html").read_text()
+k = lay.index("</style>") + len("</style>"); lhead, lbody = lay[:k], lay[k:]
+(here / "layers.html").write_text(f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Mastercard Operating System, the layer picture: a revolving globe that opens into five stacked layers; choose who you are and what you want to solve to see the areas that deliver it light up.">
+{lhead.strip()}
+<style>
+html,body{{margin:0}}
+img{{max-width:100%}}
+[hidden]{{display:none!important}}
+</style>
+</head>
+<body>
+{lbody.strip()}
+</body>
+</html>
+""")
+print("wrote", here / "layers.html")

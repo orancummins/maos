@@ -1,0 +1,155 @@
+{
+ "total": 130.174,
+ "lines": {
+  "o1": {
+   "start": 1.2,
+   "end": 6.119,
+   "say": "Mastercard powers economies and empowers people through our global operating system."
+  },
+  "o2": {
+   "start": 6.519,
+   "end": 8.107,
+   "say": "Let me show you how we do that."
+  },
+  "l1": {
+   "start": 9.407,
+   "end": 13.637,
+   "say": "Everything Mastercard runs fits into five layers, stacked into one system."
+  },
+  "l2": {
+   "start": 14.637,
+   "end": 17.04,
+   "say": "At the base, the kernel: the network itself."
+  },
+  "l3": {
+   "start": 17.54,
+   "end": 19.054,
+   "say": "Then the rails that move money."
+  },
+  "l4": {
+   "start": 19.554,
+   "end": 21.837,
+   "say": "The network services every rail can call."
+  },
+  "l5": {
+   "start": 22.337,
+   "end": 24.02,
+   "say": "The solutions built on top."
+  },
+  "l6": {
+   "start": 24.52,
+   "end": 26.541,
+   "say": "And access, where partners plug in."
+  },
+  "l7": {
+   "start": 27.141,
+   "end": 29.084,
+   "say": "Around it, everyone the system serves."
+  },
+  "a1": {
+   "start": 30.384,
+   "end": 34.331,
+   "say": "Take a bank. Its goal: cut fraud, without declining good customers."
+  },
+  "a2": {
+   "start": 35.031,
+   "end": 39.288,
+   "say": "Choose that, and the parts of the system that deliver it light up, in the order they act."
+  },
+  "a3": {
+   "start": 39.988,
+   "end": 43.181,
+   "say": "Recorded Future spots stolen cards and skimmers early."
+  },
+  "a4": {
+   "start": 43.631,
+   "end": 46.599,
+   "say": "Threat Intelligence turns those threats into fraud signals."
+  },
+  "a5": {
+   "start": 47.049,
+   "end": 49.359,
+   "say": "em-dess swaps card numbers for tokens."
+  },
+  "a6": {
+   "start": 49.809,
+   "end": 52.726,
+   "say": "Identity Check steps in only when the risk warrants it."
+  },
+  "a7": {
+   "start": 53.176,
+   "end": 58.649,
+   "say": "And Decision Intelligence Pro scores every transaction in flight, fed by data from the whole network."
+  },
+  "a8": {
+   "start": 59.549,
+   "end": 61.269,
+   "say": "Open any of them for the detail."
+  },
+  "a9": {
+   "start": 61.969,
+   "end": 69.179,
+   "say": "Decision Intelligence Pro uses generative AI to score transactions from any network, at the moment of authorization."
+  },
+  "a10": {
+   "start": 69.629,
+   "end": 73.745,
+   "say": "It can lift the detection of compromised cards by up to three hundred percent."
+  },
+  "b1": {
+   "start": 75.145,
+   "end": 79.056,
+   "say": "Now take a government, with payments to get to people, quickly and safely."
+  },
+  "b2": {
+   "start": 79.956,
+   "end": 83.683,
+   "say": "In the UK, Backs carries about ninety-eight percent of state benefits."
+  },
+  "b3": {
+   "start": 84.133,
+   "end": 90.114,
+   "say": "Mastercard Move disburses to cards, accounts and wallets, and Send pushes funds to a card in seconds."
+  },
+  "b4": {
+   "start": 90.564,
+   "end": 94.411,
+   "say": "Where people have no bank, Community Pass gives them a digital identity."
+  },
+  "b5": {
+   "start": 94.861,
+   "end": 97.966,
+   "say": "Account to Account Protect screens each payment for scams."
+  },
+  "b6": {
+   "start": 98.416,
+   "end": 101.228,
+   "say": "And Spending Pulse tracks how spending moves afterwards."
+  },
+  "b7": {
+   "start": 102.128,
+   "end": 103.872,
+   "say": "Look closer at Community Pass."
+  },
+  "b8": {
+   "start": 104.572,
+   "end": 109.931,
+   "say": "It is shared digital identity and payments infrastructure, for rural and underserved communities."
+  },
+  "b9": {
+   "start": 110.381,
+   "end": 116.418,
+   "say": "Through the Made Alliance, it aims to reach one hundred million people and businesses in Africa, by twenty thirty-four."
+  },
+  "c1": {
+   "start": 117.818,
+   "end": 123.01,
+   "say": "One system. Five layers. Working together for banks, businesses, governments and people."
+  },
+  "c2": {
+   "start": 123.61,
+   "end": 126.174,
+   "say": "This is the Mastercard Operating System."
+  }
+ }
+}

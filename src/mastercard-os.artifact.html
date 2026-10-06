@@ -221,6 +221,67 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .jnodes .node text{fill:#fff;font-family:var(--mono);font-size:10.5px;font-weight:500;text-anchor:middle;dominant-baseline:central}
 @media (prefers-reduced-motion: no-preference){ .jpath path{animation:dash 1.8s linear infinite} @keyframes dash{to{stroke-dashoffset:-20}} }
 
+/* ================= start from an outcome ================= */
+.start{display:grid;grid-template-columns:190px minmax(0,1fr);gap:18px;padding:14px 12px 14px 14px;border-radius:14px;border-left:5px solid var(--gold);background:linear-gradient(90deg,color-mix(in oklab,var(--gold) 13%,var(--ground)),color-mix(in oklab,var(--gold) 4%,var(--ground)) 60%,var(--ground));margin-bottom:12px;align-items:start;scroll-margin-top:calc(var(--ctrl-h,60px) + 12px)}
+.start .sh{padding-top:6px}
+.start .sh b{display:block;font-weight:650;font-size:17.5px;letter-spacing:-.02em;line-height:1.15;color:var(--gold-ink)}
+.start .sh span{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.start .sb{display:grid;gap:10px;min-width:0}
+.srow{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;align-items:baseline}
+.srow .sl{font-size:13px;color:var(--muted)}
+.ochips{display:flex;flex-wrap:wrap;gap:6px}
+.ochip{border:1px solid var(--line-2);background:var(--ground);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:500;cursor:pointer;color:var(--ink-2);text-align:left}
+.ochip:hover{border-color:var(--ink)}
+.ochip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.ochip.out[aria-pressed="true"]{background:var(--gold-grad);color:#2B2000;border-color:var(--gold-deep)}
+.sstat{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13px;color:var(--muted);min-height:34px}
+.sstat b{color:var(--ink);font-weight:600}
+.sbtn{border:1px solid var(--gold-deep);background:var(--ground);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)}
+.sbtn:hover{background:color-mix(in oklab,var(--gold) 14%,var(--ground))}
+.sbtn.pri{background:var(--brand-grad);color:#fff;border-color:transparent}
+.sbtn.pri:hover{background:var(--brand-grad);box-shadow:var(--sh2)}
+.slink{border:0;background:none;padding:0;color:var(--muted);cursor:pointer;font-size:12.5px;text-decoration:underline;text-underline-offset:2px}
+.slink:hover{color:var(--ink)}
+
+/* ================= collapsed layers ================= */
+.lcol{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.lbody{min-width:0}
+.tog{border:0;background:none;padding:2px 0;margin-top:6px;cursor:pointer;color:var(--muted);font-size:12.5px;font-weight:500;display:inline-flex;gap:5px;align-items:center;width:max-content;position:relative;z-index:2}
+.tog:hover{color:var(--ink)}
+.viewbtn{border:1px solid var(--line-2);background:var(--ground);border-radius:999px;padding:7px 13px;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.viewbtn:hover{border-color:var(--ink)}
+.viewbtn:disabled{opacity:.5;cursor:default;border-color:var(--line-2)}
+.sum{display:flex;gap:18px;align-items:center;min-height:56px}
+.sumr{min-width:0;display:flex;flex-direction:column;gap:8px}
+.glyph{display:block;flex:0 0 auto;overflow:visible}
+.glyph .seg{fill:var(--lcf);stroke:color-mix(in oklab,var(--lcf),#000 22%);stroke-width:1;cursor:pointer;transition:fill .15s,stroke .15s}
+.glyph .seg:hover,.glyph .seg.hot{stroke:var(--ink);stroke-width:2}
+.glyph .glink{stroke:var(--line-2);stroke-width:1.5}
+.haslit .glyph .seg{fill:color-mix(in oklab,var(--lcf) 15%,var(--ground));stroke:color-mix(in oklab,var(--lcf) 50%,var(--ground))}
+.haslit .glyph .seg.lit{fill:var(--gold);stroke:var(--gold-deep);stroke-width:2}
+.haslit .glyph .seg:hover,.haslit .glyph .seg.hot{stroke:var(--ink)}
+.tnames{display:flex;flex-wrap:wrap;gap:2px 2px;margin-left:-8px}
+.tname{border:0;background:none;padding:3px 8px;border-radius:999px;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--ink-2);text-align:left}
+.tname .tid{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--lc);margin-right:6px;letter-spacing:.04em}
+.tname:hover,.tname.hot{background:var(--panel-2);color:var(--ink)}
+.haslit .tname{color:var(--faint)}
+.haslit .tname.lit{color:var(--ink);background:color-mix(in oklab,var(--gold) 20%,var(--ground));box-shadow:inset 0 0 0 1px var(--gold-deep)}
+.litp{display:flex;flex-wrap:wrap;gap:6px}
+.litp:empty{display:none}
+.lchip{border:1px solid var(--gold-deep);background:var(--ground);border-radius:999px;padding:3px 11px 3px 4px;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;cursor:pointer;color:var(--ink);text-align:left}
+.lchip .no{font-family:var(--mono);font-size:10.5px;color:#fff;background:var(--gold-deep);border-radius:999px;min-width:18px;height:18px;padding:0 4px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+.lchip:hover{background:color-mix(in oklab,var(--gold) 14%,var(--ground))}
+.jpanel .onote{margin:0 0 14px;font-size:12.5px;color:var(--muted);padding:10px 12px;border-radius:10px;background:var(--panel)}
+@media (min-width:721px){
+  .layer.collapsed{align-items:center;padding-block:10px}
+  .layer.collapsed .lab{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:8px;row-gap:1px;margin-top:0;padding-block:2px}
+  .layer.collapsed .lab .nm{margin-top:0}
+  .layer.collapsed .lab .an{flex-basis:100%}
+  .layer.collapsed .lab .cnt{display:none}
+  .layer.collapsed .tog{margin-top:3px}
+}
+@media (max-width:720px){ .tog .tp{display:none} }
+
 /* ================= journey panel ================= */
 .jpanel{display:none;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--ctrl-h,60px) + 16px);background:var(--ground);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--sh1);flex-direction:column;overflow:hidden;max-height:calc(100vh - var(--ctrl-h,60px) - 40px)}
 .board.journey .jpanel{display:flex}
@@ -322,7 +383,12 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
   .hero h1{font-size:clamp(26px,10vw,44px)}
   .hero .sub{font-size:16px}
   .viz{justify-self:center;max-width:420px}
-  .layer,.users,.under{grid-template-columns:minmax(0,1fr);gap:10px}
+  .layer,.users,.under,.start{grid-template-columns:minmax(0,1fr);gap:10px}
+  .srow{grid-template-columns:minmax(0,1fr);gap:4px}
+  .lcol{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 10px;width:100%}
+  .lcol .lab{flex:1 1 auto}
+  .tog{margin-top:0}
+  .sum{flex-direction:column;align-items:flex-start;gap:10px}
   .lab{flex-direction:row;align-items:baseline;gap:10px;flex-wrap:wrap}
   .lab .cnt{margin-left:auto;margin-top:0}
   .tiles{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
@@ -347,6 +413,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
       <p class="sub">Everything Mastercard runs, on one map: a <b>kernel</b>, six <b>rails</b>, the <b>network services</b> every rail can call, the <b>solutions</b> built on the data, and the <b>access</b> layer people plug into.</p>
       <div class="cta">
         <button class="btn" id="explore">Explore the map <span class="ar">→</span></button>
+        <button class="btn ghost" id="cta-outcome">Start from an outcome</button>
         <button class="btn ghost" id="cta-journey">Follow a journey</button>
       </div>
       <div class="stats" id="facts"></div>
@@ -356,7 +423,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 
   <div class="mapintro" id="map">
     <h2>The map</h2>
-    <p>Read it <b>bottom-up</b> and it is a transaction; <b>top-down</b> and it is a customer. Click anything to drill down, switch a lens to re-slice the same assets, or pick a journey to watch the layers work.</p>
+    <p>Read it <b>bottom-up</b> and it is a transaction; <b>top-down</b> and it is a customer. Start from an outcome to light up what solves it, open a layer to see its areas, switch a lens to re-slice the same assets, or pick a journey to watch the layers work.</p>
   </div>
 
   <div class="controls">
@@ -368,6 +435,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
         <div class="results" id="results" hidden></div>
       </div>
       <div class="tabs" id="lens" role="group" aria-label="Lens"><span class="lbl">Lens</span></div>
+      <button class="viewbtn" id="allbtn" aria-pressed="false">Expand all</button>
       <div class="jwrap">
         <button class="jbtn" id="jbtn" aria-haspopup="menu" aria-expanded="false"><span class="dot"></span><span id="jbtnl">Journeys</span><span class="car">▼</span></button>
         <div class="jmenu" id="jmenu" hidden role="menu"></div>
@@ -379,6 +447,14 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 
   <div class="board" id="board">
     <div>
+      <section class="start" id="start" aria-label="Start from an outcome">
+        <div class="sh"><b>Start here</b><span>Who are you, and what do you want to solve?</span></div>
+        <div class="sb">
+          <div class="srow"><span class="sl">I am</span><div class="ochips" id="whochips" role="group" aria-label="Who you are"></div></div>
+          <div class="srow"><span class="sl">and I want to</span><div class="ochips" id="outchips" role="group" aria-label="What you want to solve"></div></div>
+          <div class="sstat" id="ostat" aria-live="polite"></div>
+        </div>
+      </section>
       <div class="stack" id="stack"></div>
       <div class="under">
         <div class="h"><b>Cross-cutting</b>Pillars that touch every layer</div>
@@ -388,7 +464,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
         </div>
       </div>
     </div>
-    <aside class="jpanel" id="jpanel" aria-label="Journey steps">
+    <aside class="jpanel" id="jpanel" aria-label="Steps">
       <div class="jh"><div><div class="k" id="jgroup">Journey</div><h3 id="jtitle"></h3></div><button class="x" id="jclose" aria-label="Close journey">×</button></div>
       <div class="jb" id="jbody"></div>
     </aside>
@@ -942,6 +1018,142 @@ const JOURNEYS = [
 ];
 
 /* =========================================================
+   OUTCOMES — an entry point above the stack: who you are and what you want to solve.
+   Each step is one asset and the part it plays; n is the short label used on the collapsed layer.
+   These groupings are this map's own reading of the assets, not Mastercard bundles.
+   ========================================================= */
+const WHO = {iss:"An issuer or bank", mer:"A merchant", acq:"An acquirer or PSP", fin:"A fintech", corp:"A corporate or SME", gov:"A government", ai:"An AI agent builder"};
+const OUTCOMES = [
+ {id:"fraud", who:"iss", name:"Cut fraud without declining good customers", why:"Fraud starts as a cyberattack and ends at authorisation, so the answer spans threat intelligence, tokens, authentication and a score on every transaction.",
+  steps:[
+   {at:"4.1", p:"recfut", n:"Recorded Future", t:"Recorded Future spots stolen cards and skimmers early"},
+   {at:"4.1", p:"mcti", n:"Threat Intelligence", t:"Threat Intelligence turns those threats into fraud signals"},
+   {at:"3.1", p:"mdes", n:"MDES", t:"MDES swaps card numbers for tokens"},
+   {at:"3.2", p:"idcheck", n:"Identity Check", t:"Identity Check authenticates only when the risk warrants it"},
+   {at:"3.3", p:"dipro", n:"Decision Intelligence Pro", t:"Decision Intelligence Pro scores every transaction in flight"},
+   {at:"1.4", p:"data", n:"Network data", t:"Network data and Brighterion AI feed the models"},
+  ]},
+ {id:"grow", who:"iss", name:"Grow and keep cardholders", why:"Growth is a loop: find the opportunity in the portfolio, reach people, give them reasons to stay, and measure what worked.",
+  steps:[
+   {at:"4.3", p:"portfolio", n:"Portfolio Optimizer", t:"Portfolio Optimizer finds where the portfolio can grow"},
+   {at:"4.2", p:"mktsvc", n:"Marketing Services", t:"Marketing Services runs acquisition and lifecycle campaigns"},
+   {at:"4.2", p:"loyalty", n:"Loyalty Solutions", t:"Loyalty Solutions handles rewards and redemption"},
+   {at:"4.2", p:"priceless", n:"Priceless & benefits", t:"Priceless and card benefits give reasons to stay top of wallet"},
+   {at:"3.5", p:"minna", n:"Minna Technologies", t:"Minna puts subscription control in the banking app"},
+   {at:"4.3", p:"testlearn", n:"Test & Learn", t:"Test & Learn proves which campaigns worked"},
+   {at:"1.4", p:"data", n:"Network data", t:"Network data is the raw material for all of it"},
+  ]},
+ {id:"scams", who:"iss", name:"Stop scams on real-time payments", why:"Real-time payments are irrevocable, so the sending bank has seconds to act. These assets score the payment, flag the mule account and recover what got through.",
+  steps:[
+   {at:"2.2", p:"fps", n:"Faster Payments", t:"The payment leaves on the Faster Payments rail"},
+   {at:"4.1", p:"a2aprotect", n:"A2A Protect", t:"A2A Protect scores it before it goes"},
+   {at:"4.1", p:"trace", n:"TRACE", t:"TRACE flags the receiving account as a likely mule"},
+   {at:"4.1", p:"amlrisk", n:"AML Account Risk", t:"AML Account Risk flags laundering at account level"},
+   {at:"2.2", p:"vocalink", n:"Vocalink", t:"Vocalink runs the cross-bank return for what got through"},
+  ]},
+ {id:"convert", who:"mer", name:"Lift checkout conversion", why:"Every typed card number and one-time passcode loses shoppers. These assets remove both, and share enough data for the issuer to say yes.",
+  steps:[
+   {at:"4.2", p:"dy", n:"Dynamic Yield", t:"Dynamic Yield personalises the offer"},
+   {at:"3.2", p:"c2p", n:"Click to Pay", t:"Click to Pay means no card number is typed"},
+   {at:"3.2", p:"passkeys", n:"Payment Passkeys", t:"Payment Passkeys replace the passcode with biometrics"},
+   {at:"3.1", p:"scof", n:"Secure Card on File", t:"Secure Card on File turns stored cards into tokens"},
+   {at:"2.1", p:"installments", n:"Installments", t:"Installments let shoppers split the cost"},
+   {at:"5.2", p:"merchantcloud", n:"Merchant Cloud", t:"Merchant Cloud is the one acceptance connection"},
+   {at:"3.2", p:"iift", n:"Identity Insights for Transactions", t:"Identity Insights for Transactions shares data so issuers approve more"},
+  ]},
+ {id:"dispute", who:"mer", name:"Stop chargebacks before they happen", why:"Most disputes are confusion, not fraud. Nearly all of the answer sits in Network services rather than Solutions.",
+  steps:[
+   {at:"3.4", p:"merchantid", n:"Merchant Identifier", t:"Merchant Identifier makes the statement name recognisable"},
+   {at:"3.4", p:"ethocacc", n:"Ethoca Consumer Clarity", t:"Consumer Clarity shows the receipt in the banking app"},
+   {at:"3.5", p:"abu", n:"Automatic Billing Updater", t:"Automatic Billing Updater keeps stored cards current"},
+   {at:"3.4", p:"ethocaalerts", n:"Ethoca Alerts", t:"Ethoca Alerts prompt a refund before a chargeback"},
+   {at:"3.4", p:"fpt", n:"First-Party Trust", t:"First-Party Trust proves friendly fraud"},
+   {at:"3.4", p:"mastercom", n:"Mastercom", t:"Mastercom manages what is left"},
+  ]},
+ {id:"reach", who:"mer", name:"Reach and understand shoppers", why:"The same spending data that runs the network shows where shoppers are and what they respond to.",
+  steps:[
+   {at:"4.3", p:"places", n:"Places & location analytics", t:"Location analytics show where shoppers spend"},
+   {at:"4.2", p:"audhub", n:"Marketing Audience Hub", t:"Marketing Audience Hub builds the audience"},
+   {at:"4.2", p:"commedia", n:"Commerce Media", t:"Commerce Media places the offer with permissioned consumers"},
+   {at:"4.2", p:"dy", n:"Dynamic Yield", t:"Dynamic Yield personalises the experience"},
+   {at:"4.2", p:"offers", n:"Offers platform", t:"The Offers platform distributes merchant-funded offers through bank apps"},
+   {at:"4.3", p:"testlearn", n:"Test & Learn", t:"Test & Learn measures the lift"},
+  ]},
+ {id:"board", who:"acq", name:"Onboard merchants without onboarding risk", why:"An acquirer carries its merchants' risk. These assets check the history, score the applicant and keep watching once the merchant is live.",
+  steps:[
+   {at:"1.3", p:"rules", n:"Rules & compliance", t:"The rules and compliance programmes set who may be boarded"},
+   {at:"3.3", p:"matchpro", n:"MATCH Pro", t:"MATCH Pro checks the merchant's history"},
+   {at:"3.3", p:"orc", n:"Onboard Risk Check", t:"Onboard Risk Check scores the applicant"},
+   {at:"4.1", p:"riskrecon", n:"RiskRecon", t:"RiskRecon rates their cyber posture"},
+   {at:"5.2", p:"merchantcloud", n:"Merchant Cloud", t:"Merchant Cloud connects them to acceptance"},
+   {at:"3.3", p:"merchrisk", n:"Merchant Monitoring", t:"Merchant Monitoring with AI watches them once live"},
+  ]},
+ {id:"launch", who:"fin", name:"Launch a card programme fast", why:"A fintech needs a way in, a processor, a connection and a digital-first card. Most of the answer is in Access.",
+  steps:[
+   {at:"5.4", p:"startpath", n:"Start Path", t:"Start Path gives early access and support"},
+   {at:"5.3", p:"productexpress", n:"Product Express", t:"Product Express fast-tracks programme set-up"},
+   {at:"5.3", p:"engage", n:"Mastercard Engage", t:"Engage supplies vetted enablement partners"},
+   {at:"5.3", p:"processing", n:"Mastercard Processing", t:"Mastercard Processing is issuer processing as a service"},
+   {at:"2.1", p:"cardsconsumer", n:"Card products", t:"Credit, debit or prepaid card products are the programme itself"},
+   {at:"3.1", p:"digitalfirst", n:"Digital First", t:"Digital First makes the card usable before the plastic arrives"},
+   {at:"3.1", p:"mdes", n:"MDES", t:"MDES puts it in the wallet"},
+  ]},
+ {id:"xborder", who:"fin", name:"Send money across borders", why:"One integration reaches accounts, wallets, cards and cash; the security solutions screen the payment on the way.",
+  steps:[
+   {at:"5.1", p:"developers", n:"Mastercard Developers", t:"Mastercard Developers is the one API integration"},
+   {at:"2.3", p:"xborder", n:"Cross-Border Services", t:"Cross-Border Services routes to accounts, wallets, cards and cash"},
+   {at:"4.1", p:"a2aprotect", n:"A2A Protect", t:"A2A Protect screens for scams"},
+   {at:"4.1", p:"trace", n:"TRACE", t:"TRACE flags mule accounts"},
+   {at:"2.4", p:"bvnk", n:"BVNK", t:"BVNK bridges stablecoins and fiat"},
+   {at:"2.2", p:"a2astack", n:"Instant Payment Service", t:"The Instant Payment Service lands it on a local real-time rail"},
+  ]},
+ {id:"lend", who:"fin", name:"Lend on bank data instead of paperwork", why:"Consumer-permissioned bank data verifies the applicant and their cash flow in minutes.",
+  steps:[
+   {at:"2.6", p:"dataconnect", n:"Data Connect", t:"Data Connect captures consent to share bank data"},
+   {at:"2.6", p:"ofus", n:"Open Finance", t:"Open Finance verifies accounts, income and assets"},
+   {at:"4.1", p:"mcidentity", n:"Mastercard Identity", t:"Mastercard Identity checks the applicant is who they say"},
+   {at:"4.3", p:"creditintel", n:"Credit Intelligence", t:"Credit Intelligence scores the cash flow"},
+  ]},
+ {id:"b2b", who:"corp", name:"Pay suppliers faster, with control", why:"Virtual cards put a limit, a window and a purpose on every supplier payment, and reconcile it at both ends.",
+  steps:[
+   {at:"4.5", p:"incontrol", n:"In Control & Commercial Connect", t:"Commercial Connect creates a virtual card per invoice"},
+   {at:"4.5", p:"bpc", n:"Business Payment Controls", t:"Business Payment Controls enforce the limits"},
+   {at:"4.5", p:"trackbps", n:"Track Business Payment Service", t:"Track BPS presents the payment to the supplier"},
+   {at:"2.1", p:"cardscommercial", n:"Commercial cards", t:"Commercial card products are the rail it rides"},
+   {at:"1.1", p:"swcore", n:"Global switching network", t:"The switch routes it to the issuing bank"},
+   {at:"4.5", p:"receivables", n:"Receivables Manager", t:"Receivables Manager reconciles it at the supplier"},
+  ]},
+ {id:"cyber", who:"corp", name:"See and cut cyber risk across suppliers", why:"An outcome answered entirely by Solutions: none of it needs a payment to run on Mastercard.",
+  steps:[
+   {at:"4.1", p:"riskrecon", n:"RiskRecon", t:"RiskRecon rates every vendor from the outside"},
+   {at:"4.1", p:"cybersuite", n:"Cyber Quant", t:"Cyber Quant puts a money value on the exposure"},
+   {at:"4.1", p:"recfut", n:"Recorded Future", t:"Recorded Future supplies live threat intelligence"},
+   {at:"4.1", p:"baffin", n:"Threat Protection", t:"Threat Protection blocks DDoS and bot traffic"},
+   {at:"4.4", p:"practices", n:"Consulting practices", t:"The Cyber & Enterprise Risk practice turns findings into a plan"},
+  ]},
+ {id:"disburse", who:"gov", name:"Get payments to people quickly and safely", why:"Benefits, aid and salaries move on bulk and push rails, with identity for people who have no bank.",
+  steps:[
+   {at:"2.2", p:"bacs", n:"Bacs", t:"Bacs carries about 98% of UK state benefits"},
+   {at:"2.3", p:"disb", n:"Disbursements", t:"Move disburses to cards, accounts and wallets"},
+   {at:"2.3", p:"send", n:"Mastercard Send", t:"Send pushes funds to a card in seconds"},
+   {at:"pillar-inclusion", p:"communitypass", n:"Community Pass", t:"Community Pass gives a digital ID where there is no bank"},
+   {at:"4.1", p:"a2aprotect", n:"A2A Protect", t:"A2A Protect screens payments for scams"},
+   {at:"4.3", p:"spendingpulse", n:"SpendingPulse", t:"SpendingPulse shows where spending moves afterwards"},
+  ]},
+ {id:"agent", who:"ai", name:"Let an agent pay safely", why:"An agent payment needs three new facts: which agent, for whom, and within what consent. The rest of the stack then treats it like any other payment.",
+  steps:[
+   {at:"4.6", p:"agentsuite", n:"Agent Suite", t:"Agent Suite offers ready-made agents to start from"},
+   {at:"3.6", p:"kya", n:"Know Your Agent", t:"Know Your Agent registers and vets the agent"},
+   {at:"3.6", p:"agentictokens", n:"Agentic Tokens", t:"Agentic Tokens carry which agent is acting, and for whom"},
+   {at:"3.6", p:"vintent", n:"Verifiable Intent", t:"Verifiable Intent proves it stayed within consent"},
+   {at:"3.2", p:"passkeys", n:"Payment Passkeys", t:"A Payment Passkey captures the person's consent once"},
+   {at:"3.6", p:"agentpay", n:"Agent Pay", t:"Agent Pay initiates the payment"},
+   {at:"5.2", p:"merchantcloud", n:"Merchant Cloud", t:"Merchant Cloud accepts agent payments"},
+   {at:"3.3", p:"dipro", n:"Decision Intelligence Pro", t:"Decision Intelligence Pro scores it with agent traceability"},
+  ]},
+];
+
+/* =========================================================
    MASTERCARD DEVELOPERS API CATALOGUE — read from developer.mastercard.com/apis
    on 23 Sep 2026 (90 product cards) plus llms.txt (adds Insurance Programs).
    Each entry: [API name, slug, home product id]
@@ -1049,9 +1261,10 @@ Object.values(PRODUCTS).forEach(p=>{ p.apiflag=(p.api&&p.api.length)?"yes":"no";
 const ALL = Object.values(PRODUCTS);
 const TOTAL = ALL.filter(p=>p.st!=="retired").length;
 JOURNEYS.forEach(J=>J.steps.forEach(s=>{ if(s.p&&!PRODUCTS[s.p]) console.warn("journey step product missing:",J.id,s.p); if(!s.at.startsWith("u-")&&!TILES[s.at]) console.warn("journey step tile missing:",J.id,s.at); }));
+OUTCOMES.forEach(O=>O.steps.forEach(s=>{ const p=PRODUCTS[s.p]; if(!p) console.warn("outcome step product missing:",O.id,s.p); else if(p.tile.id!==s.at) console.warn("outcome step tile mismatch:",O.id,s.p,s.at,p.tile.id); }));
 
 /* ========================================================= STATE */
-const state = {lens:"none", filter:null, journey:null, q:""};
+const state = {lens:"none", filter:null, journey:null, q:"", who:"iss", outcome:null, how:false, all:false, open:{}};
 const $ = s=>document.querySelector(s);
 const el = (t,c,h)=>{const e=document.createElement(t); if(c) e.className=c; if(h!==undefined) e.innerHTML=h; return e;};
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1064,13 +1277,18 @@ function matches(p){
   return true;
 }
 function tileEl(id){ return document.getElementById("t-"+String(id).replace(/\./g,"-")); }
+function curOutcome(){ return OUTCOMES.find(o=>o.id===state.outcome)||null; }
+function activePath(){ return JOURNEYS.find(j=>j.id===state.journey) || (state.how? curOutcome() : null); }
+function litTiles(){ const o=curOutcome(), m={}; if(o) o.steps.forEach((s,i)=>{ (m[s.at]=m[s.at]||[]).push(i+1); }); return m; }
+function layerForced(L){ if(state.lens!=="none"||state.q||state.journey) return true; const o=curOutcome(); return !!(o&&state.how&&o.steps.some(s=>TILES[s.at]&&TILES[s.at].layer===L)); }
+function layerOpen(L){ if(L.users) return true; const ov=state.open[L.id]; if(ov!==undefined) return ov; return state.all||layerForced(L); }
 
 /* ========================================================= RENDER */
 function renderFacts(){
   const fresh = ALL.filter(p=>p.st==="new").length;
-  const items=[[String(TOTAL),"products"],[String(ALL_APIS.length),"developer APIs"],[String(JOURNEYS.length),"journeys"],[String(fresh),"new in 2025–26"]];
+  const items=[[String(TOTAL),"products"],[String(ALL_APIS.length),"developer APIs"],[String(OUTCOMES.length),"outcomes"],[String(JOURNEYS.length),"journeys"],[String(fresh),"new in 2025–26"]];
   $("#facts").innerHTML = items.map(([n,l])=>`<span><b>${n}</b> ${l}</span>`).join('<span class="sep">·</span>');
-  $("#foot").innerHTML = `Compiled 23 September 2026 from Mastercard corporate, investor and developer sites, press releases and trade press; the Developer API layer was read directly from the developer.mastercard.com catalogue. Every product sits in exactly one tile; lenses re-slice the same set without duplicating anything. Unconfirmed (○) items are named in briefs but have no current public source; retired (✕) items are kept for the record and shown only under the Status lens. Journey scale figures are as reported by Mastercard or the cited source. Independent reference, not affiliated with or endorsed by Mastercard.`;
+  $("#foot").innerHTML = `Compiled 23 September 2026 from Mastercard corporate, investor and developer sites, press releases and trade press; the Developer API layer was read directly from the developer.mastercard.com catalogue. Every product sits in exactly one tile; lenses re-slice the same set without duplicating anything. Unconfirmed (○) items are named in briefs but have no current public source; retired (✕) items are kept for the record and shown only under the Status lens. Journey scale figures are as reported by Mastercard or the cited source. Outcomes are this map's own groupings of assets, not Mastercard bundles. Independent reference, not affiliated with or endorsed by Mastercard.`;
 }
 function renderStack(){
   const stack=$("#stack"); stack.innerHTML="";
@@ -1079,7 +1297,18 @@ function renderStack(){
     const lab=el("button","lab"); lab.setAttribute("aria-label",`Open layer ${L.name}`);
     const count = L.users?"": `<span class="cnt">${L.tiles.reduce((n,T)=>n+T.products.filter(p=>p.st!=="retired").length,0)} products</span>`;
     lab.innerHTML=`<span class="id">${L.users?"Users":L.id}</span><span class="nm">${esc(L.name)}</span><span class="an">${esc(L.analogy)}</span>${count}`;
-    lab.addEventListener("click",()=>openLayer(L)); row.appendChild(lab);
+    lab.addEventListener("click",()=>openLayer(L));
+    const lcol=el("div","lcol"); lcol.appendChild(lab);
+    const lbody=el("div","lbody");
+    if(!L.users){
+      const tg=el("button","tog"); tg.addEventListener("click",()=>{ state.open[L.id]=!layerOpen(L); paint(); }); lcol.appendChild(tg);
+      const sum=el("div","sum"); sum.innerHTML=glyphSvg(L)+`<div class="sumr"><div class="tnames">${L.tiles.map(T=>`<button class="tname" data-tile="${T.id}"><span class="tid">${T.id}</span>${esc(T.name)}</button>`).join("")}</div><div class="litp"></div></div>`;
+      sum.addEventListener("click",e=>{ const t=e.target.closest("[data-tile]"); if(t) openTile(TILES[t.dataset.tile]); });
+      const hot=(e,on)=>{ const t=e.target.closest&&e.target.closest("[data-tile]"); if(!t) return; sum.querySelectorAll(`[data-tile="${t.dataset.tile}"]`).forEach(x=>x.classList.toggle("hot",on)); };
+      sum.addEventListener("mouseover",e=>hot(e,true)); sum.addEventListener("mouseout",e=>hot(e,false));
+      lbody.appendChild(sum);
+    }
+    row.appendChild(lcol);
     const tiles=el("div","tiles");
     L.tiles.forEach(T=>{
       const b=el("button","tile"); b.dataset.tile=T.id; b.id="t-"+T.id.replace(/\./g,"-");
@@ -1087,13 +1316,48 @@ function renderStack(){
       else { b.innerHTML=`<span class="tid">${T.id}</span><span class="tn">${esc(T.name)}</span><span class="tf"><span class="lbar" hidden></span><span class="tc"></span></span>`; b.addEventListener("click",()=>openTile(T)); }
       tiles.appendChild(b);
     });
-    row.appendChild(tiles); stack.appendChild(row);
+    lbody.appendChild(tiles); row.appendChild(lbody); stack.appendChild(row);
   });
   const pl=$("#pillars"); pl.innerHTML="";
   PILLARS.forEach(T=>{ const b=el("button"); b.id="t-"+T.id; b.dataset.tile=T.id; b.innerHTML=`<span>${esc(T.name)}</span><span class="c">${T.products.length}</span>`; b.addEventListener("click",()=>openTile(T)); pl.appendChild(b); });
   paint();
 }
+const GLYPH = {L5:"door", L4:"app", L3:"gate", L2:"rail", L1:"core"};
+function glyphSvg(L){
+  const k=GLYPH[L.id], n=L.tiles.length; let s=`<svg class="glyph" viewBox="0 0 132 44" width="132" height="44" aria-hidden="true">`;
+  if(k==="gate") s+=`<line class="glink" x1="12" y1="22" x2="${12+(n-1)*21.6}" y2="22"/>`;
+  if(k==="core") s+=`<g transform="rotate(45 66 22)">`;
+  L.tiles.forEach((T,i)=>{
+    const a=`class="seg" data-tile="${T.id}"`, t=`<title>${esc(T.id+" "+T.name)}</title>`;
+    if(k==="door"){ const x=6+i*25; s+=`<path ${a} d="M${x} 40V18a9 9 0 0 1 18 0V40Z">${t}</path>`; }
+    else if(k==="app"){ s+=`<rect ${a} x="${3+i*21.6}" y="13" width="18" height="18" rx="5">${t}</rect>`; }
+    else if(k==="gate"){ s+=`<circle ${a} cx="${12+i*21.6}" cy="22" r="8.5">${t}</circle>`; }
+    else if(k==="rail"){ s+=`<rect ${a} x="3" y="${2+i*7}" width="126" height="5" rx="2.5">${t}</rect>`; }
+    else { s+=`<rect ${a} x="${51+(i%2)*16}" y="${7+Math.floor(i/2)*16}" width="14" height="14" rx="2.5">${t}</rect>`; }
+  });
+  if(k==="core") s+="</g>";
+  return s+"</svg>";
+}
+function syncLayers(){
+  const o=curOutcome(), by=litTiles();
+  $("#stack").classList.toggle("haslit",!!o);
+  LAYERS.forEach(L=>{
+    if(L.users) return;
+    const row=document.querySelector(`.layer[data-layer="${L.id}"]`); if(!row) return;
+    const open=layerOpen(L);
+    row.classList.toggle("collapsed",!open);
+    row.querySelector(".tiles").hidden=!open; row.querySelector(".sum").hidden=open;
+    const tg=row.querySelector(".tog"); tg.setAttribute("aria-expanded",String(open)); tg.innerHTML=open? `Hide areas <span aria-hidden="true">▴</span>` : `Show ${L.tiles.length} areas<span class="tp"> · ${L.tiles.reduce((n,T)=>n+T.products.filter(p=>p.st!=="retired").length,0)} products</span> <span aria-hidden="true">▾</span>`;
+    row.querySelectorAll(".seg,.tname").forEach(e=>e.classList.toggle("lit",!!by[e.dataset.tile]));
+    const lp=row.querySelector(".litp"); lp.innerHTML="";
+    if(o) o.steps.forEach((s,i)=>{ const T=TILES[s.at]; if(!T||T.layer!==L) return; const b=el("button","lchip",`<span class="no">${i+1}</span>${esc(s.n||PRODUCTS[s.p].n)}`); b.title=s.t; b.addEventListener("click",e=>{ e.stopPropagation(); openProduct(PRODUCTS[s.p]); }); lp.appendChild(b); });
+  });
+  const ab=$("#allbtn"), forced=state.lens!=="none"||!!state.q||!!state.journey, on=state.all||forced;
+  ab.disabled=forced; ab.textContent=on?"Collapse all":"Expand all"; ab.setAttribute("aria-pressed",String(on));
+  ab.title=forced?"Layers stay open while a lens, a search or a journey is on":"";
+}
 function paint(){
+  syncLayers();
   const lens=lensDef(); const anyFilter = (state.lens!=="none"&&state.filter)||state.q;
   LAYERS.forEach(L=>{
     L.tiles.forEach(T=>{
@@ -1114,7 +1378,7 @@ function paint(){
         bar.hidden=false;
       } else bar.hidden=true;
       b.querySelector(".tc").textContent = anyFilter? `${hits} / ${live.length}` : String(live.length);
-      b.classList.toggle("dim", !!anyFilter&&hits===0&&!state.journey);
+      b.classList.toggle("dim", !!anyFilter&&hits===0&&!activePath());
       b.classList.toggle("hit", !!state.q&&hits>0);
     });
   });
@@ -1124,7 +1388,7 @@ function paint(){
 /* ========================================================= LENS + LEGEND */
 function renderLens(){
   const seg=$("#lens"); seg.querySelectorAll("button").forEach(b=>b.remove());
-  LENSES.forEach(l=>{ const b=el("button","",esc(l.name)); b.dataset.lens=l.id; b.setAttribute("aria-pressed", String(state.lens===l.id)); b.addEventListener("click",()=>{ state.lens=l.id; state.filter=null; renderLens(); renderLegend(); syncCtrl(); paint(); if(drawerCtx) rerenderDrawer(); }); seg.appendChild(b); });
+  LENSES.forEach(l=>{ const b=el("button","",esc(l.name)); b.dataset.lens=l.id; b.setAttribute("aria-pressed", String(state.lens===l.id)); b.addEventListener("click",()=>{ state.lens=l.id; state.filter=null; state.open={}; renderLens(); renderLegend(); syncCtrl(); paint(); if(drawerCtx) rerenderDrawer(); }); seg.appendChild(b); });
 }
 function renderLegend(){
   const lg=$("#legend"); lg.innerHTML="";
@@ -1158,23 +1422,49 @@ function closeMenu(){ jmenu.hidden=true; jbtn.setAttribute("aria-expanded","fals
 jbtn.addEventListener("click",()=>{ jmenu.hidden? openMenu() : closeMenu(); });
 document.addEventListener("click",e=>{ if(!e.target.closest(".jwrap")) closeMenu(); if(!e.target.closest(".search")) $("#results").hidden=true; });
 function setJourney(id){
-  state.journey = id;
+  state.journey = id; state.open={};
+  if(id){ state.outcome=null; state.how=false; renderStart(); }
   const J=JOURNEYS.find(j=>j.id===id); renderJourneyMenu();
   if(J){ renderJourneyStatus(J); openJourneyPanel(J); } else { $("#jstatus").classList.remove("on"); }
   syncCtrl(); paint(); requestAnimationFrame(()=>{ paintJourney(); setTimeout(paintJourney,350); });
 }
-function closeJourney(){ setJourney(null); }
+function closeJourney(){ if(state.journey) setJourney(null); else if(state.how) setOutcome(state.outcome,false); }
+/* ----- outcomes: who you are and what you want to solve ----- */
+function setOutcome(id,how){
+  const o=OUTCOMES.find(x=>x.id===id)||null;
+  if(o&&state.journey){ state.journey=null; renderJourneyMenu(); $("#jstatus").classList.remove("on"); }
+  state.outcome=o?o.id:null; if(o) state.who=o.who; state.how=!!(o&&how); state.open={};
+  renderStart(); if(state.how) openJourneyPanel(o);
+  syncCtrl(); paint(); requestAnimationFrame(()=>{ paintJourney(); setTimeout(paintJourney,350); });
+}
+function renderStart(){
+  const box=$("#start"), had=box.contains(document.activeElement)? document.activeElement.dataset.k : null;
+  const w=$("#whochips"); w.innerHTML="";
+  Object.keys(WHO).forEach(k=>{ const b=el("button","ochip",esc(WHO[k])); b.dataset.k="w-"+k; b.setAttribute("aria-pressed",String(state.who===k)); b.addEventListener("click",()=>{ if(state.who===k&&!state.outcome) return; state.who=k; setOutcome(null); }); w.appendChild(b); });
+  const oc=$("#outchips"); oc.innerHTML="";
+  OUTCOMES.filter(o=>o.who===state.who).forEach(o=>{ const b=el("button","ochip out",esc(o.name)); b.dataset.k="o-"+o.id; b.setAttribute("aria-pressed",String(state.outcome===o.id)); b.addEventListener("click",()=>setOutcome(state.outcome===o.id?null:o.id)); oc.appendChild(b); });
+  const st=$("#ostat"), o=curOutcome(); st.innerHTML="";
+  if(!o){ st.textContent="Pick one to light up the assets that solve it."; }
+  else {
+    const ls=new Set(o.steps.map(s=>TILES[s.at].layer.id)), pil=ls.delete("P"), nl=ls.size;
+    st.appendChild(el("span","",`<b>${o.steps.length} assets</b> across ${nl} ${nl===1?"layer":"layers"}${pil?" and one pillar":""} light up below.`));
+    const hb=el("button","sbtn"+(state.how?"":" pri"), state.how?"Back to the simple view":"Show how they work together"); hb.dataset.k="how"; hb.addEventListener("click",()=>setOutcome(o.id,!state.how)); st.appendChild(hb);
+    const cb=el("button","slink","Clear"); cb.dataset.k="clear"; cb.addEventListener("click",()=>setOutcome(null)); st.appendChild(cb);
+  }
+  if(had){ const f=box.querySelector(`[data-k="${had}"]`)||box.querySelector(`[data-k="w-${state.who}"]`); if(f) f.focus(); }
+}
 function renderJourneyStatus(J){
   const G=JGROUPS.find(g=>g.id===J.g);
   const s=$("#jstatus"); s.innerHTML=`<span class="g">${esc(G.name)}</span><span class="n">${esc(J.name)}</span><span>${esc(J.scale)}</span><button class="x" id="jexit">Exit journey</button>`; s.classList.add("on");
   $("#jexit").addEventListener("click",closeJourney);
 }
 function openJourneyPanel(J){
-  const G=JGROUPS.find(g=>g.id===J.g);
+  const G=J.who? {name:"Outcome · "+WHO[J.who].replace(/^An? /,"")} : JGROUPS.find(g=>g.id===J.g);
   $("#jgroup").textContent=G.name; $("#jtitle").textContent=J.name;
   const body=$("#jbody"); body.innerHTML="";
   body.appendChild(el("p","why",esc(J.why)));
-  const sc=el("div","scale"); sc.innerHTML=`<b>Scale</b> · ${esc(J.scale)}${(J.src||[]).map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}`; body.appendChild(sc);
+  if(J.who) body.appendChild(el("p","onote","The assets below are numbered in the order they act. The grouping is this map's own, not a Mastercard bundle."));
+  else { const sc=el("div","scale"); sc.innerHTML=`<b>Scale</b> · ${esc(J.scale)}${(J.src||[]).map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}`; body.appendChild(sc); }
   const st=el("div","steps");
   J.steps.forEach((s,i)=>{
     const where = s.at.startsWith("u-")? USERS[s.at.slice(2)] : (TILES[s.at]? (TILES[s.at].id.startsWith("pillar")?"Pillar":TILES[s.at].id)+" · "+TILES[s.at].name : s.at);
@@ -1188,15 +1478,19 @@ $("#jclose").addEventListener("click",closeJourney);
 function paintJourney(){
   const svg=$("#jpath"), nodes=$("#jnodes"); svg.innerHTML=""; nodes.innerHTML="";
   document.querySelectorAll(".tile.on-path,.pillars button.on-path").forEach(e=>e.classList.remove("on-path"));
-  $("#board").classList.toggle("journey", !!state.journey);
-  if(!state.journey){ if(!((state.lens!=="none"&&state.filter)||state.q)) document.querySelectorAll(".tile.dim").forEach(e=>e.classList.remove("dim")); return; }
-  const J=JOURNEYS.find(j=>j.id===state.journey);
+  const J=activePath(), O=curOutcome(), me=O? "u-"+O.who : null;
+  $("#board").classList.toggle("journey", !!J);
+  if(!J){
+    if(!((state.lens!=="none"&&state.filter)||state.q)) document.querySelectorAll(".tile.dim").forEach(e=>e.classList.remove("dim"));
+    if(O){ const lit=litTiles(); document.querySelectorAll(".tile,.pillars button").forEach(b=>{ if(lit[b.dataset.tile]||b.dataset.tile===me) b.classList.add("on-path"); }); }
+    return;
+  }
   const by={}; J.steps.forEach((s,i)=>{ (by[s.at]=by[s.at]||[]).push(i+1); });
-  document.querySelectorAll(".tile").forEach(b=>{ const id=b.dataset.tile; if(by[id]){ b.classList.add("on-path"); b.classList.remove("dim"); } else b.classList.add("dim"); });
+  document.querySelectorAll(".tile").forEach(b=>{ const id=b.dataset.tile; if(by[id]||(J===O&&id===me)){ b.classList.add("on-path"); b.classList.remove("dim"); } else b.classList.add("dim"); });
   document.querySelectorAll(".pillars button").forEach(b=>{ if(by[b.dataset.tile]) b.classList.add("on-path"); });
   const board=$("#board").getBoundingClientRect();
   const pts=[]; let last=null; const seen={};
-  J.steps.forEach(s=>{ if(s.at===last) return; last=s.at; const e=tileEl(s.at); if(!e) return; const r=e.getBoundingClientRect(); pts.push({cx:r.left-board.left+r.width/2, cy:r.top-board.top+r.height/2, nx:r.right-board.left-10, ny:r.top-board.top-1, at:s.at}); });
+  J.steps.forEach(s=>{ if(s.at===last) return; last=s.at; const e=tileEl(s.at); if(!e||e.offsetParent===null) return; const r=e.getBoundingClientRect(); pts.push({cx:r.left-board.left+r.width/2, cy:r.top-board.top+r.height/2, nx:r.right-board.left-10, ny:r.top-board.top-1, at:s.at}); });
   const ns="http://www.w3.org/2000/svg";
   if(pts.length>1){ const d=pts.map((p,i)=>(i?"L":"M")+p.cx+","+p.cy).join(" "); const path=document.createElementNS(ns,"path"); path.setAttribute("d",d); svg.appendChild(path); }
   pts.forEach(p=>{ if(seen[p.at]) return; seen[p.at]=1; const g=document.createElementNS(ns,"g"); g.setAttribute("class","node"); g.setAttribute("transform",`translate(${p.nx},${p.ny})`);
@@ -1205,13 +1499,13 @@ function paintJourney(){
     const t=document.createElementNS(ns,"text"); t.textContent=label; g.appendChild(t); nodes.appendChild(g); });
 }
 function syncCtrl(){ document.documentElement.style.setProperty("--ctrl-h", $(".controls").offsetHeight+"px"); }
-window.addEventListener("resize",()=>{ syncCtrl(); if(state.journey) paintJourney(); });
+window.addEventListener("resize",()=>{ syncCtrl(); if(activePath()) paintJourney(); });
 
 /* ========================================================= SEARCH */
 const qi=$("#q"), res=$("#results");
 qi.addEventListener("input",()=>{ state.q=qi.value.trim(); paint(); renderResults(); });
 qi.addEventListener("keydown",e=>{ if(e.key==="Enter"){ const f=res.querySelector("button"); if(f) f.click(); } if(e.key==="Escape"){ qi.value=""; state.q=""; paint(); renderResults(); qi.blur(); } });
-document.addEventListener("keydown",e=>{ if(e.key==="/"&&document.activeElement!==qi&&!drawerOpen()){ e.preventDefault(); qi.focus(); } if(e.key==="Escape"){ if(drawerOpen()) closeDrawer(); else if(!jmenu.hidden) closeMenu(); else if(state.journey) closeJourney(); } });
+document.addEventListener("keydown",e=>{ if(e.key==="/"&&document.activeElement!==qi&&!drawerOpen()){ e.preventDefault(); qi.focus(); } if(e.key==="Escape"){ if(drawerOpen()) closeDrawer(); else if(!jmenu.hidden) closeMenu(); else if(state.journey||state.how) closeJourney(); } });
 function renderResults(){
   if(!state.q){ res.hidden=true; return; }
   const q=state.q.toLowerCase();
@@ -1257,6 +1551,7 @@ function detailHtml(p){
   const srcs = p.src&&p.src.length? p.src.map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("") : `<span style="color:var(--muted)">No first-party source found — treat as unconfirmed.</span>`;
   const rel = (p.rel||[]).filter(id=>PRODUCTS[id]).map(id=>`<button data-rel="${id}">${esc(PRODUCTS[id].n)}</button>`).join("");
   const inJ = JOURNEYS.filter(J=>J.steps.some(s=>s.p===p.id));
+  const inO = OUTCOMES.filter(O=>O.steps.some(s=>s.p===p.id));
   d.innerHTML=`<dl class="kv">
     <dt>What it is</dt><dd>${esc(p.d)}</dd>
     <dt>Home</dt><dd>${esc(p.tile.layer.name)} / ${esc(p.tile.id.startsWith("pillar")?"":p.tile.id+" ")}${esc(p.tile.name)}</dd>
@@ -1269,11 +1564,13 @@ function detailHtml(p){
     ${p.note?`<dt>Notes</dt><dd>${esc(p.note)}</dd>`:""}
     ${(p.api&&p.api.length)?`<dt>Developer APIs</dt><dd class="srcs">${p.api.map(a=>`<a href="${esc(a.u)}" target="_blank" rel="noopener">${esc(a.n)}</a>`).join("")}</dd>`:""}
     ${inJ.length?`<dt>In journeys</dt><dd class="rel">${inJ.map(J=>`<button data-j="${J.id}">${esc(J.name)}</button>`).join("")}</dd>`:""}
+    ${inO.length?`<dt>In outcomes</dt><dd class="rel">${inO.map(O=>`<button data-o="${O.id}">${esc(O.name)}</button>`).join("")}</dd>`:""}
     ${rel?`<dt>Related</dt><dd class="rel">${rel}</dd>`:""}
     <dt>Sources</dt><dd class="srcs">${srcs}</dd>
   </dl>`;
   d.querySelectorAll("[data-rel]").forEach(b=>b.addEventListener("click",()=>openProduct(PRODUCTS[b.dataset.rel])));
   d.querySelectorAll("[data-j]").forEach(b=>b.addEventListener("click",()=>{ closeDrawer(); setJourney(b.dataset.j); }));
+  d.querySelectorAll("[data-o]").forEach(b=>b.addEventListener("click",()=>{ closeDrawer(); setOutcome(b.dataset.o,true); }));
   return d;
 }
 function openLayer(L, keep){
@@ -1381,10 +1678,12 @@ function goHome(){ window.scrollTo({top:0,behavior:"smooth"}); }
 
 /* ========================================================= BOOT */
 function boot(){
-  renderFacts(); renderLens(); renderLegend(); renderJourneyMenu(); renderStack(); renderViz(); syncCtrl();
+  renderFacts(); renderLens(); renderLegend(); renderJourneyMenu(); renderStart(); renderStack(); renderViz(); syncCtrl();
+  $("#allbtn").addEventListener("click",()=>{ state.all=!state.all; state.open={}; paint(); });
+  $("#cta-outcome").addEventListener("click",()=>goMap(()=>{ const c=$("#outchips button"); if(c) c.focus({preventScroll:true}); }));
   $("#explore").addEventListener("click",()=>goMap()); $("#homebtn").addEventListener("click",goHome);
   $("#cta-journey").addEventListener("click",()=>goMap(()=>openMenu()));
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ syncCtrl(); if(state.journey) paintJourney(); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ syncCtrl(); if(activePath()) paintJourney(); });
   const h=(location.hash||"").slice(1);
   if(h){ const t=$("#map"); if(t) window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-8}); }
   if(/^L[1-5]$/.test(h)||h==="U"){ const L=LAYERS.find(l=>l.id===h); if(L) openLayer(L); }
@@ -1393,6 +1692,7 @@ function boot(){
   else if(/^u-/.test(h)){ const u=h.slice(2); if(USERS[u]) openUser(u); }
   else if(/^pillar-/.test(h)){ const T=TILES[h]; if(T) openTile(T); }
   else if(/^j-/.test(h)){ const J=JOURNEYS.find(j=>j.id===h.slice(2)); if(J) setJourney(J.id); }
+  else if(/^o-/.test(h)){ const O=OUTCOMES.find(o=>o.id===h.slice(2)); if(O) setOutcome(O.id); }
 }
 boot();
 </script>

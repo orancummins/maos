@@ -366,6 +366,51 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 .apihome{border:0;background:none;padding:0;color:var(--muted);cursor:pointer;font-size:12px;text-align:right}
 .apihome:hover{color:var(--ink);text-decoration:underline}
 .seealso{font-size:13px;color:var(--muted)}
+/* ================= vs Visa lens ================= */
+.tile .vw{font-family:var(--mono);font-size:10.5px;font-weight:600;line-height:1;padding:3px 6px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--ground);white-space:nowrap}
+.tile .vw[hidden]{display:none}
+.tile .vw[data-w="more"],.vwb[data-w="more"]{color:var(--c1);border-color:var(--c1)}
+.tile .vw[data-w="less"],.vwb[data-w="less"]{color:var(--c7);border-color:var(--c7)}
+.tile .vw[data-w="diff"],.vwb[data-w="diff"]{color:var(--gold-ink);border-color:var(--c4)}
+.tile .vw[data-w="unk"],.vwb[data-w="unk"]{color:var(--faint);border-style:dashed}
+.legend .vlink{border-color:var(--c1);color:var(--c1);font-weight:500}
+.legend .vlink:hover{background:color-mix(in oklab,var(--c1) 8%,var(--ground))}
+.legend .vkey b{font-family:var(--mono);color:var(--ink)}
+.vk{display:inline-block;font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:999px;margin-right:4px}
+.vk.eq{color:var(--c1);background:color-mix(in oklab,var(--c1) 12%,var(--ground))}
+.vk.rel{color:var(--gold-ink);background:color-mix(in oklab,var(--c4) 18%,var(--ground))}
+.vk.none{color:var(--c7);background:color-mix(in oklab,var(--c7) 10%,var(--ground))}
+.vn{color:var(--ink-2)}
+.dag{color:var(--muted);cursor:help}
+.vpanel{border:1px solid color-mix(in oklab,var(--c1) 35%,var(--line));border-radius:12px;padding:14px 16px 10px;margin:12px 0 6px;background:color-mix(in oklab,var(--c1) 4%,var(--ground))}
+.vpanel .vh{display:flex;gap:6px 12px;align-items:baseline;flex-wrap:wrap}
+.vwb{font-size:11.5px;font-weight:500;border:1px solid var(--line-2);border-radius:999px;padding:2px 9px;white-space:nowrap;color:var(--ink-2);background:var(--ground)}
+.vwb b{font-family:var(--mono);margin-right:2px}
+.vpanel .vs{font-size:13.5px;color:var(--ink-2);flex:1 1 280px}
+.vpanel h5{margin:14px 0 2px;font-size:12px;font-weight:500;color:var(--muted)}
+.vpanel .va{border-top:1px solid var(--line);padding:9px 0}
+.vpanel .va:first-of-type{border-top:0}
+.vpanel .vt{display:flex;gap:8px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.vpanel .vnm{font-weight:600;font-size:14px}
+.vpanel .vd{font-size:13px;color:var(--ink-2);margin-top:2px}
+.vpanel .vc{font-size:12.5px;color:var(--muted);margin-top:3px}
+.vpanel .vc button{border:0;background:none;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:12.5px;margin-right:8px}
+.vpanel .vonly{color:var(--c1);font-weight:500}
+.vpanel .vfoot{font-size:11.5px;color:var(--muted);margin:8px 0 2px}
+.badge.vst-n{color:var(--s-new);background:color-mix(in oklab,var(--s-new) 12%,var(--ground))}
+.badge.vst-p,.badge.vst-x{color:var(--s-flux);background:color-mix(in oklab,var(--s-flux) 12%,var(--ground))}
+.badge.vst-u{color:var(--muted);outline:1px dashed var(--line-2);outline-offset:-1px;background:none}
+.badge.vst-r{color:var(--s-retired);background:color-mix(in oklab,var(--s-retired) 10%,var(--ground))}
+.vdiffs{margin-bottom:6px}
+.vtable{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+.vtable th,.vtable td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.vtable thead th{font-size:12px;font-weight:600;color:var(--ink)}
+.vtable tbody th{font-weight:500;color:var(--ink-2)}
+.vtable td{font-variant-numeric:tabular-nums}
+.vnote{font-size:12.5px;color:var(--muted);margin:6px 0}
+.vtiles .tn{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.vsrc a{display:block;font-size:13px;overflow-wrap:anywhere;margin:2px 0}
+
 .seealso button{border:0;background:none;padding:0;color:var(--link);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:13px}
 
 /* ================= footer ================= */
@@ -423,7 +468,7 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 
   <div class="mapintro" id="map">
     <h2>The map</h2>
-    <p>Read it <b>bottom-up</b> and it is a transaction; <b>top-down</b> and it is a customer. Start from an outcome to light up what solves it, open a layer to see its areas, switch a lens to re-slice the same assets, or pick a journey to watch the layers work.</p>
+    <p>Read it <b>bottom-up</b> and it is a transaction; <b>top-down</b> and it is a customer. Start from an outcome to light up what solves it, open a layer to see its areas, switch a lens to re-slice the same assets (or compare them with Visa), or pick a journey to watch the layers work.</p>
   </div>
 
   <div class="controls">
@@ -503,6 +548,8 @@ a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:2px}
 <script>
 /*__DATA__*/
 
+/*__VISA__*/
+
 const APIF = {yes:"Has a Mastercard Developers API", no:"No public API"};
 const LENSES = [
   {id:"none", name:"Off"},
@@ -512,6 +559,7 @@ const LENSES = [
   {id:"o", name:"Origin", map:OR, key:"o", colors:["c7","c5"]},
   {id:"st", name:"Status", map:ST, key:"st", colors:["c8","c3","c6","c7","c4"]},
   {id:"api", name:"API", map:APIF, key:"apiflag", colors:["c1","c8"]},
+  {id:"v", name:"vs Visa", map:VISA_K, key:"vk", colors:["c1","c4","c7"]},
 ];
 
 /*__JOURNEYS__*/
@@ -659,7 +707,7 @@ const TILES = {}, PRODUCTS = {}; let ALL_APIS = [];
 LAYERS.forEach(L=>{ L.tiles.forEach(T=>{ T.layer=L; TILES[T.id]=T; (T.products||[]).forEach(p=>{ p.tile=T; PRODUCTS[p.id]=p; if(!p.div) p.div=T.div||"core"; if(!p.rev) p.rev=T.rev||"na"; }); }); });
 PILLARS.forEach(T=>{ T.layer={id:"P",name:"Pillar",color:"--lu",analogy:"cross-cutting"}; TILES[T.id]=T; T.products.forEach(p=>{ p.tile=T; PRODUCTS[p.id]=p; if(!p.div) p.div="corp"; if(!p.rev) p.rev="na"; }); });
 APIS.forEach(([n,slug,home])=>{ const p=PRODUCTS[home]; if(!p){ console.warn("API without home:",n); return; } const u = slug? D+"/product/"+slug : D+"/apis"; (p.api=p.api||[]).push({n,u}); ALL_APIS.push({n,u,p}); });
-Object.values(PRODUCTS).forEach(p=>{ p.apiflag=(p.api&&p.api.length)?"yes":"no"; });
+Object.values(PRODUCTS).forEach(p=>{ p.apiflag=(p.api&&p.api.length)?"yes":"no"; const v=VISA_P[p.id]; p.vc=v||null; p.vk=v?v[0]:"none"; if(!v&&p.st!=="retired") console.warn("no Visa comparison for:",p.id); });
 const ALL = Object.values(PRODUCTS);
 const TOTAL = ALL.filter(p=>p.st!=="retired").length;
 JOURNEYS.forEach(J=>J.steps.forEach(s=>{ if(s.p&&!PRODUCTS[s.p]) console.warn("journey step product missing:",J.id,s.p); if(!s.at.startsWith("u-")&&!TILES[s.at]) console.warn("journey step tile missing:",J.id,s.at); }));
@@ -690,7 +738,7 @@ function renderFacts(){
   const fresh = ALL.filter(p=>p.st==="new").length;
   const items=[[String(TOTAL),"products"],[String(ALL_APIS.length),"developer APIs"],[String(OUTCOMES.length),"outcomes"],[String(JOURNEYS.length),"journeys"],[String(fresh),"new in 2025–26"]];
   $("#facts").innerHTML = items.map(([n,l])=>`<span><b>${n}</b> ${l}</span>`).join('<span class="sep">·</span>');
-  $("#foot").innerHTML = `Compiled 23 September 2026 from Mastercard corporate, investor and developer sites, press releases and trade press; the Developer API layer was read directly from the developer.mastercard.com catalogue. Every product sits in exactly one tile; lenses re-slice the same set without duplicating anything. Unconfirmed (○) items are named in briefs but have no current public source; retired (✕) items are kept for the record and shown only under the Status lens. Journey scale figures are as reported by Mastercard or the cited source. Outcomes are this map's own groupings of assets, not Mastercard bundles. Independent reference, not affiliated with or endorsed by Mastercard.`;
+  $("#foot").innerHTML = `Compiled 23 September 2026 from Mastercard corporate, investor and developer sites, press releases and trade press; the Developer API layer was read directly from the developer.mastercard.com catalogue. Every product sits in exactly one tile; lenses re-slice the same set without duplicating anything. Unconfirmed (○) items are named in briefs but have no current public source; retired (✕) items are kept for the record and shown only under the Status lens. Journey scale figures are as reported by Mastercard or the cited source. Outcomes are this map's own groupings of assets, not Mastercard bundles. The vs Visa lens compares each Mastercard product with Visa's nearest asset, using Visa's filings, press releases and trade press read on 7 October 2026; an item marked † comes from background knowledge and was not source-checked, and “no equivalent found” means not found in the sources read. Independent reference, not affiliated with or endorsed by Mastercard or Visa.`;
 }
 function renderStack(){
   const stack=$("#stack"); stack.innerHTML="";
@@ -715,7 +763,7 @@ function renderStack(){
     L.tiles.forEach(T=>{
       const b=el("button","tile"); b.dataset.tile=T.id; b.id="t-"+T.id.replace(/\./g,"-");
       if(L.users){ b.innerHTML=`<span class="tn">${esc(T.name)}</span><span class="tf"><span class="usw" hidden></span><span class="tc"></span></span>`; b.addEventListener("click",()=>openUser(T.user)); }
-      else { b.innerHTML=`<span class="tid">${T.id}</span><span class="tn">${esc(T.name)}</span><span class="tf"><span class="lbar" hidden></span><span class="tc"></span></span>`; b.addEventListener("click",()=>openTile(T)); }
+      else { b.innerHTML=`<span class="tid">${T.id}</span><span class="tn">${esc(T.name)}</span><span class="tf"><span class="lbar" hidden></span><span class="vw" hidden></span><span class="tc"></span></span>`; b.addEventListener("click",()=>openTile(T)); }
       tiles.appendChild(b);
     });
     lbody.appendChild(tiles); row.appendChild(lbody); stack.appendChild(row);
@@ -773,6 +821,8 @@ function paint(){
       }
       const live=T.products.filter(p=>p.st!=="retired"||state.lens==="st");
       let hits=0; live.forEach(p=>{ if(matches(p)) hits++; });
+      const vw=b.querySelector(".vw"), vt=VISA_T[T.id];
+      if(vw){ if(state.lens==="v"&&vt){ const W=VISA_W[vt.w]; vw.hidden=false; vw.textContent="V"+W.sym; vw.title=W.t; vw.dataset.w=vt.w; } else vw.hidden=true; }
       const bar=b.querySelector(".lbar"); bar.innerHTML="";
       if(state.lens!=="none"){
         const counts={}; live.forEach(p=>catsOf(p,lens).forEach(c=>counts[c]=(counts[c]||0)+1));
@@ -804,6 +854,10 @@ function renderLegend(){
     lg.appendChild(b);
   });
   lg.appendChild(el("span","hint", state.filter?"Click again to clear":"Click to filter"));
+  if(state.lens==="v"){
+    const vb=el("button","chip vlink","Headline comparison <span class=\"cnt\">→</span>"); vb.addEventListener("click",()=>openVisa()); lg.appendChild(vb);
+    lg.appendChild(el("span","hint vkey","Tile marks (V): "+Object.values(VISA_W).filter(w=>w.sym!=="?").map(w=>`<b>${w.sym}</b> ${esc(w.t)}`).join(" · ")));
+  }
 }
 
 /* ========================================================= JOURNEYS */
@@ -931,7 +985,7 @@ function setHead(crumbs, lid, title, color){
   $("#dlid").textContent=lid||""; drawer.style.setProperty("--lc", color?`var(${color})`:"var(--accent)"); drawer.style.setProperty("--lcf", color?`var(${color}f)`:"var(--accent)");
   $("#dtitle").textContent=title;
 }
-function rerenderDrawer(){ if(!drawerCtx) return; const c=drawerCtx; if(c.kind==="tile") openTile(c.tile,true); else if(c.kind==="layer") openLayer(c.layer,true); else if(c.kind==="user") openUser(c.user,true); else if(c.kind==="product") openProduct(c.product,true); }
+function rerenderDrawer(){ if(!drawerCtx) return; const c=drawerCtx; if(c.kind==="tile") openTile(c.tile,true); else if(c.kind==="layer") openLayer(c.layer,true); else if(c.kind==="user") openUser(c.user,true); else if(c.kind==="product") openProduct(c.product,true); else if(c.kind==="visa") openVisa(true); }
 function tagHtml(p){
   const lens=lensDef(); let out="";
   if(p.st!=="active") out+=`<span class="badge ${p.st}">${p.st==="new"?"✦ New":p.st==="flux"?"◐ In flux":p.st==="unconf"?"○ Unconfirmed":"✕ Retired"}</span>`;
@@ -956,6 +1010,7 @@ function detailHtml(p){
   const inO = OUTCOMES.filter(O=>O.steps.some(s=>s.p===p.id));
   d.innerHTML=`<dl class="kv">
     <dt>What it is</dt><dd>${esc(p.d)}</dd>
+    ${visaRow(p)}
     <dt>Home</dt><dd>${esc(p.tile.layer.name)} / ${esc(p.tile.id.startsWith("pillar")?"":p.tile.id+" ")}${esc(p.tile.name)}</dd>
     <dt>Serves</dt><dd>${p.s.map(k=>esc(USERS[k])).join(" · ")||"—"}</dd>
     <dt>Lifecycle</dt><dd>${esc(LC[p.lc])}</dd>
@@ -974,6 +1029,48 @@ function detailHtml(p){
   d.querySelectorAll("[data-j]").forEach(b=>b.addEventListener("click",()=>{ closeDrawer(); setJourney(b.dataset.j); }));
   d.querySelectorAll("[data-o]").forEach(b=>b.addEventListener("click",()=>{ closeDrawer(); setOutcome(b.dataset.o,true); }));
   return d;
+}
+const VST = {a:"Active", n:"New 2025–26", p:"Pilot / beta", x:"Pending close", u:"Unconfirmed", r:"Abandoned"};
+function visaRow(p){
+  if(state.lens!=="v"||!p.vc) return "";
+  const [k,v,n,b]=p.vc;
+  const name = k==="none" ? "" : `<b>${esc(v)}</b>${b?' <span class="dag" title="From background knowledge; not source-checked in this pass">†</span>':""}<br>`;
+  return `<dt>Visa</dt><dd><span class="vk ${k}">${esc(VISA_K[k])}</span> ${name}<span class="vn">${esc(n)}</span></dd>`;
+}
+function visaTilePanel(T){
+  const v=VISA_T[T.id]; if(!v) return null; const W=VISA_W[v.w];
+  const box=el("div","vpanel");
+  box.innerHTML=`<div class="vh"><span class="vwb" data-w="${v.w}"><b>V${W.sym}</b> ${esc(W.t)}</span><span class="vs">${esc(v.s)}</span></div><h5>Visa on this tile</h5>`;
+  v.a.forEach(([n,d,mc,st,o])=>{
+    const r=el("div","va"); const only=!mc.length;
+    const counter = only? `<span class="vonly">No Mastercard counterpart on this map</span>` : `<span class="vmc">Mastercard counterpart:</span> `+mc.filter(id=>PRODUCTS[id]).map(id=>`<button data-p="${id}">${esc(PRODUCTS[id].n)}</button>`).join("");
+    r.innerHTML=`<div class="vt"><span class="vnm">${esc(n)}</span><span class="badges"><span class="badge vst-${st}">${esc(VST[st])}</span><span class="badge">${esc(o)}</span></span></div><div class="vd">${esc(d)}</div><div class="vc">${counter}</div>`;
+    r.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>openProduct(PRODUCTS[b.dataset.p])));
+    box.appendChild(r);
+  });
+  box.appendChild(el("p","vfoot","† from background knowledge, not source-checked in this pass. “No equivalent found” means not found in the sources read."));
+  return box;
+}
+function openVisa(keep){
+  drawerCtx={kind:"visa"};
+  setHead([{t:"Map",fn:closeDrawer},{t:"vs Visa"}], "Comparison · compiled 7 October 2026", "Mastercard vs Visa", "--l2");
+  const body=$("#dbody"); body.innerHTML="";
+  body.appendChild(el("p","lead",esc(VISA_OV.head)));
+  body.appendChild(el("h4","","Five differences"));
+  const dl=el("dl","kv vdiffs"); dl.innerHTML=VISA_OV.diffs.map(([k,t])=>`<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join(""); body.appendChild(dl);
+  body.appendChild(el("h4","","The numbers — Apr–Jun 2026 quarter"));
+  const tb=el("table","vtable"); tb.innerHTML=`<thead><tr>${VISA_OV.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${VISA_OV.rows.map(r=>`<tr>${r.map((c,i)=>i?`<td>${esc(c)}</td>`:`<th scope="row">${esc(c)}</th>`).join("")}</tr>`).join("")}</tbody>`; body.appendChild(tb);
+  VISA_OV.notes.forEach(n=>body.appendChild(el("p","vnote",esc(n))));
+  body.appendChild(el("h4","","Tile by tile"));
+  const list=el("div","tileline vtiles");
+  LAYERS.filter(L=>!L.users).forEach(L=>L.tiles.forEach(T=>{ const v=VISA_T[T.id]; if(!v) return; const W=VISA_W[v.w];
+    const b=el("button"); b.style.setProperty("--lc",`var(${L.color})`);
+    b.innerHTML=`<span class="tid">${T.id}</span><span class="tn">${esc(T.name)} <span class="vwb" data-w="${v.w}"><b>V${W.sym}</b> ${esc(W.t)}</span></span><span class="tb">${esc(v.s)}</span>`;
+    b.addEventListener("click",()=>openTile(T)); list.appendChild(b); }));
+  body.appendChild(list);
+  body.appendChild(el("h4","","Sources"));
+  const sr=el("div","vsrc"); sr.innerHTML=VISA_OV.src.map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(""); body.appendChild(sr);
+  if(!keep) openDrawer(); body.scrollTop=0;
 }
 function openLayer(L, keep){
   drawerCtx={kind:"layer",layer:L};
@@ -994,6 +1091,7 @@ function openTile(T, keep){
   setHead([{t:"Map",fn:closeDrawer},{t:isPillar?"Pillars":L.name,fn:isPillar?null:()=>openLayer(L)},{t:T.name}], isPillar?"Cross-cutting pillar":T.id+" · "+L.name, T.name, L.color);
   const body=$("#dbody"); body.innerHTML="";
   if(T.blurb) body.appendChild(el("p","lead",esc(T.blurb)));
+  if(state.lens==="v"){ const vp=visaTilePanel(T); if(vp) body.appendChild(vp); }
   const live=T.products.filter(p=>p.st!=="retired"), gone=T.products.filter(p=>p.st==="retired");
   const list=el("div","plist"); live.forEach(p=>list.appendChild(productCard(p))); body.appendChild(list);
   if(gone.length){ body.appendChild(el("h4","","Retired or divested")); const g=el("div","plist"); gone.forEach(p=>g.appendChild(productCard(p))); body.appendChild(g); }

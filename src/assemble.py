@@ -6,7 +6,7 @@ here = pathlib.Path(__file__).resolve().parent.parent
 src = here / "src"
 t = (src / "template.html").read_text()
 data = re.sub(r"\nconst APIF = \{[^\n]*\};\n", "\n", (src / "data.js").read_text())
-out = t.replace("/*__DATA__*/", data.strip()).replace("/*__JOURNEYS__*/", (src / "journeys.js").read_text().strip()).replace("/*__APIS__*/", (src / "apis.js").read_text().strip())
+out = t.replace("/*__DATA__*/", data.strip()).replace("/*__JOURNEYS__*/", (src / "journeys.js").read_text().strip()).replace("/*__APIS__*/", (src / "apis.js").read_text().strip()).replace("/*__VISA__*/", (src / "visa.js").read_text().strip())
 (src / "mastercard-os.artifact.html").write_text(out)
 i = out.index('<div class="wash"'); head, body = out[:i], out[i:]
 doc = f"""<!doctype html>
@@ -15,7 +15,7 @@ doc = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Mastercard Operating System — an interactive capability map of Mastercard's assets: five layers, 168 products, 91 developer APIs, 18 journeys, lenses.">
+<meta name="description" content="Mastercard Operating System — an interactive capability map of Mastercard's assets: five layers, 168 products, 91 developer APIs, 18 journeys, lenses including a comparison with Visa.">
 {head.strip()}
 <style>
 :root{{color-scheme:light}}
@@ -64,6 +64,9 @@ def face(family, file):
 solo, n = re.subn(r'<title>[^\n]*</title>\n|<link rel="(?:preconnect|stylesheet)" href="https://fonts\.googleapis\.com[^\n]*\n', "", lay)
 assert n == 3, "expected a title and two Google Fonts links in layers.artifact.html"
 k = solo.index("</style>") + len("</style>"); shead, sbody = solo[:k], solo[k:]
+# A still version for viewers that run no script (mail attachment previews), made by src/prerender-static.js.
+# It sits first in the body and hides the scripted page below it; the page's script removes it as it starts.
+still = (src / "layers.static.html").read_text() if (src / "layers.static.html").exists() else ""
 (here / "layers-standalone.html").write_text(f"""<!doctype html>
 <html lang="en">
 <head>
@@ -72,7 +75,8 @@ k = solo.index("</style>") + len("</style>"); shead, sbody = solo[:k], solo[k:]
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Mastercard Operating System, the layer picture: a revolving globe that opens into five stacked layers; choose who you are and what you want to solve to see the areas that deliver it light up.">
 <title>Mastercard OS Layers</title>
-<!-- Self-contained: styles, script, data and fonts are all in this file; it loads nothing from the network. Built from src/layers.artifact.html. -->
+<!-- Self-contained: styles, script, data and fonts are all in this file; it loads nothing from the network. Built from src/layers.artifact.html.
+     It also carries a still version (src/layers.static.html) that shows when the viewer does not run scripts. -->
 <style>
 /* Geist and Geist Mono, latin subset, SIL Open Font License 1.1 (github.com/vercel/geist-font). Embedded so the page needs no network. */
 {face("Geist", "geist-latin-wght-normal.woff2")}
@@ -86,7 +90,7 @@ img{{max-width:100%}}
 {shead.lstrip()}
 </head>
 <body>
-{sbody.strip()}
+{still}{sbody.strip()}
 </body>
 </html>
 """)

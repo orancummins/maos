@@ -5,7 +5,7 @@ An interactive capability map of Mastercard's assets — the card network, its r
 **Open `index.html` in any browser.** It is a single self-contained file: no server, build step or network needed (the Geist typeface loads from Google Fonts when online and falls back to system fonts offline).
 
 - 5 layers · 30 tiles · 168 products · 91 Mastercard Developers APIs · 18 worked journeys · 14 outcomes ("who am I and what do I want to solve?")
-- Lenses re-slice the same assets by transaction lifecycle, customer, Mastercard division, built-vs-acquired, status and public API
+- Lenses re-slice the same assets by transaction lifecycle, customer, Mastercard division, built-vs-acquired, status and public API — plus **vs Visa**, which compares every Mastercard product with Visa's nearest asset (direct equivalent, related, or none found), marks each tile where Visa has more, less or a different approach, and adds a Visa panel to every tile and product card
 - Every product card carries what it is, who it serves, origin, status, developer APIs and sources
 - Compiled September 2026 from Mastercard's corporate, investor and developer sites, press releases and trade press
 
@@ -34,17 +34,21 @@ One rule keeps it simple: **every asset has exactly one home tile**; lenses and 
 |---|---|
 | `index.html` | The map, as a standalone page — open it directly |
 | `layers.html` | The layer picture, as a standalone page — open it directly |
-| `layers-standalone.html` | The layer picture as one self-contained file: styles, script, data and fonts are all inside it and it loads nothing from the network. Open it in a browser tab; the iPhone Files and Mail previews show HTML without running its script |
-| `src/template.html` | Page template: styles, markup and application code, with `/*__DATA__*/`, `/*__JOURNEYS__*/`, `/*__APIS__*/` placeholders |
+| `layers-standalone.html` | The layer picture as one self-contained file, for sending as an attachment: styles, script, data and fonts are all inside it and it loads nothing from the network. Viewers that do not run scripts (mail attachment previews, the Files app on a phone) get a still version built into the same file: the globe, the stack, each solution lit with its steps, and every layer, area and product, worked by taps alone |
+| `src/template.html` | Page template: styles, markup and application code, with `/*__DATA__*/`, `/*__VISA__*/`, `/*__JOURNEYS__*/`, `/*__APIS__*/` placeholders |
 | `src/data.js` | The asset inventory — layers → tiles → products, with lens tags and sources |
 | `src/journeys.js` | The 18 journeys (steps, scale facts, sources) |
+| `src/visa.js` | The Visa comparison layer — Visa's nearest asset for every product, per-tile weights, Visa's own assets per tile and the headline comparison (compiled 7 Oct 2026) |
 | `src/apis.js` | The Mastercard Developers API catalogue mapped to home products (read from developer.mastercard.com, Sep 2026) |
 | `src/assemble.py` | Rebuilds `src/mastercard-os.artifact.html` and `index.html` from the template and data, and `layers.html` and `layers-standalone.html` from `src/layers.artifact.html` — `python3 src/assemble.py` |
 | `src/mastercard-os.artifact.html` | The same page without the document skeleton, for hosts that supply their own |
 | `src/layers.artifact.html` | The layer picture's source: one hand-edited file (styles, markup, code and its own copy of the inventory), without the document skeleton. `assemble.py` wraps it into `layers.html` and `layers-standalone.html` |
+| `src/layers.static.html` | The still, script-free version that `layers-standalone.html` opens with. Generated, not edited: `src/prerender-static.js` opens `layers.html` in headless Chromium and writes down what the page draws |
+| `src/prerender-static.js` | Regenerates `src/layers.static.html` (needs Playwright). After changing the layer picture: `python3 src/assemble.py && node src/prerender-static.js && python3 src/assemble.py` |
 | `src/fonts/` | Geist and Geist Mono (latin subset, variable weight, SIL Open Font License 1.1), embedded into `layers-standalone.html` |
 | `docs/framework.md` | How the map is organised and why — the design notes |
 | `docs/asset-inventory.md` | The inventory in readable form, with status and origin, plus the API-to-tile appendix |
+| `docs/visa-business-structure-research.md` · `docs/visa-os-asset-inventory.md` · `docs/visa-vs-mastercard-comparison.md` | The Visa research, Visa's assets on the same five layers, and the comparison behind the vs Visa lens |
 | `docs/business-structure-research.md` | Mastercard's segments, divisions, website taxonomy, acquisitions 2015–2026 and 2025–26 themes, with sources |
 | `docs/video-script.md` | The narration script for the walkthrough video, with scene timings |
 | `video/Mastercard-Operating-System.mp4` | Narrated walkthrough (3 min 36 s, 1600×900) |

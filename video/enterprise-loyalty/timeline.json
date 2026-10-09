@@ -1,0 +1,200 @@
+{
+ "total": 175.956,
+ "lines": {
+  "g1": {
+   "start": 1.2,
+   "end": 4.299,
+   "say": "Maya's bank is part of almost everything she does with money."
+  },
+  "g2": {
+   "start": 4.899,
+   "end": 5.689,
+   "say": "Her salary."
+  },
+  "g3": {
+   "start": 6.189,
+   "end": 6.882,
+   "say": "Her rent."
+  },
+  "g4": {
+   "start": 7.382,
+   "end": 8.276,
+   "say": "Her savings."
+  },
+  "g5": {
+   "start": 9.076,
+   "end": 12.152,
+   "say": "But it only ever says thank you for one thing: tapping her card."
+  },
+  "s1": {
+   "start": 14.552,
+   "end": 17.72,
+   "say": "What if loyalty wasn't a feature of the card, but of the whole bank?"
+  },
+  "s2": {
+   "start": 18.92,
+   "end": 23.393,
+   "say": "Everything that takes already runs on one system: the Mastercard Operating System."
+  },
+  "s3": {
+   "start": 25.993,
+   "end": 28.663,
+   "say": "Choose a bank, and a goal: reward every touchpoint."
+  },
+  "s4": {
+   "start": 31.063,
+   "end": 32.876,
+   "say": "This is Enterprise Loyalty."
+  },
+  "e1": {
+   "start": 35.276,
+   "end": 36.553,
+   "say": "It starts with permission."
+  },
+  "e2": {
+   "start": 37.353,
+   "end": 41.482,
+   "say": "Maya chooses to connect her other accounts, and earns her first reward for doing it."
+  },
+  "e3": {
+   "start": 44.482,
+   "end": 46.814,
+   "say": "On the rails layer, Open Finance lights up."
+  },
+  "e4": {
+   "start": 50.014,
+   "end": 54.216,
+   "say": "Now her bank understands her whole financial life, not just its own slice."
+  },
+  "n1": {
+   "start": 56.816,
+   "end": 57.96,
+   "say": "Then it comes alive."
+  },
+  "n2": {
+   "start": 58.76,
+   "end": 60.338,
+   "say": "Maya taps her Mastercard."
+  },
+  "n3": {
+   "start": 62.938,
+   "end": 65.481,
+   "say": "The payment rides the card rail into the switch."
+  },
+  "n4": {
+   "start": 67.281,
+   "end": 71.617,
+   "say": "And in network services, Transaction Notifications tells her bank, as it happens."
+  },
+  "n5": {
+   "start": 74.417,
+   "end": 77.151,
+   "say": "Before her coffee is on the counter, her bank has answered."
+  },
+  "n6": {
+   "start": 78.351,
+   "end": 79.352,
+   "say": "Points landed."
+  },
+  "n7": {
+   "start": 80.052,
+   "end": 81.236,
+   "say": "A streak extended."
+  },
+  "r1": {
+   "start": 83.836,
+   "end": 85.279,
+   "say": "And it doesn't stop at the till."
+  },
+  "r2": {
+   "start": 86.179,
+   "end": 87.817,
+   "say": "Salary landed: that counts."
+  },
+  "r3": {
+   "start": 89.117,
+   "end": 90.921,
+   "say": "Four weeks of saving: that counts."
+  },
+  "r4": {
+   "start": 93.121,
+   "end": 99.917,
+   "say": "In the solutions layer, Mastercard's loyalty platform keeps the ledger: card taps today and, increasingly, everything else."
+  },
+  "r5": {
+   "start": 102.517,
+   "end": 106.04,
+   "say": "Every action moves Maya, and her household, up one shared tier."
+  },
+  "p1": {
+   "start": 108.84,
+   "end": 110.711,
+   "say": "Spending is just as immediate."
+  },
+  "p2": {
+   "start": 111.611,
+   "end": 114.375,
+   "say": "Points that work like cash, at the moment of purchase."
+  },
+  "p3": {
+   "start": 116.975,
+   "end": 122.973,
+   "say": "And offers funded by merchants, chosen from what the network learns, so the bank isn't paying for loyalty alone."
+  },
+  "w1": {
+   "start": 126.173,
+   "end": 127.556,
+   "say": "Here is the whole circuit."
+  },
+  "w2": {
+   "start": 128.756,
+   "end": 130.143,
+   "say": "Open Finance, to see."
+  },
+  "w3": {
+   "start": 131.143,
+   "end": 134.654,
+   "say": "The card rail, the switch and Transaction Notifications, to sense."
+  },
+  "w4": {
+   "start": 135.654,
+   "end": 137.579,
+   "say": "Loyalty and offers, to reward."
+  },
+  "w5": {
+   "start": 138.579,
+   "end": 141.064,
+   "say": "And the data that makes the next reward smarter."
+  },
+  "w6": {
+   "start": 142.664,
+   "end": 144.347,
+   "say": "Open any step for the detail."
+  },
+  "w7": {
+   "start": 149.347,
+   "end": 152.558,
+   "say": "The bank's brand on top. One operating system beneath."
+  },
+  "c1": {
+   "start": 154.958,
+   "end": 156.828,
+   "say": "For Maya, a bank that notices."
+  },
+  "c2": {
+   "start": 158.028,
+   "end": 161.383,
+   "say": "For the bank, a customer who stays, and brings more of her life with her."
+  },
+  "c3": {
+   "start": 163.783,
+   "end": 166.893,
+   "say": "Enterprise Loyalty, on the Mastercard Operating System."
+  },
+  "c4": {
+   "start": 168.493,
+   "end": 169.956,
+   "say": "Every touchpoint counts."
+  }
+ }
+}

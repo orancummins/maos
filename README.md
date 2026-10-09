@@ -4,7 +4,7 @@ An interactive capability map of Mastercard's assets — the card network, its r
 
 **Open `index.html` in any browser.** It is a single self-contained file: no server, build step or network needed (the Geist typeface loads from Google Fonts when online and falls back to system fonts offline).
 
-- 5 layers · 30 tiles · 168 products · 91 Mastercard Developers APIs · 18 worked journeys · 14 outcomes ("who am I and what do I want to solve?")
+- 5 layers · 30 tiles · 168 products · 91 Mastercard Developers APIs · 18 worked journeys · 15 outcomes ("who am I and what do I want to solve?")
 - Lenses re-slice the same assets by transaction lifecycle, customer, Mastercard division, built-vs-acquired, status and public API — plus **vs Visa**, which compares every Mastercard product with Visa's nearest asset (direct equivalent, related, or none found), marks each tile where Visa has more, less or a different approach, and adds a Visa panel to every tile and product card
 - Every product card carries what it is, who it serves, origin, status, developer APIs and sources
 - Compiled September 2026 from Mastercard's corporate, investor and developer sites, press releases and trade press
@@ -56,6 +56,9 @@ One rule keeps it simple: **every asset has exactly one home tile**; lenses and 
 | `video/Mastercard-OS-Layers.mp4` | Narrated introduction filmed on the layer picture (2 min 10 s, 1920×1080): what the operating system is, then two worked examples with the product detail behind them |
 | `docs/layers-video-script.md` | Its narration script, scene timings and how it was made |
 | `video/layers/` | Its pipeline: narration, virtual-clock recorder and build script |
+| `video/Enterprise-Loyalty-animatic.mp4` | Animatic for the Enterprise Loyalty concept film (2 min 56 s, 1920×1080): the stack scenes are final, the real-life scenes are placeholder cards |
+| `docs/enterprise-loyalty-video-script.md` | Its narration script, scene timings, open points and how it was made |
+| `video/enterprise-loyalty/` | Its pipeline: narration, placeholder cards, recorder and build script |
 
 ## Editing the map
 
@@ -71,6 +74,10 @@ Status codes: `new` (2025–26), `flux` (rename, divestiture or restructuring), 
 
 `video/layers/build.sh` rebuilds `video/Mastercard-OS-Layers.mp4`. It films `src/layers.artifact.html` frame by frame on a virtual clock (`vt.js` replaces the page's timers, animation frames, CSS animations and SVG animation, and `record.js` steps them one thirtieth of a second per screenshot), so the picture is exact and stays in sync with the narration without any re-timing. Cursor moves and clicks are placed relative to the narration sentences in `timeline.json`. It uses the same Kokoro voice and model folder as above. See `docs/layers-video-script.md`.
 
+### The Enterprise Loyalty animatic
+
+`video/enterprise-loyalty/build.sh` rebuilds `video/Enterprise-Loyalty-animatic.mp4`. It films the layer picture on the same virtual clock, with `film.js` injected at record time to add placeholder cards for the real-life scenes, dock the stack as a mini-map while they show, and light the *Reward every touchpoint* circuit one step at a time as the narration reaches it. The title and end card show the Mastercard symbol only if official artwork is present as a file (`video/enterprise-loyalty/brand/mark.png` or `.svg`, or the brand-centre pack under `images/`); otherwise the slots stay as labelled placeholders. See `docs/enterprise-loyalty-video-script.md`.
+
 ## Outcomes and the layer picture
 
-The 14 outcomes (a kind of user plus a goal, answered by an ordered set of areas) and the icon chosen for each area are this project's own drafts, not Mastercard bundles. On the map they are the *Start here* row; on the layer picture they are the *Who* and *Solution* selectors. They are defined in `src/template.html` (`WHO`, `OUTCOMES`) and again in `src/layers.artifact.html`; a change to one should be made in both.
+The 15 outcomes (a kind of user plus a goal, answered by an ordered set of areas) and the icon chosen for each area are this project's own drafts, not Mastercard bundles. On the map they are the *Start here* row; on the layer picture they are the *Who* and *Solution* selectors. They are defined in `src/template.html` (`WHO`, `OUTCOMES`) and again in `src/layers.artifact.html`; a change to one should be made in both.

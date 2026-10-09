@@ -3,7 +3,7 @@
    when the page's script does run, its first statement removes it.
 
    It is made by opening layers.html in headless Chromium and reading back what the page itself draws: the open
-   stack, the globe, the lit circuit and step list for each of the 14 solutions, and every layer, area and product.
+   stack, the globe, the lit circuit and step list for each of the 15 solutions, and every layer, area and product.
    Selecting a solution is a radio button and its label; opening a slice is a <details>. Nothing needs a script.
 
    Run:  python3 src/assemble.py && node src/prerender-static.js && python3 src/assemble.py   (needs playwright) */

@@ -17,6 +17,12 @@ video/layers/board/
 video/layers/progress.txt
 video/layers/*.log
 .DS_Store
+video/enterprise-loyalty/rec.html
+video/enterprise-loyalty/silent.mp4
+video/enterprise-loyalty/*.wav
+video/enterprise-loyalty/board/
+video/enterprise-loyalty/progress.txt
+video/enterprise-loyalty/*.log
 
 # local scratch outputs
 Claude outputs/
